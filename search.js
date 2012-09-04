@@ -25,7 +25,7 @@ $(function ($) {
 		}, function (response) {
 			$('#result').empty();
 			for (var i = 0; i < response[1].length; i++) {
-				$('#result').append('<li><a href="show.html?s=' + response[1][i] + '">' + response[1][i] + '</a></li>\n');
+				$('#result').append('<li><a href="show.html?s=' + encodeURIComponent(response[1][i]) + '">' + response[1][i] + '</a></li>\n');
 			}
 		});
 	}
