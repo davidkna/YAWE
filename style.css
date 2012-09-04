@@ -1,0 +1,18 @@
+body {
+	min-width: 405px;
+	min-height: 400px;
+	margin: 0 !important;
+}
+#cnt, #top{
+	margin-top: 40px;
+}
+#result {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 0 5px;
+	-webkit-column-count: 2;
+			column-count: 2;
+}
+.editsection, #toc { /* can't get toc to work */
+	display: none;
+}

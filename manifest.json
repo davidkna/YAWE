@@ -1,0 +1,20 @@
+{
+  "name": "YAWE (Yet Another Wiki Extension)",
+  "version": "1.0.1",
+  "description": "Read and Search for Wiki Articles",
+  "icons": {
+      "16" : "images/icon.png",
+ 			"48" : "images/48.png",
+			"128" : "images/128.png"
+  },
+	"permissions": [
+	  "<all_urls>"
+	],
+  "options_page": "options.html",
+	"browser_action": {
+    "default_icon": "images/icon.png", 
+    "default_title": "YAWE (Yet Another Wiki Extension)",      
+    "default_popup": "search.html"       
+  },
+  "manifest_version": 2
+}
