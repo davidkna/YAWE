@@ -7,11 +7,19 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		<h1>Options</h1>
-		<hr>
-		<form>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner"> <a class="brand" href="search.html">YAWE</a>
+				<ul class="nav">
+					<li><a href="search.html">Search Wiki</a>
+					</li>
+					<li class="active"><a href="options.html">Options</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<form id="top">
 			<label>Wiki url</label>
-			<input type="url" id="wikiURL" placeholder="http://en.wikipedia.org">
+			<input type="url" id="wikiURL" placeholder="http://example.com/">
 			<br>
 			<button type="submit" class="btn" id="save">Submit</button>
 		</form>

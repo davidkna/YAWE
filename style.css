@@ -1,10 +1,10 @@
 body {
-	min-width: 405px;
+	min-width: 428px;
 	min-height: 400px;
 	margin: 0 !important;
 }
 #cnt, #top{
-	margin-top: 40px;
+	margin-top: 50px;
 }
 #result {
 	list-style: none;
@@ -15,4 +15,13 @@ body {
 }
 .editsection, #toc { /* can't get toc to work */
 	display: none;
+}
+.loading {
+	margin-left: 206px;
+}
+.brand {
+    padding-left: 93px !important;
+}
+table {
+    width: 428px;
 }
