@@ -1,6 +1,6 @@
-$(function( $ ) {
+$(function ($) {
 	// get wiki URL
-	if ( !localStorage['wikiURL'] ) {
+	if (!localStorage['wikiURL']) {
 		localStorage['wikiURL'] = 'http://en.wikipedia.org/'
 	}
 	var url = localStorage['wikiURL'];
@@ -12,7 +12,7 @@ $(function( $ ) {
 	var a = document.createElement('a');
 	a.href = url;
 	var base = a.protocol + '//' + a.hostname;
-	
+
 
 	function openWikiPageHash() {
 		var wikiPage = new RegExp('/wiki/([^&]*)', 'i').exec(location.hash);
@@ -21,19 +21,19 @@ $(function( $ ) {
 			openWiki(wikiPage[1], true);
 		}
 	}
-	$('#back').click(function() {
+	$('#back').click(function () {
 		history.back();
 		openWikiPageHash();
 		return false;
 	});
-	$('#forward').click(function() {
+	$('#forward').click(function () {
 		history.forward();
 		openWikiPageHash();
 		return false;
 	});
 
-	$('#newTab').click(function() {
-		chrome.tabs.create ({
+	$('#newTab').click(function () {
+		chrome.tabs.create({
 			url: url + 'wiki/' + $('#s').val()
 		});
 		return false;
@@ -68,7 +68,7 @@ $(function( $ ) {
 			$('base')
 				.attr('href', base);
 			$('#content')
-				.append('<h1>' + page.replace(new RegExp('_', 'g'), ' ') + '</h1>\n' + response.parse.text['*'].replace(new RegExp('href="/wiki/', 'g'), 'data-wiki="1" href="' + url).replace(new RegExp('href="url', 'g'), 'data-wiki="1" href="'+url));
+				.append('<h1>' + page.replace(new RegExp('_', 'g'), ' ') + '</h1>\n' + response.parse.text['*'].replace(new RegExp('href="/wiki/', 'g'), 'data-wiki="1" href="' + url).replace(new RegExp('href="url', 'g'), 'data-wiki="1" href="' + url));
 			$('#content *')
 				.removeAttr('style');
 			$('#toc').remove();
@@ -99,46 +99,24 @@ $(function( $ ) {
 					.remove()
 			});
 
-
-
-
-// 		function joinOuter(el) {
-// 			var response = '';
-// 			$(el).each(function() {
-// 				response += this.outerHTML;
-// 			});
-// 			return response;
-// 		}
-// 		var content = '';
-// 		$('h2 .mw-headline').parent().each(function(i) {
-// 			content += '<div class="accordion" id="accordion'+ i +'"><div class="accordion-group"><div class="accordion-heading"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion' + i + '" href="#collapse' + i + '"><h2>' + $(this).find('.mw-headline').text() + '</h2></a></div><div id="collapse' + i + '" class="accordion-body collapse"><div class="accordion-inner">' + joinOuter($(this).nextUntil('h2')) + '</div></div></div>';
-// 		});
-// 		content += '</div>';
-// 		$('h2').nextUntil('h2').remove();
-// 		$('h2').remove();
-// 		$('#content').append(content);
-
-// $('.accordion-toggle').on('click', function () {
-// 	$(this).toggleClass('arrow-up');
-//   });
-		function joinOuter(el) {
-			var response = '';
-			$(el).each(function() {
-				response += this.outerHTML;
+			function joinOuter(el) {
+				var response = '';
+				$(el).each(function () {
+					response += this.outerHTML;
+				});
+				return response;
+			}
+			var content = '';
+			$('h2 .mw-headline').parent().each(function (i) {
+				content += '<details><summary><h2>' + $(this).find('.mw-headline').text() + '</h2></summary>' + joinOuter($(this).nextUntil('h2')) + '</details>';
 			});
-			return response;
-		}
-		var content = '';
-		$('h2 .mw-headline').parent().each(function(i) {
-			content += '<details><summary><h2>' + $(this).find('.mw-headline').text() + '</h2></summary>' + joinOuter($(this).nextUntil('h2')) + '</details>';
-		});
-		$('h2').nextUntil('h2').remove();
-		$('h2').remove();
-		$('#content').append(content);
+			$('h2 .mw-headline').parent().nextUntil('h2').remove();
+			$('h2 .mw-headline').parent().remove();
+			$('#content').append(content);
 
-$('.accordion-toggle').on('click', function () {
-	$(this).toggleClass('arrow-up');
-  });
+			$('.accordion-toggle').on('click', function () {
+				$(this).toggleClass('arrow-up');
+			});
 
 
 
