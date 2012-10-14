@@ -7,22 +7,22 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner"> <a class="brand" href="search.html">YAWE</a>
-				<ul class="nav">
-					<li><a href="search.html">Search Wiki</a>
-					</li>
-					<li class="active"><a href="options.html">Options</a>
-					</li>
-				</ul>
+		<div id="topbar">
+			<div class="btn-group">
+				<button id="back" class="btn" disabled>&lt;</button>
+				<button id="forward" class="btn" disabled>&gt;</button>
 			</div>
+			<form class="form-search" id="search">
+				<input disabled type="search" name="s" id="s" tabindex="1" placeholder="Search"
+				class="search-query">
+			</form>
+			<button id="newTab" class="btn" disabled>New Tab</button>
 		</div>
-		<form id="top">
+		<form id="content">
 			<label>Wiki url</label>
 			<input type="url" id="wikiURL" placeholder="http://example.com/">
 			<br>
 			<button type="submit" class="btn" id="save">Submit</button>
 		</form>
 	</body>
-
 </html>

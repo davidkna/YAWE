@@ -1,11 +1,13 @@
 body {
-	min-width: 428px;
-	min-height: 400px;
 	margin: 0 !important;
 }
-#cnt, #top{
-	margin-top: 50px;
+
+#content, #loading {
+	width: 428px;
+	height: 496px;
+	overflow: auto;
 }
+
 #result {
 	list-style: none;
 	padding: 0;
@@ -13,15 +15,51 @@ body {
 	-webkit-column-count: 2;
 			column-count: 2;
 }
-.editsection, #toc { /* can't get toc to work */
+
+.editsection {
 	display: none;
 }
-.loading {
-	margin-left: 206px;
-}
-.brand {
-    padding-left: 93px !important;
-}
+
 table {
     width: 428px;
+}
+
+#loading {
+	cursor: progress;
+}
+#loading img {
+	margin: 232px 0 0 206px;
+
+}
+
+#newTab, #s {
+	margin-top: 7px;
+}
+
+#topbar {
+	background: #eee;
+	padding-bottom: 7px;
+}
+#search, .btn-group  {
+	display: inline-block;
+}
+
+#s {
+	width: 220px;
+}
+
+details {
+	cursor: default;
+}
+summary {
+	cursor: pointer;
+	border-top: 1px solid #e5e5e5;
+}
+summary h2  {
+	display: inline;
+}
+
+#YAWE {
+    margin-top: 210px;
+    text-align: center;
 }

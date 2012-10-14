@@ -1,6 +1,7 @@
-$(function( $ ) {
-	$('form').submit(function() {
-		localStorage.setItem('wikiURL', $('#wikiURL').val());
+$(function ($) {
+	$('#content').submit(function () {
+		localStorage['wikiURL'] = $('#wikiURL').val();
+		location.replace('search.html');
 		return false;
 	});
 });
