@@ -6,6 +6,8 @@ body {
 	width: 428px;
 	height: 496px;
 	overflow: auto;
+	padding: 2px;
+	box-sizing: border-box;
 }
 
 #result {
@@ -21,7 +23,7 @@ body {
 }
 
 table {
-    width: 428px;
+    width: 424px;
 }
 
 #loading {
@@ -62,4 +64,8 @@ summary h2  {
 #YAWE {
     margin-top: 210px;
     text-align: center;
+}
+
+#Timeline-row, #protected-icon {
+	display: none;
 }
