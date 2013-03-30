@@ -18,7 +18,7 @@ $(function ( $ ) {
 		})
 	}
 	function openWiki(page, history) {
-		$('base').attr('href', base);
+		$('base').attr('href', url);
 		$('#content').hide().empty();
 		$('#loading').show();
 		if (!history) location.hash = '/wiki/' + page;
@@ -67,25 +67,20 @@ $(function ( $ ) {
 
 			$('#content').append(content);
 			$('#loading').hide();
+			// Hash Support. Still buggy
 			if (!page.split('#')[1]) {
 				$('#content').show().scrollTop(0)
 			} else {
-				$('#content').show();
-				$('#' + page.split('#')[1]).attr('open', 'open').scrollTop(0);
+				$('#' + page.split('#')[1]).attr('open', 'open');
+				$('#content').show().scrollTop($('#' + page.split('#')[1]).offset().top);
 			}
 		})
 	}
 	// get URL infos
-	if (!localStorage['wikiURL']) {
-		localStorage['wikiURL'] = 'http://en.wikipedia.org/'
+	if (!localStorage['wikiPrefix']) {
+		localStorage['wikiPrefix'] = 'en';
 	}
-	var url = localStorage['wikiURL'];
-	if (url[url.length - 1] != '/') {
-		url += '/';
-	}
-	var a = document.createElement('a');
-	a.href = url;
-	var base = a.protocol + '//' + a.hostname;
+	var url = 'http://' + localStorage['wikiPrefix'] + '.wikipedia.org/';
 
 	// EVENTS
 	$('#back').click(function () {

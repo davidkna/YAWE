@@ -1,7 +1,8 @@
 $(function ($) {
 	$('#content').submit(function () {
-		localStorage['wikiURL'] = $('#wikiURL').val();
+		localStorage['wikiPrefix'] = $('#wikiURL').val();
 		location.replace('search.html');
 		return false;
 	});
+	$('#wikiURL').val(localStorage['wikiPrefix']);
 });
