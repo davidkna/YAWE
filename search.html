@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="jquery.js"></script>
+		<script src="plugins.js"></script>
+		<script src="search.js"></script>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+		<link rel="stylesheet" href="style.css">
+		<base>
+	</head>
+	<body>
+		<div class="navbar navbar-default">
+			<div class="btn-group">
+				<button id="back" class="btn btn-default navbar-btn">&lt;</button>
+				<button id="forward" class="btn btn-default navbar-btn">&gt;</button>
+			</div>
+			<form class="form-search navbar-form navbar-left" id="search" role="search">
+				<div class="form-group">
+				<input type="search" name="s" id="s" tabindex="1" placeholder="Search"
+				class="form-control">
+				</div>
+			</form>
+			<button id="newTab" class="btn btn-default navbar-btn">New Tab</button>
+		</div>
+		<div id="loading" style="display:none">
+			<img src="images/ajax-loader.gif" alt="loading..." class="">
+		</div>
+		<div id="content">
+			<div id="YAWE">
+				<h1>YAWE</h1>
+				<br>
+				<a href="options.html">Options</a>
+			</div>
+		</div>
+	</body>
+</html>

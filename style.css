@@ -1,0 +1,58 @@
+body {
+	margin: 0 !important;
+}
+
+#content, #loading {
+	overflow: auto;
+	padding: 2px;
+	width: 428px;
+	height: 496px;
+}
+
+.navbar {
+	margin-bottom: 0;
+}
+
+.navbar-form {
+	padding: 0px 15px;
+}
+
+
+table {
+    width: 424px;
+}
+
+#loading {
+	cursor: progress;
+}
+	#loading img {
+		margin: 232px 0 0 206px;
+	}
+
+#search, .btn-group  {
+	display: inline-block;
+}
+
+#s {
+	width: 220px;
+}
+
+details {
+	cursor: default;
+}
+summary {
+	cursor: pointer;
+}
+
+.panel {
+	margin: 0 -2px 8px -2px;
+}
+
+#YAWE {
+    margin-top: 210px;
+    text-align: center;
+}
+
+.mw-editsection, .noprint {
+    display: none;
+}

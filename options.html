@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="jquery.js"></script>
+		<script src="options.js"></script>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div class="navbar navbar-default">
+			<div class="btn-group">
+				<button id="back" class="btn btn-default navbar-btn" disabled>&lt;</button>
+				<button id="forward" class="btn btn-default navbar-btn" disabled>&gt;</button>
+			</div>
+			<form class="form-search navbar-form navbar-left" id="search" role="search">
+				<div class="form-group">
+				<input type="search" name="s" id="s" tabindex="1" placeholder="Search"
+				class="form-control" disabled>
+				</div>
+			</form>
+			<button id="newTab" class="btn btn-default navbar-btn" disabled>New Tab</button>
+		</div>
+		<form id="content">
+			 <div class="form-group">
+    <label for="wikiURL">Email address</label>
+    <input type="url" class="form-control" id="wikiURL" placeholder="http://en.wikipedia.org">
+    <p class="help-block">https not supported.</p>
+  </div>
+			<button type="submit" class="btn" id="save">Submit</button>
+		</form>
+	</body>
+</html>
