@@ -7,7 +7,7 @@ $(function ($) {
 		}
 		localStorage['wikiURL'] = wikiURL;
 
-		location.replace('index.php');
+		location.replace('index.html');
 		return false;
 	});
 	$('#wikiURL').val(localStorage['wikiURL']);
