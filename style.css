@@ -56,3 +56,11 @@ summary {
 .mw-editsection, .noprint {
     display: none;
 }
+
+.progress {
+	margin: 233px 50px;
+}
+
+	.progress-bar {
+		width: 100%;
+	}
