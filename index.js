@@ -9,7 +9,7 @@ $(function($) {
     }
 
     function search(query, process) {
-        jQuery.getJSON(url + 'w/api.php', {
+        jQuery.getJSON(url + 'w/api.php?callback=?', {
             format: 'json',
             action: 'opensearch',
             search: query,
@@ -25,7 +25,7 @@ $(function($) {
         $('#content').hide().empty();
         $('#loading').show();
         if (!history) location.hash = '/wiki/' + page;
-        $.getJSON(url + 'w/api.php', {
+        $.getJSON(url + 'w/api.php?callback=?', {
             action: 'mobileview',
             format: 'json',
             page: page,
