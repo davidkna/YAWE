@@ -81,7 +81,7 @@ $(function($) {
             'items': 10
         });
     });
-    $('#content').on('click', "a[href^='/wiki/'], a[href^=" + url + "'/wiki/'], a[href^=" + url.replace('https:', 'http:') + "'/wiki/']", function(event) {
+    $('#content').on('click', "a[href^='/wiki/'], a[href^=" + url + "'wiki/'], a[href^=" + url.replace('https:', 'http:') + "'wiki/']", function(event) {
         var href = this.href.split('/'),
             page = decodeURIComponent(href[href.length - 1]);
         if (page == '') {
@@ -91,8 +91,9 @@ $(function($) {
         openWiki(page);
         event.preventDefault();
     });
-    $('#content').on('click', "a:not(a[href^='/wiki/'], a[href^=" + url + "'/wiki/'], a[href^=" + url.replace('https:', 'http:') + "'/wiki/'])", function(event) {
+    $('#content').on('click', "a:not(a[href^='/wiki/'], a[href^=" + url + "'wiki/'], a[href^=" + url.replace('https:', 'http:') + "'wiki/'])", function(event) {
         window.open(this.href, '_newtab');
+        event.preventDefault();
     });
 
     $('#search').submit(function(event) {
