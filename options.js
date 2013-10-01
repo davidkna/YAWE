@@ -11,6 +11,11 @@ $(function ($) {
 		location.replace('index.html');
 		event.preventDefault();
 	});
+
+	$('#wikiTheme').change(function(){
+		$('link').attr('href', $('#wikiTheme').val())
+	});
+
 	$('#wikiURL').val(localStorage['wikiURL']);
 	$('#wikiTheme').val(localStorage['wikiTheme']);
 });
