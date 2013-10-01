@@ -2,7 +2,7 @@ $(function ($) {
 	$('#content').submit(function (event) {
 
 		var wikiURL = $('#wikiURL').val().replace('https:', 'http:');
-		if (!wikiURL.endsWith('/')) {
+		if (wikiURL[wikiURL.length - 1] != '/') {
 			wikiURL += '/';
 		}
 		localStorage['wikiURL'] = wikiURL;
