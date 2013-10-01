@@ -31,12 +31,10 @@ $(function($) {
             page: page,
             sections: 'all'
         }, function(response) {
-
-            console.log(rsp = response);
             var title = response.mobileview.normalizedtitle || page,
                 content = '';
 
-            content += '<h1>' + title + '</h1>\n';
+            content += '<h1 class="page-heading">' + title + '</h1>\n';
             response = response.mobileview.sections;
             $.each(response, function(key, value) {
                 key *= 1;
