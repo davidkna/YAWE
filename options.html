@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet">
+		<script type="text/javascript">
+				document.getElementsByTagName("link")[0].href = localStorage['wikiTheme'];
+		</script>
 		<script src="jquery.js"></script>
 		<script src="options.js"></script>
-		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
 		<div class="navbar navbar-default">
 			<div class="btn-group">
-				<button id="back" class="btn btn-default navbar-btn" disabled>&lt;</button>
-				<button id="forward" class="btn btn-default navbar-btn" disabled>&gt;</button>
+				<button id="back" class="btn btn-default navbar-btn" disabled><span class="glyphicon glyphicon-chevron-left"></span></button>
+				<button id="forward" class="btn btn-default navbar-btn" disabled><span class="glyphicon glyphicon-chevron-right"></span></button>
 			</div>
 			<form class="form-search navbar-form navbar-left" id="search" role="search">
 				<div class="form-group">
@@ -21,11 +23,29 @@
 			<button id="newTab" class="btn btn-default navbar-btn" disabled>New Tab</button>
 		</div>
 		<form id="content">
-			 <div class="form-group">
-    <label for="wikiURL">Email address</label>
-    <input type="url" class="form-control" id="wikiURL" placeholder="http://en.wikipedia.org">
-    <p class="help-block">https not supported.</p>
-  </div>
+			<div class="form-group">
+    			<label for="wikiURL">Wiki URL</label>
+    			<input type="url" class="form-control" id="wikiURL" placeholder="http://en.wikipedia.org">
+    			<p class="help-block">https not supported.</p>
+    		</div>
+    		<div class="form-group">
+    			<label for="wikiTheme">Theme</label>
+    			<select class="form-control" id="wikiTheme">
+         			<option value="http://davidkna.github.io/YAWE/bootswatch/amelia/bootstrap.min.css">Amelia</option>
+        			<option value="http://davidkna.github.io/YAWE/bootswatch/cerulean/bootstrap.min.css">Cerulean</option>
+        			<option value="http://davidkna.github.io/YAWE/bootswatch/cosmo/bootstrap.min.css">Cosmo</option>
+         			<option value="http://davidkna.github.io/YAWE/bootswatch/cyborg/bootstrap.min.css">Cyborg</option>
+        			<option value="http://davidkna.github.io/YAWE/bootswatch/custom/bootstrap.min.css">Bootstrap (Default)</option>
+        			<option value="http://davidkna.github.io/YAWE/bootswatch/flatly/bootstrap.min.css">Flatly</option>
+        			<option value="http://davidkna.github.io/YAWE/bootswatch/journal/bootstrap.min.css">Journal</option>
+        			<option value="http://davidkna.github.io/YAWE/bootswatch/readable/bootstrap.min.css">Readable</option>
+          			<option value="http://davidkna.github.io/YAWE/bootswatch/simplex/bootstrap.min.css">Simplex</option>
+          			<option value="http://davidkna.github.io/YAWE/bootswatch/slate/bootstrap.min.css">Slate</option>
+         			<option value="http://davidkna.github.io/YAWE/bootswatch/spacelab/bootstrap.min.css">Spacelab</option>
+         			<option value="http://davidkna.github.io/YAWE/bootswatch/united/bootstrap.min.css">United</option>
+        		</select>
+       			<p class="help-block">Themes by <a href="http://bootswatch.com/" target="_newtab">Bootswatch</a>.</p>
+  			</div>
 			<button type="submit" class="btn" id="save">Submit</button>
 		</form>
 	</body>

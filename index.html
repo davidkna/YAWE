@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet">
+		<script type="text/javascript">
+		if (localStorage['wikiTheme']) {
+				document.getElementsByTagName('link')[0].href = localStorage['wikiTheme'];
+			} else {
+				document.getElementsByTagName('link')[0].href = 'http://davidkna.github.io/YAWE/bootswatch/custom/bootstrap.min.css';
+				localStorage['wikiTheme'] = 'http://davidkna.github.io/YAWE/bootswatch/custom/bootstrap.min.css';
+			}
+		</script>
 		<script src="jquery.js"></script>
 		<script src="plugins.js"></script>
 		<script src="index.js"></script>
-		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-		<link rel="stylesheet" href="style.css">
 		<base>
 	</head>
 	<body>
 		<div class="navbar navbar-default">
 			<div class="btn-group">
-				<button id="back" class="btn btn-default navbar-btn">&lt;</button>
-				<button id="forward" class="btn btn-default navbar-btn">&gt;</button>
+				<button id="back" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-chevron-left"></span></button>
+				<button id="forward" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-chevron-right"></span></button>
 			</div>
 			<form class="form-search navbar-form navbar-left" id="search" role="search">
 				<div class="form-group">
