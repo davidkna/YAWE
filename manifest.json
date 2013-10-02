@@ -1,6 +1,6 @@
 {
   "name": "YAWE (Yet Another Wiki Extension)",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Read and Search for Wikipedia Articles",
   "icons": {
       "16" : "images/icon.png",
