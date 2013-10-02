@@ -69,10 +69,11 @@ $(function($) {
         openWikiPageHash();
         return false;
     });
-    $('#newTab').click(function() {
+    $('#newTab').click(function(event) {
         window.open(url + 'wiki/' + $('#s').val(), '_newtab');
-        return false;
+        event.preventDefault();
     });
+
     $('#s').keypress(function() {
         $('#s').typeahead({
             'source': search,
@@ -92,6 +93,10 @@ $(function($) {
     $('#content').on('click', "a:not(a[href^='/wiki/'], a[href^='" + url + "wiki/'], a[href^='" + url.replace('https:', 'http:') + "wiki/'], a[href='options.html'])", function(event) {
         window.open(this.href, '_newtab');
         event.preventDefault();
+    });
+
+    $("a[href='options.html']").click(function() {
+        $('base').attr('href', '');
     });
 
     $('#search').submit(function(event) {
