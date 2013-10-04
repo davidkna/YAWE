@@ -49,8 +49,8 @@ $(function($) {
             });
             content += '</details>';
             $('#content').html(content);
-            if(!$.fn.details.support) $('details').details();
             $('#content, #loading').toggle();
+            if(!$.fn.details.support) $('details').details();
         });
     }
     // get URL infos
