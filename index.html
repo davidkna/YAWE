@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" charset="utf-8">
-		<script type="text/javascript">
-		if (localStorage['wikiTheme']) {
-				document.getElementsByTagName('link')[0].href = localStorage['wikiTheme'];
-			} else {
-				document.getElementsByTagName('link')[0].href = 'http://davidkna.github.io/YAWE/bootswatch/custom/bootstrap.min.css';
-				localStorage['wikiTheme'] = 'http://davidkna.github.io/YAWE/bootswatch/custom/bootstrap.min.css';
-			}
-		</script>
-		<script src="jquery.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script>if(window.jQuery==null){document.write('<script src="jquery.js"></script>')}if(localStorage["wikiTheme"]==null){localStorage["wikiTheme"]="http://davidkna.github.io/YAWE/bootswatch/custom/bootstrap.min.css"}document.write('<link rel="stylesheet" charset="utf-8" href="'+localStorage["wikiTheme"]+'"></link>')</script>
 		<script src="plugins.js"></script>
-		<script src="index.min.js?v=3.0.0"></script>
+		<script src="index.min.js?v=3.0.1"></script>
 		<base>
 	</head>
 	<body>
