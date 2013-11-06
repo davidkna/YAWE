@@ -1,16 +1,23 @@
 {
   "name": "YAWE (Yet Another Wiki Extension)",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Read and Search for Wikipedia Articles",
   "icons": {
-      "16" : "images/icon.png",
- 			"48" : "images/48.png",
-			"128" : "images/128.png"
+    "16" : "images/icon.png",
+    "48" : "images/48.png",
+    "128" : "images/128.png"
   },
-	"browser_action": {
+  "sandbox": {
+    "pages": [
+      "index.html"
+    ]
+  },
+  "options_page": "options.html",
+  "browser_action": {
     "default_icon": "images/icon.png", 
     "default_title": "YAWE (Yet Another Wiki Extension)",      
-    "default_popup": "index.html"       
+    "default_popup": "popup.html"       
   },
-  "manifest_version": 2
+  "manifest_version": 2,
+  "permissions": ["storage"]
 }

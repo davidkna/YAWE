@@ -1,9 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-		<link rel="stylesheet" href="style.css">
-</head>
-<body>
-	<iframe seamless width="458" height="555" src="http://davidkna.github.com/YAWE"></iframe>
-</body>
+	<head>
+		<script src="jquery.js"></script>
+		<script src="plugins.js"></script>
+		<script src="index.min.js"></script>
+		<link rel="stylesheet" type="text/css" charset="utf-8"></link>
+		<base>
+	</head>
+	<body>
+		<div class="navbar navbar-default container navbar-fixed-top">
+			<a href="#" id="back" class="btn navbar-btn icon-left-open"></a>
+			<a href="#" id="forward" class="btn navbar-btn icon-right-open"></a>
+			<form class="form-search navbar-form" id="search-form" role="search">
+				<div class="form-group">
+				<input type="search" id="search" tabindex="1" placeholder="Search"
+				class="form-control">
+				</div>
+			</form>
+			<div class="dropdown">
+ 				<a data-toggle="dropdown" href="#" class="btn navbar-btn icon-menu"></a>
+  					<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+						<li><a href="#" id="newTab">New Tab</a></li>
+						<li><a href="options.html">Options</a></li>
+  					</ul>
+			</div>
+
+		</div>
+		<div id="loading" class="container" style="display:none">
+			<div class="progress progress-striped active">
+  				<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0">
+    				<span class="sr-only">Loading...</span>
+  				</div>
+			</div>
+		</div>
+		<div id="content" class="container">
+			<div id="YAWE">
+				<h1>YAWE</h1>
+				<br>
+				<a href="options.html">Options</a>
+			</div>
+		</div>
+	</body>
 </html>

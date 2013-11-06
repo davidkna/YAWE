@@ -1,0 +1,23 @@
+$ ($) ->
+  $("#content").submit (event) ->
+    url = $("#url").val().replace("https:", "http:")
+    url += "/"  unless url[url.length - 1] is "/"
+    options =
+      url: url
+      theme: $("#theme").val()
+    chrome.storage.sync.set options
+    location.replace "index.html?" + encodeURIComponent(options.theme) + "&" + encodeURIComponent(options.url)
+    event.preventDefault()
+
+  $("#theme").change ->
+    $("link").attr "href", "bootswatch/" + $("#theme").val() + "/bootstrap.min.css"
+
+  chrome.storage.sync.get (options) ->
+    if options is {}
+      options = 
+        theme: "custom"
+        url: "http://en.wikipedia.org/"
+      chrome.storage.sync.set options
+    $("#url").val options.url
+    $("#theme").val options.theme
+    $("link").attr "href", "bootswatch/" + options.theme + "/bootstrap.min.css"
