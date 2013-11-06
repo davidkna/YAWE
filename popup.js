@@ -1,6 +1,6 @@
 $(function($) {
   chrome.storage.sync.get(function(options) {
-    if (options == {}) {
+    if (!options.theme) {
       options = {
         theme: "custom",
         url: "http://en.wikipedia.org/"
