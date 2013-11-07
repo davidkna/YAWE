@@ -16,8 +16,8 @@ $(function($) {
   $("#theme").change(function() {
     return $("link").attr("href", "bootswatch/" + $("#theme").val() + "/bootstrap.min.css");
   });
-  return chrome.storage.sync.get(function(options) {
-    if (options === {}) {
+  chrome.storage.sync.get(function(options) {
+    if (options.theme == null) {
       options = {
         theme: "custom",
         url: "http://en.wikipedia.org/"
@@ -27,5 +27,9 @@ $(function($) {
     $("#url").val(options.url);
     $("#theme").val(options.theme);
     return $("link").attr("href", "bootswatch/" + options.theme + "/bootstrap.min.css");
+  });
+  return $(".icon-left-open").click(function(event) {
+    history.back();
+    return event.preventDefault();
   });
 });

@@ -29,8 +29,8 @@ jQuery(function($) {
   getWiki = function(page, history) {
     var wikiOptions;
     $("base").attr("href", options.url + "wiki/" + page);
-    $("#content").hide().empty();
-    $("#loading").show();
+    $("#content").fadeOut().empty();
+    $("#loading").fadeIn();
     if (!history) {
       location.hash = "/wiki/" + page;
     }
@@ -60,7 +60,10 @@ jQuery(function($) {
       });
       content += "</details>";
       $("#content").html(content);
-      $("#content, #loading").toggle();
+      $("#content img").lazyload({
+        effect: "fadeIn"
+      });
+      $("#content, #loading").fadeToggle();
       if (!$.fn.details.support) {
         return $("details").details();
       }

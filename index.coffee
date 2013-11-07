@@ -27,8 +27,8 @@ jQuery ($) ->
 
   getWiki = (page, history) ->
     $("base").attr "href", options.url + "wiki/" + page
-    $("#content").hide().empty()
-    $("#loading").show()
+    $("#content").fadeOut().empty()
+    $("#loading").fadeIn()
     location.hash = "/wiki/" + page  unless history
 
     wikiOptions =
@@ -52,7 +52,10 @@ jQuery ($) ->
 
       content += "</details>"
       $("#content").html content
-      $("#content, #loading").toggle()
+      $("#content img").lazyload(
+          effect: "fadeIn"
+        )
+      $("#content, #loading").fadeToggle()
       $("details").details()  unless $.fn.details.support
 
   

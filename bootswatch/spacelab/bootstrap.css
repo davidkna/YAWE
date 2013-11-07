@@ -1,4 +1,4 @@
-@import url("//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700");
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700");
 
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 
@@ -2699,12 +2699,6 @@ input[type="button"].btn-block {
   overflow: hidden;
   -webkit-transition: height 0.35s ease;
           transition: height 0.35s ease;
-}
-
-@font-face {
-  font-family: 'fontello';
-  src: url('../../fonts/entypo.eot');
-  src: url('../../fonts/entypo.eot?#iefix') format('embedded-opentype'), url('../../fonts/entypo.woff') format('woff'), url('../../fonts/entypo.ttf') format('truetype'), url('../../fonts/entypo.svg#glyphicons_halflingsregular') format('svg');
 }
 
 @font-face {

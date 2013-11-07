@@ -13,7 +13,7 @@ $ ($) ->
     $("link").attr "href", "bootswatch/" + $("#theme").val() + "/bootstrap.min.css"
 
   chrome.storage.sync.get (options) ->
-    if options is {}
+    unless options.theme?
       options = 
         theme: "custom"
         url: "http://en.wikipedia.org/"
@@ -21,3 +21,7 @@ $ ($) ->
     $("#url").val options.url
     $("#theme").val options.theme
     $("link").attr "href", "bootswatch/" + options.theme + "/bootstrap.min.css"
+
+  $(".icon-left-open").click (event) ->
+    history.back()
+    event.preventDefault()
