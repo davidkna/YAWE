@@ -6905,6 +6905,10 @@ fieldset[disabled] .navbar .dropdown > a {
   color: #cccccc;
 }
 
+.navbar {
+  min-width: 1000px;
+}
+
 .page-header,
 .navbar-btn {
   margin-top: 0;
@@ -6960,6 +6964,10 @@ fieldset[disabled] .navbar .dropdown > a {
   cursor: progress;
 }
 
+.loading {
+  overflow: none;
+}
+
 #search {
   width: 220px;
 }
@@ -6991,7 +6999,7 @@ summary {
 }
 
 #YAWE {
-  margin-top: 210px;
+  margin-top: 162px;
   text-align: center;
 }
 
@@ -7001,7 +7009,7 @@ summary {
 }
 
 .progress {
-  margin: 233px 0;
+  margin: 185.5px 0 256.5px 0;
 }
 
 .progress-bar {

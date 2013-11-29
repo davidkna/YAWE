@@ -1,13 +1,10 @@
 jQuery ($) ->
   "use strict"
-  options = location.search.substring(1, location.hash.lenght).split('&')
-  options = 
-    theme: decodeURIComponent(options[0])
-    url: decodeURIComponent(options[1])
-
-
-  $("link").attr "href", "bootswatch/" + options.theme + "/bootstrap.min.css"
-
+  # get options from url
+  options = JSON.parse(decodeURIComponent(location.search.substring(1, location.search.length)))
+  # get stylesheet
+  $("link").attr("href", "bootswatch/#{ options.theme }/bootstrap.min.css")
+    
   # FUNCTIONS
   getWikiPageHash = ->
     page = location.hash.substring(7, location.hash.length)
@@ -26,9 +23,10 @@ jQuery ($) ->
       process response[1]
 
   getWiki = (page, history) ->
-    $("base").attr "href", options.url + "wiki/" + page
+    $("base").attr "href", "#{options.url}wiki/#{page}"
     $("#content").fadeOut().empty()
     $("#loading").fadeIn()
+    $("#body").addClass "loading"
     location.hash = "/wiki/" + page  unless history
 
     wikiOptions =
@@ -36,26 +34,37 @@ jQuery ($) ->
       format: "json"
       page: page
       sections: "all"
-    $.getJSON options.url + "w/api.php?callback=?", wikiOptions, (response) ->
-      title = response.mobileview.normalizedtitle or page.replace /_/g, " "
-      $("#search").val title
-      content = ""
-      content += "<h1 class=\"page-header\">" + title + "</h1>\n"
-      response = response.mobileview.sections
-      $.each response, (key, value) ->
-        key *= 1
-        if value.toclevel is 1
-          content += "</details>"  unless key is 1
-          content += "<details id=\"" + value.line + "\" class=\"panel panel-default\">\n<summary class=\"panel-heading\"><span class=\"panel-title\">" + value.line + "</span></summary>\n<div class=\"panel-body>\"" + value.text.replace("class=\"", "class=\"hide ") + "</div>\n"
-        else
-          content += value.text + "\n"
 
-      content += "</details>"
-      $("#content").html content
-      $("#content img").lazyload(
-          effect: "fadeIn"
-        )
-      $("#content, #loading").fadeToggle()
+    $.getJSON options.url + "w/api.php?callback=?", wikiOptions, (response, status, xhr) ->
+      unless response.error
+        title = response.mobileview.normalizedtitle or page.replace /_/g, " "
+        $("#search").val title
+        content = ""
+        content += "<h1 class=\"page-header\">" + title + "</h1>\n"
+        response = response.mobileview.sections
+        $.each response, (key, value) ->
+          key *= 1
+          if value.toclevel is 1
+            content += "</details>"  unless key is 1
+            content += "<details id=\" #{ value.line } \" class=\"panel panel-default\">
+            				<summary class=\"panel-heading\"><span class=\"panel-title\">#{ value.line }</span></summary>
+          				<div class=\"panel-body\">
+          					#{ value.text.replace("class=\"", "class=\"hide ") }
+          				</div>"
+          else
+            content += value.text + "\n"
+
+        content += "</details>"
+        $("#content").html content
+        $("#content img").lazyload(
+            effect: "fadeIn"
+          )
+      else
+        $("#content").html("<div class=\"alert alert-danger\">#{ response.error.info }</div>")
+      $("table *").removeAttr("style")
+      $("body").removeClass "loading"
+      $("#loading").fadeOut()
+      $("#content").fadeIn()
       $("details").details()  unless $.fn.details.support
 
   
@@ -65,11 +74,13 @@ jQuery ($) ->
   $("#back").click ->
     history.back()
     getWikiPageHash()
+
     false
 
   $("#forward").click ->
     history.forward()
     getWikiPageHash()
+
     false
 
   $("#newTab").click (event) ->

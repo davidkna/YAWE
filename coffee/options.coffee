@@ -1,16 +1,16 @@
-$ ($) ->
+jQuery ( $ ) ->
   $("#content").submit (event) ->
-    url = $("#url").val().replace("https:", "http:")
+    url = $("#url").val().replace "https:", "http:"
     url += "/"  unless url[url.length - 1] is "/"
     options =
       url: url
       theme: $("#theme").val()
     chrome.storage.sync.set options
-    location.replace "index.html?" + encodeURIComponent(options.theme) + "&" + encodeURIComponent(options.url)
+    location.replace "index.html?#{ encodeURIComponent(JSON.stringify(options)) }"
     event.preventDefault()
 
   $("#theme").change ->
-    $("link").attr "href", "bootswatch/" + $("#theme").val() + "/bootstrap.min.css"
+    $("link").attr "href", "bootswatch/#{ $("#theme").val() }/bootstrap.min.css"
 
   chrome.storage.sync.get (options) ->
     unless options.theme?
@@ -20,7 +20,7 @@ $ ($) ->
       chrome.storage.sync.set options
     $("#url").val options.url
     $("#theme").val options.theme
-    $("link").attr "href", "bootswatch/" + options.theme + "/bootstrap.min.css"
+    $("link").attr "href", "bootswatch/#{ options.theme }/bootstrap.min.css"
 
   $(".icon-left-open").click (event) ->
     history.back()
