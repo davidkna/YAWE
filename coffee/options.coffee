@@ -1,5 +1,5 @@
 jQuery ( $ ) ->
-  $("#content").submit (event) ->
+  $("form").submit (event) ->
     url = $("#url").val().replace "https:", "http:"
     url += "/"  unless url[url.length - 1] is "/"
     options =
