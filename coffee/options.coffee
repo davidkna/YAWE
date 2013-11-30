@@ -6,7 +6,7 @@ jQuery ( $ ) ->
       url: url
       theme: $("#theme").val()
     chrome.storage.sync.set options
-    location.replace "index.html?#{ encodeURIComponent(JSON.stringify(options)) }"
+    location.replace "app.html?#{ encodeURIComponent(JSON.stringify(options)) }"
     event.preventDefault()
 
   $("#theme").change ->

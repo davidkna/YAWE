@@ -26,7 +26,7 @@ jQuery ($) ->
     $("base").attr "href", "#{options.url}wiki/#{page}"
     $("#content").fadeOut().empty()
     $("#loading").fadeIn()
-    $("#body").addClass "loading"
+    $("body").addClass "loading"
     location.hash = "/wiki/" + page  unless history
 
     wikiOptions =
@@ -62,9 +62,9 @@ jQuery ($) ->
       else
         $("#content").html("<div class=\"alert alert-danger\">#{ response.error.info }</div>")
       $("table *").removeAttr("style")
-      $("body").removeClass "loading"
       $("#loading").fadeOut()
       $("#content").fadeIn()
+      $("body").removeClass "loading"
       $("details").details()  unless $.fn.details.support
 
   

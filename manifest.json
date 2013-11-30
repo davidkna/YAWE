@@ -10,14 +10,14 @@
   },
   "sandbox": {
     "pages": [
-      "index.html"
+      "app.html"
     ]
   },
   "options_page": "options.html",
   "browser_action": {
     "default_icon": "images/icon.png", 
     "default_title": "YAWE (Yet Another Wiki Extension)",      
-    "default_popup": "popup.html"       
+    "default_popup": "index.html"       
   },
   "manifest_version": 2,
   "permissions": ["storage"]

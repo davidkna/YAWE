@@ -6,4 +6,4 @@ $ ($) ->
         url: "http://en.wikipedia.org/"
 
       chrome.storage.sync.set options
-    $("iframe").attr "src", "index.html? #{ JSON.stringify options }"
+    $("iframe").attr "src", "app.html? #{ JSON.stringify options }"

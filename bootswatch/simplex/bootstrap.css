@@ -6857,7 +6857,6 @@ h6 {
 
 body {
   margin: 0;
-  margin-top: 76px;
 }
 
 .navbar > a,
@@ -6986,11 +6985,8 @@ fieldset[disabled] .navbar .dropdown > a {
 }
 
 #loading {
+  height: 600px;
   cursor: progress;
-}
-
-.loading {
-  overflow: none;
 }
 
 #search {
@@ -7024,8 +7020,16 @@ summary {
 }
 
 #YAWE {
-  margin-top: 175px;
+  margin-top: 157px;
   text-align: center;
+}
+
+#content {
+  width: 458px;
+  height: 515px;
+  padding-top: 36px;
+  margin-top: 40px;
+  overflow: auto;
 }
 
 .mw-editsection,
@@ -7034,9 +7038,13 @@ summary {
 }
 
 .progress {
-  margin: 201.5px 0 259.5px 0;
+  margin-top: 277.5px;
 }
 
 .progress-bar {
   width: 100%;
+}
+
+.loading {
+  overflow: hidden;
 }
