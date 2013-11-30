@@ -2310,6 +2310,7 @@ textarea.input-lg {
   font-size: 13px;
   font-weight: normal;
   line-height: 1.428571429;
+  color: #333333;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -2332,7 +2333,7 @@ textarea.input-lg {
 
 .btn:hover,
 .btn:focus {
-  color: #ffffff;
+  color: #d9230f;
   text-decoration: none;
 }
 
@@ -6902,7 +6903,7 @@ body {
 .navbar .dropdown > a:hover,
 .navbar > a:focus,
 .navbar .dropdown > a:focus {
-  color: #ffffff;
+  color: #d9230f;
   text-decoration: none;
 }
 
