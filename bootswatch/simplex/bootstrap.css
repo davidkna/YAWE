@@ -7026,11 +7026,16 @@ summary {
 }
 
 #content {
-  width: 458px;
-  height: 515px;
   padding-top: 36px;
   margin-top: 40px;
   overflow: auto;
+}
+
+@media (width: 458px) {
+  #content {
+    width: 458px;
+    height: 515px;
+  }
 }
 
 .mw-editsection,

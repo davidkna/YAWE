@@ -6990,11 +6990,16 @@ summary {
 }
 
 #content {
-  width: 458px;
-  height: 505px;
   padding-top: 48px;
   margin-top: 50px;
   overflow: auto;
+}
+
+@media (width: 458px) {
+  #content {
+    width: 458px;
+    height: 505px;
+  }
 }
 
 .mw-editsection,

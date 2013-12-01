@@ -6968,11 +6968,16 @@ summary {
 }
 
 #content {
-  width: 458px;
-  height: 495px;
   padding-top: 42px;
   margin-top: 60px;
   overflow: auto;
+}
+
+@media (width: 458px) {
+  #content {
+    width: 458px;
+    height: 495px;
+  }
 }
 
 .mw-editsection,
