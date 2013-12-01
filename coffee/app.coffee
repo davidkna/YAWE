@@ -61,7 +61,7 @@ jQuery ($) ->
           )
       else
         $("#content").html("<div class=\"alert alert-danger\">#{ response.error.info }</div>")
-      $("table *").removeAttr("style")
+      $("table, table *").removeAttr("style")
       $("#loading").fadeOut()
       $("#content").fadeIn()
       $("body").removeClass "loading"
