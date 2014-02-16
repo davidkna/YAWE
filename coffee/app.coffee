@@ -3,7 +3,7 @@ jQuery ($) ->
   # get options from url
   options = JSON.parse(decodeURIComponent(location.search.substring(1, location.search.length)))
   # get stylesheet
-  $("link").attr("href", "bootswatch/#{ options.theme }/bootstrap.min.css")
+  $("link").attr("href", "bootswatch/#{ options.theme }/style.css")
     
   # FUNCTIONS
   getWikiPageHash = ->
@@ -23,7 +23,7 @@ jQuery ($) ->
       process response[1]
 
   getWiki = (page, history) ->
-    $("base").attr "href", "#{options.url}wiki/#{page}"
+    $("base").attr "href", "#{ options.url }wiki/#{page}"
     $("#content").fadeOut().empty()
     $("#loading").fadeIn()
     $("body").addClass "loading"
@@ -32,10 +32,11 @@ jQuery ($) ->
     wikiOptions =
       action: "mobileview"
       format: "json"
+      noheadings: true
       page: page
       sections: "all"
 
-    $.getJSON options.url + "w/api.php?callback=?", wikiOptions, (response, status, xhr) ->
+    $.getJSON "#{ options.url }w/api.php?callback=?", wikiOptions, (response, status, xhr) ->
       unless response.error
         title = response.mobileview.normalizedtitle or page.replace /_/g, " "
         $("#search").val title
@@ -49,9 +50,10 @@ jQuery ($) ->
             content += "<details id=\" #{ value.line } \" class=\"panel panel-default\">
             				<summary class=\"panel-heading\"><span class=\"panel-title\">#{ value.line }</span></summary>
           				<div class=\"panel-body\">
-          					#{ value.text.replace("class=\"", "class=\"hide ") }
+          					#{ value.text }
           				</div>"
           else
+            content += "<h#{ value.toclevel + 1 }>#{value.line}</h#{ value.toclevel + 1 }>\n" if value.toclevel?
             content += value.text + "\n"
 
         content += "</details>"

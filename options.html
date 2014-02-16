@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script src="min/jquery.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="min/options.min.js"></script>
 		<link rel="stylesheet" type="text/css" charset="utf-8"></link>
 
 	</head>
 	<body>
-		<div class="navbar navbar-fixed-top navbar-default container">
+		<div id="navbar" class="navbar container">
 			<a class="btn navbar-btn icon-left-open"></a>
 			<a class="btn navbar-btn icon-right-open" disabled></a>
 			<form class="form-search navbar-form">
@@ -29,17 +29,20 @@
     				<label for="theme">Theme</label>
     				<select class="form-control" id="theme">
          				<option value="amelia">Amelia</option>
+         				<option value="custom">Bootstrap (Default)</option>
     	    			<option value="cerulean">Cerulean</option>
     	    			<option value="classic">Classic (Bootstrap 2)</option>
         				<option value="cosmo">Cosmo</option>
+        				<option value="cupid">Cupid</option>
          				<option value="cyborg">Cyborg</option>
-        				<option value="custom">Bootstrap (Default)</option>
         				<option value="flatly">Flatly</option>
  		       			<option value="journal">Journal</option>
+ 		       			<option value="lumen">Lumen</option>
         				<option value="readable">Readable</option>
           				<option value="simplex">Simplex</option>
           				<option value="slate">Slate</option>
          				<option value="spacelab">Spacelab</option>
+         				<option value="superhero">Superhero</option>
  	        			<option value="united">United</option>
     	    		</select>
        				<p class="help-block">Most themes by <a href="http://bootswatch.com/" target="_newtab">Bootswatch</a>. All themes use <a href="http://getbootstrap.com/" target="_newtab">Bootstrap</a>.</p>

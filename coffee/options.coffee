@@ -10,7 +10,7 @@ jQuery ( $ ) ->
     event.preventDefault()
 
   $("#theme").change ->
-    $("link").attr "href", "bootswatch/#{ $("#theme").val() }/bootstrap.min.css"
+    $("link").attr "href", "bootswatch/#{ $("#theme").val() }/style.css"
 
   chrome.storage.sync.get (options) ->
     unless options.theme?
@@ -20,7 +20,7 @@ jQuery ( $ ) ->
       chrome.storage.sync.set options
     $("#url").val options.url
     $("#theme").val options.theme
-    $("link").attr "href", "bootswatch/#{ options.theme }/bootstrap.min.css"
+    $("link").attr "href", "bootswatch/#{ options.theme }/style.css"
 
   $(".icon-left-open").click (event) ->
     history.back()
