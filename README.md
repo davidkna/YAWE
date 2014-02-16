@@ -1,7 +1,7 @@
 YAWE
 ----------
 
-License: [CC BY-SA Germany 3.0](http://creativecommons.org/licenses/by-sa/3.0/de/) 
+License: [CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/) 
 
 [Demo](http://davidkna.github.io/YAWE)*
 
