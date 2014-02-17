@@ -13,7 +13,7 @@
     "firefox-extension",
     "opera-extension"
   ],
-  "license": "CC BY-SA Germany 3.0",
+  "license": "CC BY-NC-SA 4.0",
   "private": true,
   "ignore": [
     "**/.*",
