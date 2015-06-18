@@ -1,0 +1,44 @@
+{
+  "name": "yawe",
+  "version": "4.0.0",
+  "description": "View and search for wikipedia articles.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidkna/YAWE.git"
+  },
+  "author": "David Knaack",
+  "license": "CC-BY-NC-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/davidkna/YAWE/issues"
+  },
+  "homepage": "https://github.com/davidkna/YAWE#readme",
+  "devDependencies": {
+    "babel": "^5.4.7",
+    "babel-eslint": "^3.1.10",
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.3",
+    "del": "^1.2.0",
+    "eslint": "^0.22.1",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-babel": "^5.1.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-csscomb": "^3.0.3",
+    "gulp-csso": "^1.0.0",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-sass": "^2.0.1",
+    "gulp-streamify": "0.0.5",
+    "gulp-uglify": "^1.2.0",
+    "run-sequence": "^1.1.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.2"
+  },
+  "dependencies": {
+    "query-string": "^2.3.0"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  }
+}

@@ -1,0 +1,153 @@
+body
+{
+    margin: 0;
+}
+
+.topbar > a,
+.topbar > div,
+.topbar form,
+.topbar form div,
+.topbar form input
+{
+    display: inline-block;
+}
+
+.topbar > a,
+.topbar .dropdown > a
+{
+    color: $navbar-default-link-color;
+
+    @extend .btn;
+    &:hover
+    {
+        color: $navbar-default-link-hover-color;
+        background: $navbar-default-link-hover-bg;
+    }
+}
+
+.topbar > a[disabled],
+.topbar .dropdown > a[disabled]
+{
+    color: $navbar-default-link-disabled-color;
+}
+
+.topbar
+{
+    min-width: 1000px;
+}
+
+.page-header,
+.navbar-btn
+{
+    margin-top: 0;
+}
+
+.dablink
+{
+    @extend .alert;
+    @extend .alert-info;
+}
+
+img.tex
+{
+    @extend code;
+}
+
+#loading
+{
+    height: 600px;
+
+    cursor: progress;
+}
+#search
+{
+    width: 220px;
+}
+details
+{
+    cursor: default;
+}
+summary
+{
+    cursor: pointer;
+}
+.no-details details > summary:before
+{
+    content: '► ';
+}
+.no-details details[open] > summary:before
+{
+    content: '▼ ';
+}
+.no-details details > summary:before
+{
+    float: left;
+
+    width: 20px;
+
+    content: '► ';
+}
+.no-details details.open > summary:before
+{
+    content: '▼ ';
+}
+
+#YAWE
+{
+    margin-top: 233px - $navbar-height - $line-height-computed * 2;
+
+    text-align: center;
+}
+#content
+{
+    overflow: auto;
+
+    margin-top: $navbar-height + $line-height-computed;
+    @media (width: 458px)
+    {
+        width: 458px;
+        height: 555px - $navbar-height;
+    }
+}
+
+.mw-editsection,
+.noprint,
+.hlist.navbar.mini
+{
+    display: none;
+}
+.progress
+{
+    margin-top: 277.5px;
+}
+
+.progress-bar
+{
+    width: 100%;
+}
+.loading
+{
+    overflow: hidden;
+}
+.panel-body h2
+{
+    display: none;
+}
+
+.navbar .form-group
+{
+    margin-bottom: 0;
+}
+
+details {
+    @extend .panel;
+    @extend .panel-default;
+}
+
+summary {
+    @extend .panel-heading;
+    h2 {
+        @extend .panel-title;
+        display: inline-block;
+    }
+}
