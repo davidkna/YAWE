@@ -18,7 +18,7 @@
     "babelify": "^6.1.2",
     "browserify": "^10.2.3",
     "del": "^1.2.0",
-    "eslint": "^0.22.1",
+    "eslint": "^0.23.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-babel": "^5.1.0",
