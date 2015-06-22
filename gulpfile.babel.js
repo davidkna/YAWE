@@ -18,44 +18,44 @@ import uglify from 'gulp-uglify';
 
 
 gulp.task('generic:chrome', () => {
-    return gulp.src('./src/chrome/*')
-        .pipe(gulp.dest('dist'));
+	return gulp.src('./src/chrome/*')
+		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('html', () => {
-    return gulp.src('./src/*.html')
-        .pipe(gulp.dest('dist'));
+	return gulp.src('./src/*.html')
+		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('img', () => {
-    return gulp.src('./src/images/*.png')
-        .pipe(imagemin())
-        .pipe(gulp.dest('dist/images'));
+	return gulp.src('./src/images/*.png')
+		.pipe(imagemin())
+		.pipe(gulp.dest('dist/images'));
 });
 
 
 gulp.task('js', ['js:app', 'js:options', 'js:plugins']);
 
 gulp.task('js:options', () => {
-    return browserify('./src/js/options.js')
-        .bundle()
-        .pipe(source('options.js'))//.pipe(streamify(uglify()))
-        .pipe(gulp.dest('./dist/js/'));
+	return browserify('./src/js/options.js')
+		.bundle()
+		.pipe(source('options.js'))//.pipe(streamify(uglify()))
+		.pipe(gulp.dest('./dist/js/'));
 });
 
 
 gulp.task('js:app', () => {
-    return browserify('./src/js/app.js')
-        .bundle()
-        .pipe(source('app.js'))//.pipe(streamify(uglify()))
-        .pipe(gulp.dest('./dist/js/'));
+	return browserify('./src/js/app.js')
+		.bundle()
+		.pipe(source('app.js'))//.pipe(streamify(uglify()))
+		.pipe(gulp.dest('./dist/js/'));
 });
 
 gulp.task('js:plugins', () => {
-    return gulp.src('vendor/awesomplete/awesomplete.js')
-        .pipe(concat('plugins.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('./dist/js/'));
+	return gulp.src('vendor/awesomplete/awesomplete.js')
+		.pipe(concat('plugins.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('./dist/js/'));
 });
 
 function scss(browsers) {
