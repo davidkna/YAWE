@@ -8,8 +8,9 @@ import autoprefixer from 'gulp-autoprefixer';
 import babel from 'gulp-babel';
 import concat from 'gulp-concat';
 import csscomb from 'gulp-csscomb';
-import csso from 'gulp-csso';
 import imagemin from 'gulp-imagemin';
+import minifyCss from 'gulp-minify-css';
+import minifyHtml from 'gulp-minify-html';
 import sass from 'gulp-sass';
 import streamify from 'gulp-streamify';
 import uglify from 'gulp-uglify';
@@ -24,6 +25,7 @@ gulp.task('generic:chrome', () => {
 
 gulp.task('html', () => {
 	return gulp.src('./src/*.html')
+		.pipe(minifyHtml())
 		.pipe(gulp.dest('dist'));
 });
 
@@ -68,7 +70,8 @@ function scss(browsers) {
 			browsers: browsers,
 			cascade: false,
 			remove: true
-		})) // .pipe(csso())
+		}))
+		.pipe(minifyCss())
 		.pipe(gulp.dest('dist/bootswatch/'));
 }
 
