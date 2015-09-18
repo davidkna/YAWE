@@ -18,6 +18,45 @@ gulp.task('clean', callback => {
 	return del('dist/', callback)
 })
 
+gulp.task('release:chrome', ['clean'], () => {
+	gulp.run('chrome')
+})
+
+gulp.task('chrome', [
+	'generic:chrome',
+	'js_min',
+	'scss:chrome',
+	'img',
+	'html',
+])
+
+gulp.task('release:opera', ['clean'], () => {
+	gulp.run('opera')
+})
+
+gulp.task('opera', [
+	'generic:chrome',
+	'js',
+	'scss:opera',
+	'img',
+	'html',
+])
+
+// NOT WORKING YET
+gulp.task('release:firefox', ['clean'], () => {
+	gulp.run('firefox')
+})
+
+gulp.task('firefox', [
+	'js',
+	'scss:opera',
+	'img',
+	'html',
+])
+
+gulp.task('js', ['js:app', 'js:options', 'js:plugins'])
+gulp.task('js_min', ['js:app_min', 'js:options_min', 'js:plugins'])
+
 gulp.task('generic:chrome', () => {
 	return gulp.src(['./src/chrome/*', '!./src/chrome/*.js'])
 		.pipe(gulp.dest('dist'))
@@ -90,7 +129,7 @@ function scss(browsers) {
 
 
 gulp.task('scss:web', () => {
-	return scss(['> 1%', 'last 2 versions', 'Firefox ESR'])
+	return scss(['last 2 versions', 'Firefox ESR'])
 })
 
 gulp.task('scss:firefox', () => {
