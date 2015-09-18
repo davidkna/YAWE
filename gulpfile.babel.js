@@ -4,7 +4,6 @@ import del from 'del'
 import source from 'vinyl-source-stream'
 
 import autoprefixer from 'gulp-autoprefixer'
-import babel from 'gulp-babel'
 import concat from 'gulp-concat'
 import csscomb from 'gulp-csscomb'
 import imagemin from 'gulp-imagemin'
@@ -70,32 +69,6 @@ gulp.task('js:app_min', () => {
 gulp.task('js:plugins', () => {
 	return gulp.src('vendor/awesomplete/awesomplete.js')
 		.pipe(concat('plugins.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest('./dist/js/'))
-})
-
-gulp.task('js:helper', () => {
-	return gulp.src('./src/js/helper.js')
-		.pipe(babel())
-		.pipe(gulp.dest('./dist/js/'))
-})
-
-gulp.task('js:helper_min', () => {
-	return gulp.src('./src/js/helper.js')
-		.pipe(babel())
-		.pipe(uglify())
-		.pipe(gulp.dest('./dist/js/'))
-})
-
-gulp.task('js:wiki', () => {
-	return gulp.src('./src/js/wiki.js')
-		.pipe(babel())
-		.pipe(gulp.dest('./dist/js/'))
-})
-
-gulp.task('js:wiki_min', () => {
-	return gulp.src('./src/js/wiki.js')
-		.pipe(babel())
 		.pipe(uglify())
 		.pipe(gulp.dest('./dist/js/'))
 })
