@@ -98,18 +98,21 @@ export function isWikiUrl(testUrl) {
 }
 
 export function articleNameFromUrl(articleUrl) {
+	function beautify(name) {
+		return decodeURIComponent(name.replace(/_/g, ' '))
+	}
 	const parsedUrl = url.parse(articleUrl)
 	const wikiUrl   = url.parse(options.url)
 
 	if (parsedUrl.pathname.startsWith('../wiki/')) {
-		return decodeURIComponent(parsedUrl.pathname.substring(8))
+		return beautify(parsedUrl.pathname.substring(8))
 	}
 
 	if (wikiUrl.pathname === '/') {
-		return decodeURIComponent(parsedUrl.pathname.substring(6))
+		return beautify(parsedUrl.pathname.substring(6))
 	}
 
-	return decodeURIComponent(parsedUrl.pathname.substring(wikiUrl.pathname.length + 6))
+	return beautify(parsedUrl.pathname.substring(wikiUrl.pathname.length + 6))
 }
 
 export function loadFromHash() {

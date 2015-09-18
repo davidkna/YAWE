@@ -1,4 +1,4 @@
-import { $, options } from './helper'
+import { $, findParentLink, options } from './helper'
 import {
 	articleNameFromUrl,
 	getArticle,
@@ -44,13 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 
 	$('#content').addEventListener('click', (event) => {
-		const target = event.target
-		if (target.tagName.toLowerCase() === 'a') {
+		const target = findParentLink(event.target)
+		if (target) {
 			if (isWikiUrl(target.href)) {
 				event.preventDefault()
 				const searchTerm = articleNameFromUrl(target.href)
 
-				$('#search').value = searchTerm.replace(/_/g, ' ')
+				$('#search').value = searchTerm
 				getArticle(searchTerm)
 			} else {
 				if (target.dataset.internal !== '') {

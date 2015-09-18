@@ -12,6 +12,16 @@ export function $$(expr, container) {
 	return [].slice.call((container || document).querySelectorAll(expr))
 }
 
+export function findParentLink(el) {
+	if ((el.nodeName || el.tagName).toLowerCase() === 'a') {
+		return el
+	}
+	if (el.parentNode) {
+		return findParentLink(el.parentNode)
+	}
+	return null
+}
+
 export function http2https(url) {
 	if (!url.match(/^http/)) {
 		return `https://${ url }`
