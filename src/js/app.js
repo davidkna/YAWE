@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				event.preventDefault()
 				const searchTerm = articleNameFromUrl(target.href)
 
-				$('#search').value = searchTerm
+				$('#search').value = searchTerm.replace(/_/g, ' ')
 				getArticle(searchTerm)
 			} else {
 				if (target.dataset.internal !== '') {

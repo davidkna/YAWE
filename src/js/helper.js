@@ -26,6 +26,7 @@ export function getJSON(url) {
 		const xhr = new XMLHttpRequest()
 		xhr.open('get', url, true)
 		xhr.responseType = 'json'
+		xhr.setRequestHeader( 'Api-User-Agent', 'YAWE/4.0' )
 		xhr.addEventListener('load', () => {
 			const status = xhr.status
 			if (status === 200) {

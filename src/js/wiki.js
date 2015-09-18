@@ -88,7 +88,7 @@ export function isWikiUrl(testUrl) {
 	if (parsedUrl.host) {
 		if (parsedUrl.host !== wikiUrl.host) return false
 	}
-	if (parsedUrl.pathname.substring(0, 8) === '../wiki/') return true
+	if (parsedUrl.pathname.startsWith('../wiki/')) return true
 
 	if (wikiUrl.pathname === '/') {
 		return parsedUrl.pathname.substring(0, 6) === '/wiki/'
@@ -98,22 +98,18 @@ export function isWikiUrl(testUrl) {
 }
 
 export function articleNameFromUrl(articleUrl) {
-	function beautifyArticleName(name) {
-		return decodeURIComponent(name.replace(/_/g, ' '))
-	}
-
 	const parsedUrl = url.parse(articleUrl)
 	const wikiUrl   = url.parse(options.url)
 
-	if (parsedUrl.pathname.substring(0, 8) === '../wiki/') {
-		return beautifyArticleName(parsedUrl.pathname.substring(8))
+	if (parsedUrl.pathname.startsWith('../wiki/')) {
+		return decodeURIComponent(parsedUrl.pathname.substring(8))
 	}
 
 	if (wikiUrl.pathname === '/') {
-		return beautifyArticleName(parsedUrl.pathname.substring(6))
+		return decodeURIComponent(parsedUrl.pathname.substring(6))
 	}
 
-	return beautifyArticleName(parsedUrl.pathname.substring(wikiUrl.pathname.length + 6))
+	return decodeURIComponent(parsedUrl.pathname.substring(wikiUrl.pathname.length + 6))
 }
 
 export function loadFromHash() {

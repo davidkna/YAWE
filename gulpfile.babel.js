@@ -4,6 +4,7 @@ import del from 'del'
 import source from 'vinyl-source-stream'
 
 import autoprefixer from 'gulp-autoprefixer'
+import babel from 'gulp-babel'
 import concat from 'gulp-concat'
 import csscomb from 'gulp-csscomb'
 import imagemin from 'gulp-imagemin'
@@ -13,8 +14,11 @@ import sass from 'gulp-sass'
 import streamify from 'gulp-streamify'
 import uglify from 'gulp-uglify'
 
+let appFolder = 'dist'
+
 
 gulp.task('clean', callback => {
+	appFolder = 'dist/data'
 	return del('dist/', callback)
 })
 
@@ -26,7 +30,7 @@ gulp.task('chrome', [
 	'generic:chrome',
 	'js_min',
 	'scss:chrome',
-	'img',
+	'img:chrome',
 	'html',
 ])
 
@@ -38,7 +42,7 @@ gulp.task('opera', [
 	'generic:chrome',
 	'js',
 	'scss:opera',
-	'img',
+	'img:chrome',
 	'html',
 ])
 
@@ -48,9 +52,11 @@ gulp.task('release:firefox', ['clean'], () => {
 })
 
 gulp.task('firefox', [
+	'generic:firefox',
 	'js',
-	'scss:opera',
-	'img',
+	'js:firefox',
+	'scss:firefox',
+	'img:firefox',
 	'html',
 ])
 
@@ -59,72 +65,100 @@ gulp.task('js_min', ['js:app_min', 'js:options_min', 'js:plugins'])
 
 gulp.task('generic:chrome', () => {
 	return gulp.src(['./src/chrome/*', '!./src/chrome/*.js'])
-		.pipe(gulp.dest('dist'))
+	.pipe(gulp.dest('dist'))
+})
+
+gulp.task('generic:firefox', () => {
+	return gulp.src(['./src/firefox/*', '!./src/chrome/*.js'])
+	.pipe(gulp.dest('dist'))
 })
 
 gulp.task('html', () => {
 	return gulp.src('./src/*.html')
-		.pipe(minifyHtml())
-		.pipe(gulp.dest('dist'))
+	.pipe(minifyHtml())
+	.pipe(gulp.dest('dist'))
 })
 
-gulp.task('img', () => {
-	return gulp.src('./src/images/*.png')
-		.pipe(imagemin())
-		.pipe(gulp.dest('dist/images'))
+gulp.task('img:firefox', () => {
+	return gulp.src([
+		'./src/images/icon_16x16.png',
+		'./src/images/icon_32x32.png',
+		'./src/images/icon_48x48.png',
+		'./src/images/icon_64x64.png',
+	])
+	.pipe(imagemin())
+	.pipe(gulp.dest('dist/images'))
+})
+
+gulp.task('img:chrome', () => {
+	return gulp.src([
+		'./src/images/icon_16x16.png',
+		'./src/images/icon_19x19.png',
+		'./src/images/icon_38x38.png',
+		'./src/images/icon_48x48.png',
+		'./src/images/icon_128x128.png',
+	])
+	.pipe(imagemin())
+	.pipe(gulp.dest('dist/images'))
 })
 
 
 gulp.task('js:options', () => {
 	return browserify('./src/js/options.js')
-		.bundle()
-		.pipe(source('options.js'))
-		.pipe(gulp.dest('./dist/js/'))
+	.bundle()
+	.pipe(source('options.js'))
+	.pipe(gulp.dest('./dist/js/'))
 })
 
 gulp.task('js:options_min', () => {
 	return browserify('./src/js/options.js')
-		.bundle()
-		.pipe(source('options.js'))
-		.pipe(streamify(uglify()))
-		.pipe(gulp.dest('./dist/js/'))
+	.bundle()
+	.pipe(source('options.js'))
+	.pipe(streamify(uglify()))
+	.pipe(gulp.dest('./dist/js/'))
 })
 
 gulp.task('js:app', () => {
 	return browserify('./src/js/app.js')
-		.bundle()
-		.pipe(source('app.js'))
-		.pipe(gulp.dest('./dist/js/'))
+	.bundle()
+	.pipe(source('app.js'))
+	.pipe(gulp.dest('./dist/js/'))
 })
 
 gulp.task('js:app_min', () => {
 	return browserify('./src/js/app.js')
-		.bundle()
-		.pipe(source('app.js'))
-		.pipe(streamify(uglify()))
-		.pipe(gulp.dest('./dist/js/'))
+	.bundle()
+	.pipe(source('app.js'))
+	.pipe(streamify(uglify()))
+	.pipe(gulp.dest('./dist/js/'))
 })
 
 gulp.task('js:plugins', () => {
 	return gulp.src('vendor/awesomplete/awesomplete.js')
-		.pipe(concat('plugins.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest('./dist/js/'))
+	.pipe(concat('plugins.js'))
+	.pipe(uglify())
+	.pipe(gulp.dest('./dist/js/'))
+})
+
+gulp.task('js:firefox', () => {
+	return gulp.src('src/firefox/index.js')
+	.pipe(babel())
+	.pipe(gulp.dest('./dist/js/'))
 })
 
 function scss(browsers) {
 	return gulp.src('vendor/bootswatch/**/style.scss')
-		.pipe(sass({
-			includePaths: ['vendor/bootstrap/', 'src/scss'],
-		}).on('error', sass.logError))
-		.pipe(csscomb())
-		.pipe(autoprefixer({
-			browsers: browsers,
-			cascade: false,
-			remove: true,
-		}))
-		.pipe(minifyCss())
-		.pipe(gulp.dest('dist/bootswatch/'))
+	.pipe(sass({
+		includePaths: ['vendor/bootstrap/', 'src/scss'],
+	}).on('error', sass.logError))
+	.pipe(csscomb())
+	.pipe(autoprefixer({
+		browsers: browsers,
+		cascade: false,
+		remove: true,
+	}))
+	.pipe(minifyCss())
+	.pipe(gulp.dest('dist/bootswatch/'))
 }
 
 
