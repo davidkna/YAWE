@@ -1,22 +1,21 @@
 {
-  "name": "YAWE (Yet Another Wiki Extension)",
-  "short_name": "YAWE",
-  "version": "4.0.0",
-  "description": "View and Search for Wikipedia Articles",
-  "icons": {
-    "16" : "images/icon.png",
-    "48" : "images/48.png",
-    "128" : "images/128.png"
-  },
-  "options_page": "options.html",
-  "browser_action": {
-    "default_icon": "images/icon.png",
-    "default_title": "YAWE (Yet Another Wiki Extension)",
-    "default_popup": "index.html"
-  },
-  "manifest_version": 2,
-  "permissions": [
-  	"storage",
-  	"https://*/w/api.php"
-  ]
+	"name": "YAWE (Yet Another Wiki Extension)",
+	"short_name": "YAWE",
+	"version": "4.0.0",
+	"description": "View and Search for Wikipedia Articles",
+	"icons": {
+		"16" : "images/icon.png",
+		"48" : "images/48.png",
+		"128" : "images/128.png"
+	},
+	"options_page": "options.html",
+	"browser_action": {
+		"default_icon": "images/icon.png",
+		"default_title": "YAWE (Yet Another Wiki Extension)",
+		"default_popup": "index.html"
+	},
+	"manifest_version": 2,
+	"permissions": [
+		"https://*/w/api.php"
+	]
 }
