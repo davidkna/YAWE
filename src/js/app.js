@@ -1,5 +1,11 @@
 import { $, options } from './helper'
-import { getArticle, isWiki, loadFromHash, search } from './wiki'
+import {
+	articleNameFromUrl,
+	getArticle,
+	isWikiUrl,
+	loadFromHash,
+	search,
+} from './wiki'
 
 document.addEventListener('DOMContentLoaded', () => {
 	$('link').setAttribute('href', `bootswatch/${ options.theme }/style.css`)
@@ -40,13 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	$('#content').addEventListener('click', (event) => {
 		const target = event.target
 		if (target.tagName.toLowerCase() === 'a') {
-			if (isWiki(target.href)) {
+			if (isWikiUrl(target.href)) {
 				event.preventDefault()
-				const searchTerm = decodeURIComponent(target.pathname
-					.split('/wiki/')[1]
-					.replace(/#.+$/, '')
-					.replace('/$', '')
-					.replace(/_/g, ' '))
+				const searchTerm = articleNameFromUrl(target.href)
+
 				$('#search').value = searchTerm
 				getArticle(searchTerm)
 			} else {

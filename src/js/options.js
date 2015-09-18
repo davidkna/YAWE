@@ -1,4 +1,4 @@
-import { $, http2https, options, timestamp } from 'helper'
+import { $, http2https, options, timestamp } from './helper'
 
 (() => {
 	function getVal(el) {
@@ -17,11 +17,15 @@ import { $, http2https, options, timestamp } from 'helper'
 
 	$('form', $('#content')).addEventListener('submit', (event) => {
 		event.preventDefault()
-		const url = http2https($('#url').value)
+		let url = http2https($('#url').value)
 		const theme = getVal($('#theme'))
 
 		if (url[-1] !== '/') {
 			url.concat('/')
+		}
+
+		if (url === '') {
+			url = 'https://en.wikipedia.org/'
 		}
 
 		localStorage.setItem('settings', JSON.stringify({

@@ -2,7 +2,6 @@ import gulp from 'gulp'
 import browserify from 'browserify'
 import del from 'del'
 import source from 'vinyl-source-stream'
-import runSequence from 'run-sequence'
 
 import autoprefixer from 'gulp-autoprefixer'
 import babel from 'gulp-babel'
@@ -15,28 +14,14 @@ import sass from 'gulp-sass'
 import streamify from 'gulp-streamify'
 import uglify from 'gulp-uglify'
 
-gulp.task('clean', () => {
-	return del('dist/')
+
+gulp.task('clean', callback => {
+	return del('dist/', callback)
 })
 
 gulp.task('generic:chrome', () => {
 	return gulp.src(['./src/chrome/*', '!./src/chrome/*.js'])
 		.pipe(gulp.dest('dist'))
-})
-
-gulp.task('js:chrome', () => {
-	return browserify('./src/chrome/index.js')
-		.bundle()
-		.pipe(source('index.js'))
-		.pipe(streamify(uglify()))
-		.pipe(gulp.dest('./dist/js/'))
-})
-
-gulp.task('js:opera', () => {
-	return browserify('./src/chrome/index.js')
-		.bundle()
-		.pipe(source('index.js'))
-		.pipe(gulp.dest('./dist/js/'))
 })
 
 gulp.task('html', () => {
@@ -52,9 +37,14 @@ gulp.task('img', () => {
 })
 
 
-gulp.task('js', ['js:app', 'js:options', 'js:plugins'])
-
 gulp.task('js:options', () => {
+	return browserify('./src/js/options.js')
+		.bundle()
+		.pipe(source('options.js'))
+		.pipe(gulp.dest('./dist/js/'))
+})
+
+gulp.task('js:options_min', () => {
 	return browserify('./src/js/options.js')
 		.bundle()
 		.pipe(source('options.js'))
@@ -62,8 +52,14 @@ gulp.task('js:options', () => {
 		.pipe(gulp.dest('./dist/js/'))
 })
 
-
 gulp.task('js:app', () => {
+	return browserify('./src/js/app.js')
+		.bundle()
+		.pipe(source('app.js'))
+		.pipe(gulp.dest('./dist/js/'))
+})
+
+gulp.task('js:app_min', () => {
 	return browserify('./src/js/app.js')
 		.bundle()
 		.pipe(source('app.js'))
@@ -84,9 +80,23 @@ gulp.task('js:helper', () => {
 		.pipe(gulp.dest('./dist/js/'))
 })
 
+gulp.task('js:helper_min', () => {
+	return gulp.src('./src/js/helper.js')
+		.pipe(babel())
+		.pipe(uglify())
+		.pipe(gulp.dest('./dist/js/'))
+})
+
 gulp.task('js:wiki', () => {
 	return gulp.src('./src/js/wiki.js')
 		.pipe(babel())
+		.pipe(gulp.dest('./dist/js/'))
+})
+
+gulp.task('js:wiki_min', () => {
+	return gulp.src('./src/js/wiki.js')
+		.pipe(babel())
+		.pipe(uglify())
 		.pipe(gulp.dest('./dist/js/'))
 })
 

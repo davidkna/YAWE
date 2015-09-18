@@ -1,5 +1,10 @@
+// My Imports
+import { $, options, getJSON } from './helper'
+
+// Vendor Imports
+import url from 'url'
 import qs from 'query-string'
-import { $, options, getJSON, regEscape } from './helper'
+
 
 // Helpers
 function prepareResponse(response, article) {
@@ -56,9 +61,8 @@ export function getArticle(article) {
 		sections: 'all',
 		redirect: 'yes',
 	}
-	const url = options.url
 
-	getJSON(`${ url }w/api.php?${ qs.stringify(wikiOptions) }`)
+	getJSON(`${ options.url }w/api.php?${ qs.stringify(wikiOptions) }`)
 		.then(response => {
 			if (response.error) {
 				$('#content').innerHTML = wrapError(response.error.info)
@@ -76,10 +80,40 @@ export function getArticle(article) {
 		})
 }
 
-const isWikiRegex = new RegExp(`^(${ regEscape(options.url.slice(0, -1)).replace(/^https?:/, 'https?:') })?/wiki/.+$`)
+export function isWikiUrl(testUrl) {
+	const parsedUrl = url.parse(testUrl)
+	const wikiUrl   = url.parse(options.url)
 
-export function isWiki(str) {
-	return str.match(isWikiRegex)
+	if (! /^https?:$/.test(parsedUrl.protocol)) return false
+	if (parsedUrl.host) {
+		if (parsedUrl.host !== wikiUrl.host) return false
+	}
+	if (parsedUrl.pathname.substring(0, 8) === '../wiki/') return true
+
+	if (wikiUrl.pathname === '/') {
+		return parsedUrl.pathname.substring(0, 6) === '/wiki/'
+	}
+
+	return parsedUrl.pathname.substring(0, wikiUrl.pathname.length + 6) === wikiUrl.pathname + '/wiki/'
+}
+
+export function articleNameFromUrl(articleUrl) {
+	function beautifyArticleName(name) {
+		return decodeURIComponent(name.replace(/_/g, ' '))
+	}
+
+	const parsedUrl = url.parse(articleUrl)
+	const wikiUrl   = url.parse(options.url)
+
+	if (parsedUrl.pathname.substring(0, 8) === '../wiki/') {
+		return beautifyArticleName(parsedUrl.pathname.substring(8))
+	}
+
+	if (wikiUrl.pathname === '/') {
+		return beautifyArticleName(parsedUrl.pathname.substring(6))
+	}
+
+	return beautifyArticleName(parsedUrl.pathname.substring(wikiUrl.pathname.length + 6))
 }
 
 export function loadFromHash() {
@@ -98,8 +132,8 @@ export function search(query, callback) {
 		suggest: true,
 		limit: 10,
 	})
-	const url = options.url
-	getJSON(`${ url }w/api.php?${ ajaxOptions }`)
+
+	getJSON(`${ options.url }w/api.php?${ ajaxOptions }`)
 		.then((response) => {
 			callback(response[1])
 		})

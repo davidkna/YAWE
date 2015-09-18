@@ -43,11 +43,6 @@ export function timestamp() {
 	return Math.floor(Date.now() / 1000)
 }
 
-// Escapes string
-export function regEscape(str) {
-	return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
-}
-
 const defaultOptions = {
 	theme: 'custom',
 	url: 'https://en.wikipedia.org/',
