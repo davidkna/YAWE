@@ -64,6 +64,7 @@ export function getArticle(article) {
 
 	getJSON(`${ options.url }w/api.php?${ qs.stringify(wikiOptions) }`)
 		.then(response => {
+			scroll(0, 0)
 			if (response.error) {
 				$('#content').innerHTML = wrapError(response.error.info)
 			} else {
