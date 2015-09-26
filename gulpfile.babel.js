@@ -14,11 +14,8 @@ import sass from 'gulp-sass'
 import streamify from 'gulp-streamify'
 import uglify from 'gulp-uglify'
 
-let appFolder = 'dist'
-
 
 gulp.task('clean', callback => {
-	appFolder = 'dist/data'
 	return del('dist/', callback)
 })
 
@@ -28,7 +25,9 @@ gulp.task('release:chrome', ['clean'], () => {
 
 gulp.task('chrome', [
 	'generic:chrome',
-	'js_min',
+	'js:app_min',
+	'js:options_min',
+	'js:plugins',
 	'scss:chrome',
 	'img:chrome',
 	'html',
@@ -40,7 +39,9 @@ gulp.task('release:opera', ['clean'], () => {
 
 gulp.task('opera', [
 	'generic:chrome',
-	'js',
+	'js:app',
+	'js:options',
+	'js:plugins',
 	'scss:opera',
 	'img:chrome',
 	'html',
@@ -53,15 +54,17 @@ gulp.task('release:firefox', ['clean'], () => {
 
 gulp.task('firefox', [
 	'generic:firefox',
-	'js',
+	'js:app_firefox',
+	'js:options_firefox',
+	'js:plugins_firefox',
 	'js:firefox',
+	'js:helper',
+	'js:wiki',
+	'js:ajax',
 	'scss:firefox',
 	'img:firefox',
-	'html',
+	'html:firefox',
 ])
-
-gulp.task('js', ['js:app', 'js:options', 'js:plugins'])
-gulp.task('js_min', ['js:app_min', 'js:options_min', 'js:plugins'])
 
 gulp.task('generic:chrome', () => {
 	return gulp.src(['./src/chrome/*', '!./src/chrome/*.js'])
@@ -69,7 +72,7 @@ gulp.task('generic:chrome', () => {
 })
 
 gulp.task('generic:firefox', () => {
-	return gulp.src(['./src/firefox/*', '!./src/chrome/*.js'])
+	return gulp.src(['./src/firefox/*', '!./src/firefox/*.js'])
 	.pipe(gulp.dest('dist'))
 })
 
@@ -77,6 +80,12 @@ gulp.task('html', () => {
 	return gulp.src('./src/*.html')
 	.pipe(minifyHtml())
 	.pipe(gulp.dest('dist'))
+})
+
+gulp.task('html:firefox', () => {
+	return gulp.src('./src/*.html')
+	.pipe(minifyHtml())
+	.pipe(gulp.dest('dist/data'))
 })
 
 gulp.task('img:firefox', () => {
@@ -87,7 +96,7 @@ gulp.task('img:firefox', () => {
 		'./src/images/icon_64x64.png',
 	])
 	.pipe(imagemin())
-	.pipe(gulp.dest('dist/images'))
+	.pipe(gulp.dest('dist/data/images'))
 })
 
 gulp.task('img:chrome', () => {
@@ -118,11 +127,23 @@ gulp.task('js:options_min', () => {
 	.pipe(gulp.dest('./dist/js/'))
 })
 
+gulp.task('js:options_firefox', () => {
+	return gulp.src('./src/js/options.js')
+	.pipe(babel())
+	.pipe(gulp.dest('./dist/data/js/'))
+})
+
 gulp.task('js:app', () => {
 	return browserify('./src/js/app.js')
 	.bundle()
 	.pipe(source('app.js'))
 	.pipe(gulp.dest('./dist/js/'))
+})
+
+gulp.task('js:app_firefox', () => {
+	return gulp.src('./src/js/app.js')
+	.pipe(babel())
+	.pipe(gulp.dest('./dist/data/js/'))
 })
 
 gulp.task('js:app_min', () => {
@@ -140,10 +161,35 @@ gulp.task('js:plugins', () => {
 	.pipe(gulp.dest('./dist/js/'))
 })
 
+gulp.task('js:plugins_firefox', () => {
+	return gulp.src('vendor/awesomplete/awesomplete.js')
+	.pipe(concat('plugins.js'))
+	.pipe(uglify())
+	.pipe(gulp.dest('./dist/data/js/'))
+})
+
 gulp.task('js:firefox', () => {
 	return gulp.src('src/firefox/index.js')
 	.pipe(babel())
-	.pipe(gulp.dest('./dist/js/'))
+	.pipe(gulp.dest('./dist/'))
+})
+
+gulp.task('js:helper', () => {
+	return gulp.src('src/helper.js')
+	.pipe(babel())
+	.pipe(gulp.dest('./dist/data/js/'))
+})
+
+gulp.task('js:wiki', () => {
+	return gulp.src('src/wiki.js')
+	.pipe(babel())
+	.pipe(gulp.dest('./dist/data/js/'))
+})
+
+gulp.task('js:ajax', () => {
+	return gulp.src('src/firefox/ajax.js')
+	.pipe(babel())
+	.pipe(gulp.dest('./dist/data/js/'))
 })
 
 function scss(browsers) {
@@ -158,22 +204,25 @@ function scss(browsers) {
 		remove: true,
 	}))
 	.pipe(minifyCss())
-	.pipe(gulp.dest('dist/bootswatch/'))
 }
 
 
 gulp.task('scss:web', () => {
 	return scss(['last 2 versions', 'Firefox ESR'])
+	.pipe(gulp.dest('dist/bootswatch/'))
 })
 
 gulp.task('scss:firefox', () => {
 	return scss(['Firefox ESR'])
+	.pipe(gulp.dest('dist/data/bootswatch/'))
 })
 
 gulp.task('scss:chrome', () => {
 	return scss(['last 2 Chrome versions'])
+	.pipe(gulp.dest('dist/bootswatch/'))
 })
 
 gulp.task('scss:opera', () => {
 	return scss(['last 2 Opera versions'])
+	.pipe(gulp.dest('dist/bootswatch/'))
 })
