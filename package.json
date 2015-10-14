@@ -22,7 +22,7 @@
     "eslint-config-airbnb": "0.0.8",
     "eslint-plugin-react": "3.5.1",
     "gulp": "3.9.0",
-    "gulp-autoprefixer": "2.3.1",
+    "gulp-autoprefixer": "3.0.2",
     "gulp-babel": "5.2.1",
     "gulp-concat": "2.6.0",
     "gulp-csscomb": "3.0.6",
