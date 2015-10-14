@@ -4,7 +4,6 @@ import del from 'del'
 import source from 'vinyl-source-stream'
 
 import autoprefixer from 'gulp-autoprefixer'
-import babel from 'gulp-babel'
 import concat from 'gulp-concat'
 import csscomb from 'gulp-csscomb'
 import imagemin from 'gulp-imagemin'
@@ -24,12 +23,12 @@ gulp.task('release:chrome', ['clean'], () => {
 })
 
 gulp.task('chrome', [
-	'generic:chrome',
+	'generic',
 	'js:app_min',
 	'js:options_min',
 	'js:plugins',
 	'scss:chrome',
-	'img:chrome',
+	'img',
 	'html',
 ])
 
@@ -43,7 +42,7 @@ gulp.task('opera', [
 	'js:options',
 	'js:plugins',
 	'scss:opera',
-	'img:chrome',
+	'img',
 	'html',
 ])
 
@@ -53,28 +52,20 @@ gulp.task('release:firefox', ['clean'], () => {
 })
 
 gulp.task('firefox', [
-	'generic:firefox',
-	'js:app_firefox',
-	'js:options_firefox',
-	'js:plugins_firefox',
-	'js:firefox',
-	'js:helper',
-	'js:wiki',
-	'js:ajax',
+	'generic',
+	'js:app',
+	'js:options',
+	'js:plugins',
 	'scss:firefox',
-	'img:firefox',
-	'html:firefox',
+	'img',
+	'html',
 ])
 
-gulp.task('generic:chrome', () => {
+gulp.task('generic', () => {
 	return gulp.src(['./src/chrome/*', '!./src/chrome/*.js'])
 	.pipe(gulp.dest('dist'))
 })
 
-gulp.task('generic:firefox', () => {
-	return gulp.src(['./src/firefox/*', '!./src/firefox/*.js'])
-	.pipe(gulp.dest('dist'))
-})
 
 gulp.task('html', () => {
 	return gulp.src('./src/*.html')
@@ -82,24 +73,7 @@ gulp.task('html', () => {
 	.pipe(gulp.dest('dist'))
 })
 
-gulp.task('html:firefox', () => {
-	return gulp.src('./src/*.html')
-	.pipe(minifyHtml())
-	.pipe(gulp.dest('dist/data'))
-})
-
-gulp.task('img:firefox', () => {
-	return gulp.src([
-		'./src/images/icon_16x16.png',
-		'./src/images/icon_32x32.png',
-		'./src/images/icon_48x48.png',
-		'./src/images/icon_64x64.png',
-	])
-	.pipe(imagemin())
-	.pipe(gulp.dest('dist/data/images'))
-})
-
-gulp.task('img:chrome', () => {
+gulp.task('img', () => {
 	return gulp.src([
 		'./src/images/icon_16x16.png',
 		'./src/images/icon_19x19.png',
@@ -127,23 +101,11 @@ gulp.task('js:options_min', () => {
 	.pipe(gulp.dest('./dist/js/'))
 })
 
-gulp.task('js:options_firefox', () => {
-	return gulp.src('./src/js/options.js')
-	.pipe(babel())
-	.pipe(gulp.dest('./dist/data/js/'))
-})
-
 gulp.task('js:app', () => {
 	return browserify('./src/js/app.js')
 	.bundle()
 	.pipe(source('app.js'))
 	.pipe(gulp.dest('./dist/js/'))
-})
-
-gulp.task('js:app_firefox', () => {
-	return gulp.src('./src/js/app.js')
-	.pipe(babel())
-	.pipe(gulp.dest('./dist/data/js/'))
 })
 
 gulp.task('js:app_min', () => {
@@ -159,37 +121,6 @@ gulp.task('js:plugins', () => {
 	.pipe(concat('plugins.js'))
 	.pipe(uglify())
 	.pipe(gulp.dest('./dist/js/'))
-})
-
-gulp.task('js:plugins_firefox', () => {
-	return gulp.src('vendor/awesomplete/awesomplete.js')
-	.pipe(concat('plugins.js'))
-	.pipe(uglify())
-	.pipe(gulp.dest('./dist/data/js/'))
-})
-
-gulp.task('js:firefox', () => {
-	return gulp.src('src/firefox/index.js')
-	.pipe(babel())
-	.pipe(gulp.dest('./dist/'))
-})
-
-gulp.task('js:helper', () => {
-	return gulp.src('src/helper.js')
-	.pipe(babel())
-	.pipe(gulp.dest('./dist/data/js/'))
-})
-
-gulp.task('js:wiki', () => {
-	return gulp.src('src/wiki.js')
-	.pipe(babel())
-	.pipe(gulp.dest('./dist/data/js/'))
-})
-
-gulp.task('js:ajax', () => {
-	return gulp.src('src/firefox/ajax.js')
-	.pipe(babel())
-	.pipe(gulp.dest('./dist/data/js/'))
 })
 
 function scss(browsers) {
