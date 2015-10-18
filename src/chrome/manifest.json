@@ -3,6 +3,11 @@
 	"short_name": "YAWE",
 	"version": "4.0.1",
 	"description": "View and Search for Wikipedia Articles",
+	"applications": {
+		"gecko": {
+			"id": "yawe@knaack.me"
+		}
+	},
 	"icons": {
 		"16" : "images/icon_16x16.png",
 		"48" : "images/icon_48x48.png",

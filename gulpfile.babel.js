@@ -46,7 +46,7 @@ gulp.task('opera', [
 	'html',
 ])
 
-// NOT WORKING YET
+// Works in firefox nightly
 gulp.task('release:firefox', ['clean'], () => {
 	gulp.run('firefox')
 })
@@ -145,7 +145,7 @@ gulp.task('scss:web', () => {
 
 gulp.task('scss:firefox', () => {
 	return scss(['Firefox ESR'])
-	.pipe(gulp.dest('dist/data/bootswatch/'))
+	.pipe(gulp.dest('dist/bootswatch/'))
 })
 
 gulp.task('scss:chrome', () => {
