@@ -36,6 +36,10 @@ gulp.task('release:opera', ['clean'], () => {
 	gulp.run('opera')
 })
 
+gulp.task('release:firefox', ['clean'], () => {
+	gulp.run('opera')
+})
+
 gulp.task('opera', [
 	'generic',
 	'js:app',
@@ -119,7 +123,6 @@ gulp.task('js:app_min', () => {
 gulp.task('js:plugins', () => {
 	return gulp.src('vendor/awesomplete/awesomplete.js')
 	.pipe(concat('plugins.js'))
-	.pipe(uglify())
 	.pipe(gulp.dest('./dist/js/'))
 })
 
