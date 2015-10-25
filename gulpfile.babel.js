@@ -37,7 +37,7 @@ gulp.task('release:opera', ['clean'], () => {
 })
 
 gulp.task('opera', [
-	'generic:chrome',
+	'generic',
 	'js:app',
 	'js:options',
 	'js:plugins',
