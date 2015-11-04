@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				const searchTerm = articleNameFromUrl(target.href)
 
 				$('#search').value = searchTerm
+				$('#content').scrollTop = 0
 				getArticle(searchTerm)
 			} else {
 				if (target.dataset.internal !== '') {
