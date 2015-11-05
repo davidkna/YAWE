@@ -22,7 +22,7 @@ export function findParentLink(el) {
 	return null
 }
 
-export function http2https(url) {
+export function http2https(url : string) {
 	if (!url.match(/^http/)) {
 		return `https://${ url }`
 	}
@@ -31,7 +31,7 @@ export function http2https(url) {
 
 // Returns url as JSON
 // Source: https://mathiasbynens.be/notes/xhr-responsetype-json
-export function getJSON(url) {
+export function getJSON(url: string) {
 	return new Promise((resolve, reject) => {
 		const xhr = new XMLHttpRequest()
 		xhr.open('get', url, true)
@@ -50,7 +50,7 @@ export function getJSON(url) {
 }
 
 // Creates timestamp for saves
-export function timestamp() {
+export function timestamp() : number {
 	return Math.floor(Date.now() / 1000)
 }
 
@@ -60,7 +60,7 @@ const defaultOptions = {
 	timestamp: timestamp(),
 }
 
-function getOptions() {
+function getOptions() : Object {
 	const options = localStorage.getItem('settings')
 	if (!options) {
 		localStorage.setItem('settings', JSON.stringify(defaultOptions))

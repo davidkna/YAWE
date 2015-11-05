@@ -7,7 +7,7 @@ import qs from 'query-string'
 
 
 // Helpers
-function prepareResponse(response, article) {
+function prepareResponse(response : string, article : string) : void {
 	const sections = response.mobileview.sections
 	const title = response.mobileview.normalizedtitle || article.replace(/_/g, ' ')
 	let result = ''
@@ -36,7 +36,7 @@ function prepareResponse(response, article) {
 }
 
 // Exports
-export function getArticle(article) {
+export function getArticle(article : string) : void {
 	function wrapError(msg) {
 		return `<div class='alert alert-danger'>${ msg }</div>`
 	}
@@ -81,7 +81,7 @@ export function getArticle(article) {
 		})
 }
 
-export function isWikiUrl(testUrl) {
+export function isWikiUrl(testUrl : string) : boolean {
 	const parsedUrl = url.parse(testUrl)
 	const wikiUrl   = url.parse(options.url)
 
@@ -98,8 +98,8 @@ export function isWikiUrl(testUrl) {
 	return parsedUrl.pathname.substring(0, wikiUrl.pathname.length + 6) === wikiUrl.pathname + '/wiki/'
 }
 
-export function articleNameFromUrl(articleUrl) {
-	function beautify(name) {
+export function articleNameFromUrl(articleUrl : string) : string {
+	function beautify(name : string) : string {
 		return decodeURIComponent(name.replace(/_/g, ' '))
 	}
 	const parsedUrl = url.parse(articleUrl)
@@ -116,7 +116,7 @@ export function articleNameFromUrl(articleUrl) {
 	return beautify(parsedUrl.pathname.substring(wikiUrl.pathname.length + 6))
 }
 
-export function loadFromHash() {
+export function loadFromHash() : void {
 	if (location.hash !== '') {
 		const hash = qs.parse(location.hash)
 		$('#search').setAttribute('value', hash.article)
@@ -124,7 +124,7 @@ export function loadFromHash() {
 	}
 }
 
-export function search(query, callback) {
+export function search(query : string, callback : Function) {
 	const ajaxOptions = qs.stringify({
 		format: 'json',
 		action: 'opensearch',

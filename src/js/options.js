@@ -1,11 +1,11 @@
 import { $, http2https, options, timestamp } from './helper'
 
 (() => {
-	function getVal(el) {
+	function getVal(el) : string {
 		return el.options[el.selectedIndex].getAttribute('value')
 	}
 
-	function setVal(el, val) {
+	function setVal(el, val : string) {
 		for (let i = 0; i < el.options.length; i++ ) {
 			if (el.options[i].value === val) {
 				el.selectedIndex = i
