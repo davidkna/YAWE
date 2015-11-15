@@ -33,7 +33,7 @@
     "gulp-streamify": "1.0.2",
     "gulp-uglify": "1.5.1",
     "vinyl-source-stream": "1.1.0",
-    "watchify": "3.6.0"
+    "watchify": "3.6.1"
   },
   "dependencies": {
     "query-string": "3.0.0",
