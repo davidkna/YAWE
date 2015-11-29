@@ -21,7 +21,7 @@
     "del": "2.1.0",
     "eslint": "1.10.1",
     "eslint-config-airbnb": "1.0.0",
-    "eslint-plugin-react": "3.10.0",
+    "eslint-plugin-react": "3.11.1",
     "gulp": "3.9.0",
     "gulp-autoprefixer": "3.1.0",
     "gulp-concat": "2.6.0",
