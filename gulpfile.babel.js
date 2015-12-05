@@ -63,7 +63,7 @@ gulp.task('firefox', [
 ])
 
 gulp.task('generic', () => {
-	return gulp.src(['./src/chrome/*', '!./src/chrome/*.js'])
+	return gulp.src(['./src/generic/*', '!./src/generic/*.js'])
 	.pipe(gulp.dest('dist'))
 })
 
