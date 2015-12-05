@@ -1,6 +1,7 @@
 import { $, findParentLink, options } from './helper'
 import {
 	articleNameFromUrl,
+	domElems,
 	getArticle,
 	isWikiUrl,
 	loadFromHash,
@@ -8,6 +9,10 @@ import {
 } from './wiki'
 
 document.addEventListener('DOMContentLoaded', () => {
+	const $base = domElems.base
+	const $search = domElems.search
+	const $content = domElems.content
+
 	$('link').setAttribute('href', `bootswatch/${ options.theme }/style.css`)
 	loadFromHash()
 
@@ -36,22 +41,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		maxItems: 10,
 	})
 
-	$('#search').addEventListener('input', () => {
-		search($('#search').value, (response) => {
+	$search.addEventListener('input', () => {
+		search($search.value, (response) => {
 			awesome.list = response
 			awesome.evaluate()
 		})
 	})
 
-	$('#content').addEventListener('click', (event) => {
+	$content.addEventListener('click', (event) => {
 		const target = findParentLink(event.target)
 		if (target) {
 			if (isWikiUrl(target.href)) {
 				event.preventDefault()
 				const searchTerm = articleNameFromUrl(target.href)
 
-				$('#search').value = searchTerm
-				$('#content').scrollTop = 0
+				$search.value = searchTerm
+				$content.scrollTop = 0
 				getArticle(searchTerm)
 			} else {
 				if (target.dataset.internal !== '') {
@@ -63,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 
 	$('a[href="options.html"]').addEventListener('click', () => {
-		$('base').setAttribute('href', '')
+		$base.setAttribute('href', '')
 	})
 
 	$('.dropdown .btn').addEventListener('click', (event) => {
@@ -74,6 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	$('#search-form').addEventListener('submit', (event) => {
 		event.preventDefault()
-		getArticle($('#search').value)
+		getArticle($search.value)
 	})
 })

@@ -1,13 +1,9 @@
 // My Imports
-import { $, options, getJSON } from './helper'
-
-// Vendor Imports
-import url from 'url'
-import qs from 'query-string'
+import { $, options, getJSON, fromQueryString, toQueryString } from './helper'
 
 
 // Helpers
-function prepareResponse(response : string, article : string) : void {
+function prepareResponse(response, article) {
 	const sections = response.mobileview.sections
 	const title = response.mobileview.normalizedtitle || article.replace(/_/g, ' ')
 	let result = ''
@@ -35,19 +31,43 @@ function prepareResponse(response : string, article : string) : void {
 	return result
 }
 
+function urlparse(url) {
+	const a = document.createElement('a')
+	a.href = url
+	return a
+}
+
+export let domElems = {}
+
+function initDomElems() {
+	domElems = {
+		base: $('base'),
+		body: $('body'),
+		search: $('#search'),
+		content: $('#content'),
+		loading: $('#loading'),
+	}
+}
+document.addEventListener('DOMContentLoaded', initDomElems)
+// DOM constants
+
 // Exports
-export function getArticle(article : string) : void {
+export function getArticle(article) {
 	function wrapError(msg) {
 		return `<div class='alert alert-danger'>${ msg }</div>`
 	}
+	const $base = domElems.base
+	const $body = domElems.body
+	const $content = domElems.content
+	const $loading = domElems.loading
 
-	$('base').setAttribute('href', options.url + 'wiki/' + article)
-	$('#content').innerHTML = ''
-	$('#content').style.display = 'none'
-	$('#loading').style.display = 'block'
-	$('body').classList.add('loading')
-	if (qs.parse(location.hash).article !== article) {
-		location.hash = qs.stringify({
+	$base.setAttribute('href', options.url + 'wiki/' + article)
+	$content.innerHTML = ''
+	$content.style.display = 'none'
+	$loading.style.display = 'block'
+	$body.classList.add('loading')
+	if (fromQueryString(location.hash).article !== article) {
+		location.hash = toQueryString({
 			article: article,
 		})
 	}
@@ -62,28 +82,28 @@ export function getArticle(article : string) : void {
 		redirect: 'yes',
 	}
 
-	getJSON(`${ options.url }w/api.php?${ qs.stringify(wikiOptions) }`)
+	getJSON(`${ options.url }w/api.php?${ toQueryString(wikiOptions) }`)
 		.then(response => {
 			scroll(0, 0)
 			if (response.error) {
-				$('#content').innerHTML = wrapError(response.error.info)
+				$content.innerHTML = wrapError(response.error.info)
 			} else {
-				$('#content').innerHTML = prepareResponse(response, article)
+				$content.innerHTML = prepareResponse(response, article)
 			}
-			$('#content').style.display = 'block'
-			$('#loading').style.display = 'none'
-			$('body').classList.remove('loading')
+			$content.style.display = 'block'
+			$loading.style.display = 'none'
+			$body.classList.remove('loading')
 		}, errorMsg => {
-			$('#content').innerHTML = wrapError(errorMsg)
-			$('#content').style.display = 'block'
-			$('#loading').style.display = 'none'
-			$('body').classList.remove('loading')
+			$content.innerHTML = wrapError(errorMsg)
+			$content.style.display = 'block'
+			$loading.style.display = 'none'
+			$body.classList.remove('loading')
 		})
 }
 
-export function isWikiUrl(testUrl : string) : boolean {
-	const parsedUrl = url.parse(testUrl)
-	const wikiUrl   = url.parse(options.url)
+export function isWikiUrl(testUrl) {
+	const parsedUrl = urlparse(testUrl)
+	const wikiUrl = urlparse(options.url)
 
 	if (! /^https?:$/.test(parsedUrl.protocol)) return false
 	if (parsedUrl.host) {
@@ -98,12 +118,12 @@ export function isWikiUrl(testUrl : string) : boolean {
 	return parsedUrl.pathname.substring(0, wikiUrl.pathname.length + 6) === wikiUrl.pathname + '/wiki/'
 }
 
-export function articleNameFromUrl(articleUrl : string) : string {
-	function beautify(name : string) : string {
+export function articleNameFromUrl(articleUrl) {
+	function beautify(name) {
 		return decodeURIComponent(name.replace(/_/g, ' '))
 	}
-	const parsedUrl = url.parse(articleUrl)
-	const wikiUrl   = url.parse(options.url)
+	const parsedUrl = urlparse(articleUrl)
+	const wikiUrl = urlparse(options.url)
 
 	if (parsedUrl.pathname.startsWith('../wiki/')) {
 		return beautify(parsedUrl.pathname.substring(8))
@@ -116,16 +136,17 @@ export function articleNameFromUrl(articleUrl : string) : string {
 	return beautify(parsedUrl.pathname.substring(wikiUrl.pathname.length + 6))
 }
 
-export function loadFromHash() : void {
+export function loadFromHash() {
 	if (location.hash !== '') {
-		const hash = qs.parse(location.hash)
-		$('#search').setAttribute('value', hash.article)
+		const $search = domElems.search
+		const hash = fromQueryString(location.hash)
+		$search.setAttribute('value', hash.article)
 		getArticle(hash.article, true)
 	}
 }
 
-export function search(query : string, callback : Function) {
-	const ajaxOptions = qs.stringify({
+export function search(query, callback) {
+	const ajaxOptions = toQueryString({
 		format: 'json',
 		action: 'opensearch',
 		search: query,

@@ -10,9 +10,6 @@ import imagemin from 'gulp-imagemin'
 import minifyCss from 'gulp-minify-css'
 import minifyHtml from 'gulp-minify-html'
 import sass from 'gulp-sass'
-import streamify from 'gulp-streamify'
-import uglify from 'gulp-uglify'
-
 
 gulp.task('clean', callback => {
 	return del('dist/', callback)
@@ -24,8 +21,8 @@ gulp.task('release:chrome', ['clean'], () => {
 
 gulp.task('chrome', [
 	'generic',
-	'js:app_min',
-	'js:options_min',
+	'js:app',
+	'js:options',
 	'js:plugins',
 	'scss:chrome',
 	'img',
@@ -96,27 +93,10 @@ gulp.task('js:options', () => {
 	.pipe(source('options.js'))
 	.pipe(gulp.dest('./dist/js/'))
 })
-
-gulp.task('js:options_min', () => {
-	return browserify('./src/js/options.js')
-	.bundle()
-	.pipe(source('options.js'))
-	.pipe(streamify(uglify()))
-	.pipe(gulp.dest('./dist/js/'))
-})
-
 gulp.task('js:app', () => {
 	return browserify('./src/js/app.js')
 	.bundle()
 	.pipe(source('app.js'))
-	.pipe(gulp.dest('./dist/js/'))
-})
-
-gulp.task('js:app_min', () => {
-	return browserify('./src/js/app.js')
-	.bundle()
-	.pipe(source('app.js'))
-	.pipe(streamify(uglify()))
 	.pipe(gulp.dest('./dist/js/'))
 })
 
