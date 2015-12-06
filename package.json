@@ -17,7 +17,7 @@
     "babel-preset-node5": "10.0.0",
     "babelify": "7.2.0",
     "browserify": "11.2.0",
-    "del": "2.1.0",
+    "del": "2.2.0",
     "eslint": "1.10.3",
     "eslint-config-airbnb": "2.0.0",
     "gulp": "3.9.0",
