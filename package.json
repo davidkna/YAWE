@@ -29,7 +29,7 @@
     "gulp-minify-html": "1.0.5",
     "gulp-sass": "2.1.1",
     "vinyl-source-stream": "1.1.0",
-    "watchify": "3.6.1"
+    "watchify": "3.7.0"
   },
   "dependencies": {},
   "browserify": {
