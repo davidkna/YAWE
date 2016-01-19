@@ -13,13 +13,8 @@
   },
   "homepage": "https://github.com/davidkna/YAWE#readme",
   "devDependencies": {
-<<<<<<< HEAD
-    "babel-core": "6.3.26",
-    "babel-preset-node5": "10.3.0",
-=======
     "babel-core": "6.4.0",
-    "babel-preset-node5": "10.1.2",
->>>>>>> master
+    "babel-preset-node5": "10.3.0",
     "babelify": "7.2.0",
     "browserify": "13.0.0",
     "del": "2.2.0",
