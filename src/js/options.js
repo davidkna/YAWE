@@ -1,14 +1,14 @@
 import { $, http2https, options, timestamp } from './helper'
 
 (() => {
-	function getVal(el) : string {
+	function getVal(el) {
 		return el.options[el.selectedIndex].getAttribute('value')
 	}
 
-	function setVal(el, val : string) {
-		for (let i = 0; i < el.options.length; i++ ) {
+	function setVal(el, val) {
+		for (let i = 0; i < el.options.length; i++) {
 			if (el.options[i].value === val) {
-				el.selectedIndex = i
+				el.selectedIndex = i // eslint-disable-line
 				return
 			}
 		}
@@ -29,9 +29,9 @@ import { $, http2https, options, timestamp } from './helper'
 		}
 
 		localStorage.setItem('settings', JSON.stringify({
-			url: url,
-			theme: theme,
-			timestamp: timestamp,
+			url,
+			theme,
+			timestamp,
 		}))
 
 		location.replace('app.html')
@@ -50,6 +50,6 @@ import { $, http2https, options, timestamp } from './helper'
 		history.back()
 	})
 	$('#url').addEventListener('blur', (event) => {
-		event.target.value = http2https(event.target.value)
+		$('#url').value = http2https(event.target.value)
 	})
 })()

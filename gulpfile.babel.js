@@ -107,14 +107,14 @@ gulp.task('js:plugins', () => {
 	.pipe(gulp.dest('./dist/js/'))
 })
 
-function scss(browserList) {
+function scss(browsers) {
 	return gulp.src('vendor/bootswatch/**/style.scss')
 	.pipe(sass({
 		includePaths: ['vendor/bootstrap/', 'src/scss'],
 	}).on('error', sass.logError))
 	.pipe(csscomb())
 	.pipe(autoprefixer({
-		browsers: browserList,
+		browsers,
 		cascade: false,
 		remove: true,
 	}))

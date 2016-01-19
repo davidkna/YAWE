@@ -68,7 +68,7 @@ export function getArticle(article) {
 	$body.classList.add('loading')
 	if (fromQueryString(location.hash).article !== article) {
 		location.hash = toQueryString({
-			article: article,
+			article,
 		})
 	}
 
@@ -115,7 +115,8 @@ export function isWikiUrl(testUrl) {
 		return parsedUrl.pathname.substring(0, 6) === '/wiki/'
 	}
 
-	return parsedUrl.pathname.substring(0, wikiUrl.pathname.length + 6) === wikiUrl.pathname + '/wiki/'
+	const shortPathname = parsedUrl.pathname.substring(0, wikiUrl.pathname.length + 6)
+	return shortPathname === wikiUrl.pathname + '/wiki/'
 }
 
 export function articleNameFromUrl(articleUrl) {

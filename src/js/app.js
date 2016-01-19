@@ -36,10 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		loadFromHash()
 	})
 
+	/* eslint-disable no-undef */
 	const awesome = new Awesomplete($('#search'), {
 		minChars: 1,
 		maxItems: 10,
 	})
+	/* eslint-enable no-undef */
 
 	$search.addEventListener('input', () => {
 		search($search.value, (response) => {
