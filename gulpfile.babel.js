@@ -7,6 +7,7 @@ import autoprefixer from 'gulp-autoprefixer'
 import concat from 'gulp-concat'
 import csscomb from 'gulp-csscomb'
 import cssnano from 'gulp-cssnano'
+import eslint from 'gulp-eslint'
 import htmlmin from 'gulp-htmlmin'
 import imagemin from 'gulp-imagemin'
 
@@ -139,4 +140,11 @@ gulp.task('scss:chrome', () => {
 gulp.task('scss:opera', () => {
 	return scss(['last 2 Opera versions'])
 	.pipe(gulp.dest('dist/bootswatch/'))
+})
+
+gulp.task('lint', () => {
+	return gulp.src(['**/*.js', '!node_modules/**'])
+		.pipe(eslint())
+    .pipe(eslint.format())
+		.pipe(eslint.failAfterError())
 })
