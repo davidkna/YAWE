@@ -13,13 +13,18 @@
   },
   "homepage": "https://github.com/davidkna/YAWE#readme",
   "devDependencies": {
+<<<<<<< HEAD
     "babel-core": "6.3.26",
     "babel-preset-node5": "10.3.0",
+=======
+    "babel-core": "6.4.0",
+    "babel-preset-node5": "10.1.2",
+>>>>>>> master
     "babelify": "7.2.0",
-    "browserify": "11.2.0",
+    "browserify": "13.0.0",
     "del": "2.2.0",
     "eslint": "1.10.3",
-    "eslint-config-airbnb": "3.0.1",
+    "eslint-config-airbnb": "3.1.0",
     "gulp": "3.9.0",
     "gulp-autoprefixer": "3.1.0",
     "gulp-concat": "2.6.0",
@@ -29,7 +34,7 @@
     "gulp-minify-html": "1.0.5",
     "gulp-sass": "2.1.1",
     "vinyl-source-stream": "1.1.0",
-    "watchify": "3.6.1"
+    "watchify": "3.7.0"
   },
   "dependencies": {},
   "browserify": {
