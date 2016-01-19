@@ -6,9 +6,10 @@ import source from 'vinyl-source-stream'
 import autoprefixer from 'gulp-autoprefixer'
 import concat from 'gulp-concat'
 import csscomb from 'gulp-csscomb'
+import cssnano from 'gulp-cssnano'
+import htmlmin from 'gulp-htmlmin'
 import imagemin from 'gulp-imagemin'
-import minifyCss from 'gulp-minify-css'
-import minifyHtml from 'gulp-minify-html'
+
 import sass from 'gulp-sass'
 
 gulp.task('clean', callback => {
@@ -67,10 +68,9 @@ gulp.task('generic', () => {
 	.pipe(gulp.dest('dist'))
 })
 
-
 gulp.task('html', () => {
 	return gulp.src('./src/*.html')
-	.pipe(minifyHtml())
+	.pipe(htmlmin())
 	.pipe(gulp.dest('dist'))
 })
 
@@ -106,18 +106,18 @@ gulp.task('js:plugins', () => {
 	.pipe(gulp.dest('./dist/js/'))
 })
 
-function scss(browsers) {
+function scss(browserList) {
 	return gulp.src('vendor/bootswatch/**/style.scss')
 	.pipe(sass({
 		includePaths: ['vendor/bootstrap/', 'src/scss'],
 	}).on('error', sass.logError))
 	.pipe(csscomb())
 	.pipe(autoprefixer({
-		browsers: browsers,
+		browsers: browserList,
 		cascade: false,
 		remove: true,
 	}))
-	.pipe(minifyCss())
+	.pipe(cssnano())
 }
 
 
