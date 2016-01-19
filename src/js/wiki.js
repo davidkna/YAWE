@@ -39,7 +39,7 @@ function urlparse(url) {
 
 export let domElems = {}
 
-function initDomElems() {
+export function initDomElems() {
 	domElems = {
 		base: $('base'),
 		body: $('body'),
@@ -48,10 +48,18 @@ function initDomElems() {
 		loading: $('#loading'),
 	}
 }
-document.addEventListener('DOMContentLoaded', initDomElems)
 // DOM constants
 
 // Exports
+export function loadFromHash() {
+	if (location.hash !== '') {
+		const $search = domElems.search
+		const hash = fromQueryString(location.hash)
+		$search.setAttribute('value', hash.article)
+		getArticle(hash.article, true) // eslint-disable-line no-use-before-define
+	}
+}
+
 export function getArticle(article) {
 	function wrapError(msg) {
 		return `<div class='alert alert-danger'>${ msg }</div>`
@@ -67,9 +75,11 @@ export function getArticle(article) {
 	$loading.style.display = 'block'
 	$body.classList.add('loading')
 	if (fromQueryString(location.hash).article !== article) {
+		removeEventListener('hashchange', loadFromHash)
 		location.hash = toQueryString({
 			article,
 		})
+		addEventListener('hashchange', loadFromHash)
 	}
 
 	// https://en.wikipedia.org/w/api.php?action=help&modules=mobileview
@@ -135,15 +145,6 @@ export function articleNameFromUrl(articleUrl) {
 	}
 
 	return beautify(parsedUrl.pathname.substring(wikiUrl.pathname.length + 6))
-}
-
-export function loadFromHash() {
-	if (location.hash !== '') {
-		const $search = domElems.search
-		const hash = fromQueryString(location.hash)
-		$search.setAttribute('value', hash.article)
-		getArticle(hash.article, true)
-	}
 }
 
 export function search(query, callback) {

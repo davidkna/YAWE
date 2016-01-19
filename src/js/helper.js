@@ -65,7 +65,7 @@ function getOptions() {
 export function fromQueryString(str) {
 	const obj = {}
 	str
-		.replace(/(^\?)/, '')
+		.replace(/^[\?#]/, '')
 		.split('&')
 		.map(n => {
 			const k = n.split('=')

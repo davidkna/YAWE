@@ -6,9 +6,11 @@ import {
 	isWikiUrl,
 	loadFromHash,
 	search,
+	initDomElems,
 } from './wiki'
 
 document.addEventListener('DOMContentLoaded', () => {
+	initDomElems()
 	const $base = domElems.base
 	const $search = domElems.search
 	const $content = domElems.content
@@ -20,21 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	$('#back').addEventListener('click', (event) => {
 		event.preventDefault()
 		history.back()
-		loadFromHash()
 	})
 	$('#forward').addEventListener('click', (event) => {
 		event.preventDefault()
 		history.forward()
-		loadFromHash()
 	})
 	$('#newTab').addEventListener('click', (event) => {
 		event.preventDefault()
 		window.open(`${ options.url }wiki/${ $('#search').value }`, '_newtab')
 	})
 
-	addEventListener('hashchange', () => {
-		loadFromHash()
-	})
+	addEventListener('hashchange', loadFromHash)
 
 	/* eslint-disable no-undef */
 	const awesome = new Awesomplete($('#search'), {
