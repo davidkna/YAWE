@@ -55,7 +55,7 @@ export function loadFromHash() {
 	if (location.hash !== '') {
 		const $search = domElems.search
 		const hash = fromQueryString(location.hash)
-		$search.setAttribute('value', hash.article)
+		$search.value = hash.article
 		getArticle(hash.article, true) // eslint-disable-line no-use-before-define
 	}
 }
