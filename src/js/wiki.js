@@ -69,7 +69,7 @@ export function getArticle(article) {
 	const $content = domElems.content
 	const $loading = domElems.loading
 
-	$base.setAttribute('href', options.url + 'wiki/' + article)
+	$base.setAttribute('href', `${ options.url }wiki/${article}`)
 	$content.innerHTML = ''
 	$content.style.display = 'none'
 	$loading.style.display = 'block'
@@ -126,7 +126,7 @@ export function isWikiUrl(testUrl) {
 	}
 
 	const shortPathname = parsedUrl.pathname.substring(0, wikiUrl.pathname.length + 6)
-	return shortPathname === wikiUrl.pathname + '/wiki/'
+	return shortPathname === `${ wikiUrl.pathname }/wiki/`
 }
 
 export function articleNameFromUrl(articleUrl) {

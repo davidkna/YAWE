@@ -77,9 +77,7 @@ export function fromQueryString(str) {
 export function toQueryString(obj) {
 	return Object
 		.keys(obj)
-		.map(key =>	{
-			return key + '=' + encodeURIComponent(obj[key])
-		})
+		.map(key => `${ key }=${ encodeURIComponent(obj[key]) }`)
 		.join('&')
 }
 
