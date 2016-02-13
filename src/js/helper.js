@@ -63,15 +63,15 @@ function getOptions() {
 }
 
 export function fromQueryString(str) {
-	const obj = {}
+	const result = {}
 	str
 		.replace(/^[\?#]/, '')
 		.split('&')
 		.map(n => {
-			const k = n.split('=')
-			obj[k[0]] = decodeURIComponent(k[1])
+			const [key, value] = n.split('=')
+			result[key] = decodeURIComponent(value)
 		})
-	return obj
+	return result
 }
 
 export function toQueryString(obj) {

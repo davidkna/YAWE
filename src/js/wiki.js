@@ -4,14 +4,15 @@ import { $, options, getJSON, fromQueryString, toQueryString } from './helper'
 
 // Helpers
 function prepareResponse(response, article) {
-	const sections = response.mobileview.sections
 	const title = response.mobileview.normalizedtitle || article.replace(/_/g, ' ')
+	const [first, ...sections] = response.mobileview.sections
+
 	let result = ''
 
 	result += `<h1>${ title }</h1>`
-	result += sections[0].text
+	result += first.text
 
-	let i = 1
+	let i = 0
 	while (sections[i]) {
 		result += `<details><summary><h2>${ sections[i].line }</h2></summary>`
 		result += `<div class='panel-body'>${ sections[i].text }`
@@ -41,11 +42,11 @@ export let domElems = {}
 
 export function initDomElems() {
 	domElems = {
-		base: $('base'),
-		body: $('body'),
-		search: $('#search'),
-		content: $('#content'),
-		loading: $('#loading'),
+		$base: $('base'),
+		$body: $('body'),
+		$search: $('#search'),
+		$content: $('#content'),
+		$loading: $('#loading'),
 	}
 }
 // DOM constants
@@ -53,7 +54,7 @@ export function initDomElems() {
 // Exports
 export function loadFromHash() {
 	if (location.hash !== '') {
-		const $search = domElems.search
+		const { $search } = domElems
 		const hash = fromQueryString(location.hash)
 		$search.value = hash.article
 		getArticle(hash.article, true) // eslint-disable-line no-use-before-define
@@ -64,10 +65,13 @@ export function getArticle(article) {
 	function wrapError(msg) {
 		return `<div class='alert alert-danger'>${ msg }</div>`
 	}
-	const $base = domElems.base
-	const $body = domElems.body
-	const $content = domElems.content
-	const $loading = domElems.loading
+
+	const {
+		$base,
+		$body,
+		$content,
+		$loading,
+	} = domElems
 
 	$base.setAttribute('href', `${ options.url }wiki/${article}`)
 	$content.innerHTML = ''

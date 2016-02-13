@@ -11,9 +11,7 @@ import {
 
 document.addEventListener('DOMContentLoaded', () => {
 	initDomElems()
-	const $base = domElems.base
-	const $search = domElems.search
-	const $content = domElems.content
+	const { $base, $search, $content } = domElems
 
 	$('link').setAttribute('href', `bootswatch/${ options.theme }/style.css`)
 	loadFromHash()
