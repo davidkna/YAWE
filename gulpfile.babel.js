@@ -1,15 +1,15 @@
 import gulp from 'gulp'
-import browserify from 'browserify'
 import del from 'del'
-import source from 'vinyl-source-stream'
 
 import autoprefixer from 'gulp-autoprefixer'
+import babel from 'gulp-babel'
 import concat from 'gulp-concat'
 import csscomb from 'gulp-csscomb'
 import cssnano from 'gulp-cssnano'
 import eslint from 'gulp-eslint'
 import htmlmin from 'gulp-htmlmin'
 import imagemin from 'gulp-imagemin'
+import rollup from 'gulp-rollup'
 
 import sass from 'gulp-sass'
 
@@ -90,15 +90,16 @@ gulp.task('img', () =>
 
 
 gulp.task('js:options', () => {
-	browserify('./src/js/options.js')
-		.bundle()
-		.pipe(source('options.js'))
+	gulp
+		.src('./src/js/options.js')
+		.pipe(rollup())
+		.pipe(babel())
 		.pipe(gulp.dest('./dist/js/'))
 })
 gulp.task('js:app', () =>
-	browserify('./src/js/app.js')
-		.bundle()
-		.pipe(source('app.js'))
+	gulp.src('./src/js/app.js')
+		.pipe(rollup())
+		.pipe(babel())
 		.pipe(gulp.dest('./dist/js/'))
 )
 
