@@ -1,16 +1,17 @@
 import gulp from 'gulp'
 import del from 'del'
 
-import autoprefixer from 'gulp-autoprefixer'
 import babel from 'gulp-babel'
 import concat from 'gulp-concat'
 import csscomb from 'gulp-csscomb'
-import cssnano from 'gulp-cssnano'
 import eslint from 'gulp-eslint'
 import htmlmin from 'gulp-htmlmin'
 import imagemin from 'gulp-imagemin'
+import postcss from 'gulp-postcss'
 import rollup from 'gulp-rollup'
 
+import autoprefixer from 'autoprefixer'
+import cssnano from 'cssnano'
 import sass from 'gulp-sass'
 
 gulp.task('clean', callback => del('dist/', callback))
@@ -112,18 +113,22 @@ gulp.task('js:plugins', () =>
 )
 
 function scss(browsers) {
+	const processors = [
+		autoprefixer({
+			browsers,
+			cascade: false,
+			remove: true,
+		}),
+		cssnano,
+	]
+
 	return gulp
 		.src('vendor/bootswatch/**/style.scss')
 		.pipe(sass({
 			includePaths: ['vendor/bootstrap/', 'src/scss'],
 		}).on('error', sass.logError))
 		.pipe(csscomb())
-		.pipe(autoprefixer({
-			browsers,
-			cascade: false,
-			remove: true,
-		}))
-		.pipe(cssnano())
+		.pipe(postcss(processors))
 }
 
 
