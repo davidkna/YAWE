@@ -2,7 +2,9 @@ import { $, http2https, options, timestamp } from './helper'
 
 (() => {
 	function getVal(el) {
-		return el.options[el.selectedIndex].getAttribute('value')
+		return el
+			.options[el.selectedIndex]
+			.getAttribute('value')
 	}
 
 	function setVal(el, val) {
@@ -38,12 +40,12 @@ import { $, http2https, options, timestamp } from './helper'
 	})
 
 	$('#theme').addEventListener('change', () => {
-		$('link').setAttribute('href', `bootswatch/${ getVal($('#theme')) }/style.css`)
+		$('link').setAttribute('href', `bootswatch/${getVal($('#theme'))}/style.css`)
 	})
 
 	$('#url').setAttribute('value', options.url)
 	setVal($('#theme'), options.theme)
-	$('link').setAttribute('href', `bootswatch/${ options.theme }/style.css`)
+	$('link').setAttribute('href', `bootswatch/${options.theme}/style.css`)
 
 	$('.icon-left-open').addEventListener('click', (event) => {
 		event.preventDefault()

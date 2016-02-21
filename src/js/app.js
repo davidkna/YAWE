@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	initDomElems()
 	const { $base, $search, $content } = domElems
 
-	$('link').setAttribute('href', `bootswatch/${ options.theme }/style.css`)
+	$('link').setAttribute('href', `bootswatch/${options.theme}/style.css`)
 	loadFromHash()
 
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 	$('#newTab').addEventListener('click', (event) => {
 		event.preventDefault()
-		window.open(`${ options.url }wiki/${ $('#search').value }`, '_newtab')
+		window.open(`${options.url}wiki/${$('#search').value}`, '_newtab')
 	})
 
 	addEventListener('hashchange', loadFromHash)
@@ -71,7 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	$('.dropdown .btn').addEventListener('click', (event) => {
 		event.preventDefault()
-		event.target.classList.toggle('active')
+		event
+			.target
+			.classList
+			.toggle('active')
 		$('.dropdown-menu').classList.toggle('show')
 	})
 

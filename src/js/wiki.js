@@ -9,13 +9,13 @@ function prepareResponse(response, article) {
 
 	let result = ''
 
-	result += `<h1>${ title }</h1>`
+	result += `<h1>${title}</h1>`
 	result += first.text
 
 	let i = 0
 	while (sections[i]) {
-		result += `<details><summary><h2>${ sections[i].line }</h2></summary>`
-		result += `<div class='panel-body'>${ sections[i].text }`
+		result += `<details><summary><h2>${sections[i].line}</h2></summary>`
+		result += `<div class='panel-body'>${sections[i].text}`
 		i++
 
 		while (sections[i] && sections[i].toclevel !== 1) {
@@ -23,8 +23,8 @@ function prepareResponse(response, article) {
 			if (level > 6) {
 				level = 6
 			}
-			result += `<h${ level }>${ sections[i].line }</h${ level }>`
-			result += `${ sections[i].text }`
+			result += `<h${level}>${sections[i].line}</h${level}>`
+			result += `${sections[i].text}`
 			i++
 		}
 		result += '</div></details>'
@@ -63,7 +63,7 @@ export function loadFromHash() {
 
 export function getArticle(article) {
 	function wrapError(msg) {
-		return `<div class='alert alert-danger'>${ msg }</div>`
+		return `<div class='alert alert-danger'>${msg}</div>`
 	}
 
 	const {
@@ -73,7 +73,7 @@ export function getArticle(article) {
 		$loading,
 	} = domElems
 
-	$base.setAttribute('href', `${ options.url }wiki/${article}`)
+	$base.setAttribute('href', `${options.url}wiki/${article}`)
 	$content.innerHTML = ''
 	$content.style.display = 'none'
 	$loading.style.display = 'block'
@@ -96,7 +96,7 @@ export function getArticle(article) {
 		redirect: 'yes',
 	}
 
-	getJSON(`${ options.url }w/api.php?${ toQueryString(wikiOptions) }`)
+	getJSON(`${options.url}w/api.php?${toQueryString(wikiOptions)}`)
 		.then(response => {
 			scroll(0, 0)
 			if (response.error) {
@@ -130,7 +130,7 @@ export function isWikiUrl(testUrl) {
 	}
 
 	const shortPathname = parsedUrl.pathname.substring(0, wikiUrl.pathname.length + 6)
-	return shortPathname === `${ wikiUrl.pathname }/wiki/`
+	return shortPathname === `${wikiUrl.pathname}/wiki/`
 }
 
 export function articleNameFromUrl(articleUrl) {
@@ -160,7 +160,7 @@ export function search(query, callback) {
 		limit: 10,
 	})
 
-	getJSON(`${ options.url }w/api.php?${ ajaxOptions }`)
+	getJSON(`${options.url}w/api.php?${ajaxOptions}`)
 		.then((response) => {
 			callback(response[1])
 		})

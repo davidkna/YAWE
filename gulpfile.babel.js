@@ -97,7 +97,8 @@ gulp.task('js:options', () => {
 		.pipe(gulp.dest('./dist/js/'))
 })
 gulp.task('js:app', () =>
-	gulp.src('./src/js/app.js')
+	gulp
+		.src('./src/js/app.js')
 		.pipe(rollup())
 		.pipe(babel())
 		.pipe(gulp.dest('./dist/js/'))
@@ -111,17 +112,18 @@ gulp.task('js:plugins', () =>
 )
 
 function scss(browsers) {
-	return gulp.src('vendor/bootswatch/**/style.scss')
-	.pipe(sass({
-		includePaths: ['vendor/bootstrap/', 'src/scss'],
-	}).on('error', sass.logError))
-	.pipe(csscomb())
-	.pipe(autoprefixer({
-		browsers,
-		cascade: false,
-		remove: true,
-	}))
-	.pipe(cssnano())
+	return gulp
+		.src('vendor/bootswatch/**/style.scss')
+		.pipe(sass({
+			includePaths: ['vendor/bootstrap/', 'src/scss'],
+		}).on('error', sass.logError))
+		.pipe(csscomb())
+		.pipe(autoprefixer({
+			browsers,
+			cascade: false,
+			remove: true,
+		}))
+		.pipe(cssnano())
 }
 
 
