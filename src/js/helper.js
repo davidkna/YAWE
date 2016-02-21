@@ -17,7 +17,7 @@ export function findParentLink(el) {
 
 export function http2https(url) {
 	if (!url.match(/^http/)) {
-		return `https://${ url }`
+		return `https://${url}`
 	}
 	return url.replace(/^http:/, 'https:')
 }
@@ -35,7 +35,7 @@ export function getJSON(url) {
 			if (status === 0 || status >= 200 && status < 300 || xhr.status === 304) {
 				resolve(xhr.response)
 			} else {
-				reject(`${ status }: ${ xhr.statusText}`)
+				reject(`${status}: ${xhr.statusText}`)
 			}
 		})
 		xhr.send()
@@ -67,7 +67,7 @@ export function fromQueryString(str) {
 	str
 		.replace(/^[\?#]/, '')
 		.split('&')
-		.map(n => {
+		.forEach(n => {
 			const [key, value] = n.split('=')
 			result[key] = decodeURIComponent(value)
 		})
@@ -77,7 +77,7 @@ export function fromQueryString(str) {
 export function toQueryString(obj) {
 	return Object
 		.keys(obj)
-		.map(key => `${ key }=${ encodeURIComponent(obj[key]) }`)
+		.map(key => `${key}=${encodeURIComponent(obj[key])}`)
 		.join('&')
 }
 
