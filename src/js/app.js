@@ -9,6 +9,8 @@ import {
 	initDomElems,
 } from './wiki'
 
+  import { default as Awesomplete } from 'awesomplete'
+
 document.addEventListener('DOMContentLoaded', () => {
 	initDomElems()
 	const { $base, $search, $content } = domElems
@@ -32,12 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	addEventListener('hashchange', loadFromHash)
 
-	/* eslint-disable no-undef */
 	const awesome = new Awesomplete($('#search'), {
 		minChars: 1,
 		maxItems: 10,
 	})
-	/* eslint-enable no-undef */
 
 	$search.addEventListener('input', () => {
 		search($search.value, (response) => {

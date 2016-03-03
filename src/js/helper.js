@@ -87,4 +87,4 @@ export function toQueryString(obj) {
 		.join('&')
 }
 
-export const options = getOptions(); // eslint-disable-line semi
+export const options = getOptions()
