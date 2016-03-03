@@ -71,10 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	$('.dropdown .btn').addEventListener('click', (event) => {
 		event.preventDefault()
-		event
-			.target
-			.classList
-			.toggle('active')
+		event.target.classList.toggle('active')
+
 		$('.dropdown-menu').classList.toggle('show')
 	})
 
