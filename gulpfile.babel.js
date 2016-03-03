@@ -1,4 +1,3 @@
-import babel from 'gulp-babel'
 import csscomb from 'gulp-csscomb'
 import eslint from 'gulp-eslint'
 import htmlmin from 'gulp-htmlmin'
@@ -12,12 +11,9 @@ import autoprefixer from 'autoprefixer'
 import cssnano from 'cssnano'
 import sass from 'gulp-sass'
 
-import rollup from 'rollup-stream'
+import rollup from 'rollup'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
-
-import buffer from 'vinyl-buffer'
-import source from 'vinyl-source-stream'
 
 gulp.task('clean', callback => del('dist/', callback))
 
@@ -91,28 +87,28 @@ gulp.task('img', () =>
 		.pipe(gulp.dest('dist/images'))
 )
 
-
-gulp.task('js:options', () => {
-	rollup({
+gulp.task('js:options', () =>
+	rollup.rollup({
 		entry: './src/js/options.js',
-	})
-		.pipe(source('options.js', './src/js'))
-		.pipe(buffer())
-		.pipe(babel())
-		.pipe(gulp.dest('./dist/js/'))
-})
+	}).then(bundle =>
+		bundle.write({
+			dest: './dist/js/options.js',
+		})
+	)
+)
+
 gulp.task('js:app', () =>
-	rollup({
+	rollup.rollup({
 		entry: './src/js/app.js',
 		plugins: [
 			commonjs(),
 			nodeResolve(),
 		],
-	})
-		.pipe(source('app.js', './src/js'))
-		.pipe(buffer())
-		.pipe(babel())
-		.pipe(gulp.dest('./dist/js/'))
+	}).then(bundle =>
+		bundle.write({
+			dest: './dist/js/app.js',
+		})
+	)
 )
 
 function scss(browsers) {
