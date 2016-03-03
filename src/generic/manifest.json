@@ -1,7 +1,7 @@
 {
 	"name": "YAWE (Yet Another Wiki Extension)",
 	"short_name": "YAWE",
-	"version": "4.0.3",
+	"version": "4.0.4",
 	"description": "View and Search for Wikipedia Articles",
 	"applications": {
 		"gecko": {
