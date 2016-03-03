@@ -6,12 +6,12 @@ export function $(expr, container) {
 }
 
 export function findParentLink(el) {
-	if ((el.nodeName || el.tagName).toLowerCase() === 'a') {
-		return el
+	for (let i = el; i.parentNode; i = i.parentNode) {
+		if ((i.nodeName || i.tagName).toLowerCase() === 'a') {
+			return i
+		}
 	}
-	if (el.parentNode) {
-		return findParentLink(el.parentNode)
-	}
+
 	return null
 }
 
@@ -22,24 +22,27 @@ export function http2https(url) {
 	return url.replace(/^http:/, 'https:')
 }
 
-// Returns url as JSON
-// Source: https://mathiasbynens.be/notes/xhr-responsetype-json
+// Check HTTP status code
+function checkStatus(response) {
+	const status = response.status
+	if (status >= 200 && status < 300) {
+		return response
+	}
+
+	const error = new Error(`HTTP Error ${status}: ${response.statusText}`)
+	throw error
+}
+
+// Parse fetched JSON
+function parseJSON(response) {
+	return response.json()
+}
+
+// Returns promise with fetched data from url parsed as JSON
 export function getJSON(url) {
-	return new Promise((resolve, reject) => {
-		const xhr = new XMLHttpRequest()
-		xhr.open('get', url, true)
-		xhr.responseType = 'json'
-		xhr.setRequestHeader('Api-User-Agent', 'YAWE/4.0')
-		xhr.addEventListener('load', () => {
-			const status = xhr.status
-			if (status === 0 || status >= 200 && status < 300 || xhr.status === 304) {
-				resolve(xhr.response)
-			} else {
-				reject(`${status}: ${xhr.statusText}`)
-			}
-		})
-		xhr.send()
-	})
+	return fetch(url)
+		.then(checkStatus)
+		.then(parseJSON)
 }
 
 // Creates timestamp for saves
@@ -47,12 +50,14 @@ export function timestamp() {
 	return Math.floor(Date.now() / 1000)
 }
 
+// Options to use if none set
 const defaultOptions = {
 	theme: 'custom',
 	url: 'https://en.wikipedia.org/',
 	timestamp: timestamp(),
 }
 
+// Returns user settings from localStorage
 function getOptions() {
 	const options = localStorage.getItem('settings')
 	if (!options) {
@@ -62,6 +67,7 @@ function getOptions() {
 	return JSON.parse(localStorage.getItem('settings'))
 }
 
+// Transforms query string to Map
 export function fromQueryString(str) {
 	const result = {}
 	str
