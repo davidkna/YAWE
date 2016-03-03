@@ -1,35 +1,55 @@
 // My Imports
 import { $, options, getJSON, fromQueryString, toQueryString } from './helper'
 
+export let domElems = {}
 
 // Helpers
-function prepareResponse(response, article) {
-	const title = response.mobileview.normalizedtitle || article.replace(/_/g, ' ')
-	const [first, ...sections] = response.mobileview.sections
+function prepareResponse(response, articleName) {
+	const [first, ...responseSections] = response.mobileview.sections
 
-	let result = ''
-
-	result += `<h1>${title}</h1>`
-	result += first.text
-
-	let i = 0
-	while (sections[i]) {
-		result += `<details><summary><h2>${sections[i].line}</h2></summary>`
-		result += `<div class='panel-body'>${sections[i].text}`
-		i++
-
-		while (sections[i] && sections[i].toclevel !== 1) {
-			let level = sections[i].toclevel + 1
-			if (level > 6) {
-				level = 6
-			}
-			result += `<h${level}>${sections[i].line}</h${level}>`
-			result += `${sections[i].text}`
-			i++
+	const sections = responseSections.reduce((prev, current) => {
+		const result = prev
+		if (current.toclevel === 1) {
+			result.push({
+				title: current.line,
+				content: current.text,
+			})
+		} else {
+			const level = current.toclevel <= 6 ? current.toclevel : 6
+			result[result.length - 1].content +=
+				`<h${level}>${current.line}</h${level}>
+				${current.text}`
 		}
-		result += '</div></details>'
+		return result
+	}, [])
+
+
+	return {
+		articleName: response.mobileview.normalizedtitle || articleName.replace(/_/g, ' '),
+		summary: first.text,
+		sections,
 	}
-	return result
+}
+
+function outputResponse(preparedResponse) {
+	const { $content } = domElems
+	const { articleName, summary, sections } = preparedResponse
+
+	const head =
+		`<h1>${articleName}</h1>
+		${summary}`
+
+	const body = sections.reduce((previous, current) =>
+		`${previous}
+			<details>
+				<summary><h2>${current.title}</h2></summary>
+				<div class="panel-body">${current.content}</div>
+			</details>`
+	, '')
+
+	$content.innerHTML =
+		`${head}
+		 ${body}`
 }
 
 function urlparse(url) {
@@ -37,8 +57,6 @@ function urlparse(url) {
 	a.href = url
 	return a
 }
-
-export let domElems = {}
 
 export function initDomElems() {
 	domElems = {
@@ -49,7 +67,6 @@ export function initDomElems() {
 		$loading: $('#loading'),
 	}
 }
-// DOM constants
 
 // Exports
 export function loadFromHash() {
@@ -61,11 +78,7 @@ export function loadFromHash() {
 	}
 }
 
-export function getArticle(article) {
-	function wrapError(msg) {
-		return `<div class='alert alert-danger'>${msg}</div>`
-	}
-
+function prepareRequest(article) {
 	const {
 		$base,
 		$body,
@@ -85,7 +98,9 @@ export function getArticle(article) {
 		})
 		addEventListener('hashchange', loadFromHash)
 	}
+}
 
+function loadArticle(article) {
 	// https://en.wikipedia.org/w/api.php?action=help&modules=mobileview
 	const wikiOptions = {
 		action: 'mobileview',
@@ -96,23 +111,44 @@ export function getArticle(article) {
 		redirect: 'yes',
 	}
 
-	getJSON(`${options.url}w/api.php?${toQueryString(wikiOptions)}`)
+	return getJSON(`${options.url}w/api.php?${toQueryString(wikiOptions)}`)
+		.then(response => {
+			if (response.error) {
+				const error = new Error(response.error.info)
+				throw error
+			}
+			return response
+		})
+}
+
+export function getArticle(article) {
+	function wrapError(msg) {
+		return `<div class='alert alert-danger'>${msg}</div>`
+	}
+
+	const {
+		$body,
+		$content,
+		$loading,
+	} = domElems
+
+	function cleanup() {
+		$content.style.display = 'block'
+		$loading.style.display = 'none'
+		$body.classList.remove('loading')
+	}
+
+	prepareRequest(article)
+
+	loadArticle(article)
 		.then(response => {
 			scroll(0, 0)
-			if (response.error) {
-				$content.innerHTML = wrapError(response.error.info)
-			} else {
-				$content.innerHTML = prepareResponse(response, article)
-			}
-			$content.style.display = 'block'
-			$loading.style.display = 'none'
-			$body.classList.remove('loading')
-		}, errorMsg => {
+			const preparedResponse = prepareResponse(response, article)
+			outputResponse(preparedResponse)
+		}).catch(errorMsg => {
 			$content.innerHTML = wrapError(errorMsg)
-			$content.style.display = 'block'
-			$loading.style.display = 'none'
-			$body.classList.remove('loading')
 		})
+		.then(cleanup)
 }
 
 export function isWikiUrl(testUrl) {
@@ -137,18 +173,23 @@ export function articleNameFromUrl(articleUrl) {
 	function beautify(name) {
 		return decodeURIComponent(name.replace(/_/g, ' '))
 	}
-	const parsedUrl = urlparse(articleUrl)
-	const wikiUrl = urlparse(options.url)
 
-	if (parsedUrl.pathname.startsWith('../wiki/')) {
-		return beautify(parsedUrl.pathname.substring(8))
+	function getName() {
+		const parsedUrl = urlparse(articleUrl)
+		const wikiUrl = urlparse(options.url)
+
+		if (parsedUrl.pathname.startsWith('../wiki/')) {
+			return parsedUrl.pathname.substring(8)
+		}
+
+		if (wikiUrl.pathname === '/') {
+			return parsedUrl.pathname.substring(6)
+		}
+
+		return parsedUrl.pathname.substring(wikiUrl.pathname.length + 6)
 	}
 
-	if (wikiUrl.pathname === '/') {
-		return beautify(parsedUrl.pathname.substring(6))
-	}
-
-	return beautify(parsedUrl.pathname.substring(wikiUrl.pathname.length + 6))
+	return beautify(getName(articleUrl))
 }
 
 export function search(query, callback) {
