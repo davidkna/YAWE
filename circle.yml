@@ -14,5 +14,5 @@ test:
       gulp release:chrome
       zip -r $CIRCLE_ARTIFACTS/chrome.zip dist/*
     - |
-      gulp release:opera
+      gulp scss:opera
       zip -r $CIRCLE_ARTIFACTS/opera.zip dist/*

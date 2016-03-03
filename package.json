@@ -32,7 +32,7 @@
     "gulp-sass": "2.2.0",
     "rollup": "0.25.4",
     "rollup-plugin-commonjs": "2.2.1",
-    "rollup-plugin-node-resolve": "1.4.0",
+    "rollup-plugin-node-resolve": "1.4.0"
   },
   "dependencies": {
     "awesomplete": "github:leaverou/awesomplete#gh-pages"
