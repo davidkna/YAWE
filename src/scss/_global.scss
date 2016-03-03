@@ -48,6 +48,15 @@ body
     @extend .alert-info;
 }
 
+.thumb
+{
+  @extend .well;
+}
+
+.panel-body .thumb {
+  @extend .well-sm;
+}
+
 img.tex
 {
     @extend code;
