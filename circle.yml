@@ -16,7 +16,9 @@ test:
       zip -r $CIRCLE_ARTIFACTS/chrome.zip *
     - |
       gulp scss:opera
+      cd dist
       zip -r $CIRCLE_ARTIFACTS/opera.zip *
     - |
       gulp scss:firefox
+      cd dist
       zip -r $CIRCLE_ARTIFACTS/firefox.xpi *
