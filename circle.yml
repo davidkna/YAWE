@@ -12,7 +12,11 @@ test:
     - gulp lint
     - |
       gulp release:chrome
-      zip -r $CIRCLE_ARTIFACTS/chrome.zip dist/*
+      cd dist
+      zip -r $CIRCLE_ARTIFACTS/chrome.zip *
     - |
       gulp scss:opera
-      zip -r $CIRCLE_ARTIFACTS/opera.zip dist/*
+      zip -r $CIRCLE_ARTIFACTS/opera.zip *
+    - |
+      gulp scss:firefox
+      zip -r $CIRCLE_ARTIFACTS/firefox.xpi *
