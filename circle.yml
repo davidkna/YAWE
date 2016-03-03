@@ -1,0 +1,18 @@
+machine:
+  node:
+    version: "stable"
+
+dependencies:
+  override:
+    - npm install --global gulp-cli
+    - npm install
+
+test:
+  override:
+    - gulp lint
+    - |
+      gulp release:chrome
+      zip -r $CIRCLE_ARTIFACTS/chrome.zip dist/*
+    - |
+      gulp release:opera
+      zip -r $CIRCLE_ARTIFACTS/opera.zip dist/*
