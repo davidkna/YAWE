@@ -22,8 +22,8 @@ import { $, http2https, options, timestamp } from './helper'
 		let url = http2https($('#url').value)
 		const theme = getVal($('#theme'))
 
-		if (url[-1] !== '/') {
-			url.concat('/')
+		if (url[url.length - 1] !== '/') {
+			url += '/'
 		}
 
 		if (url === '') {
