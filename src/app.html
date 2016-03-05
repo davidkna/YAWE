@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" charset="utf-8"></link>
-		<base>
-	</head>
-	<body>
-		<div class="topbar container">
-			<a href="#" id="back" class="btn topbar-btn icon-left-open"></a>
-			<a href="#" id="forward" class="btn topbar-btn icon-right-open"></a>
-			<form class="form-search topbar-form" id="search-form" role="search">
-				<div class="form-group">
-				<input type="search" id="search" tabindex="1" placeholder="Search"
-				class="form-control" autofocus>
-				</div>
-			</form>
-			<div class="dropdown">
- 				<a href="#" class="btn topbar-btn icon-menu"></a>
-  					<ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownmenu">
-						<li role="presentation"><a href="#" id="newTab" data-internal>New Tab</a></li>
-						<li role="presentation"><a href="options.html" data-internal>Options</a></li>
-					</ul>
-			</div>
-		</div>
-
-		<div id="content" class="container">
-			<div id="YAWE">
-				<h1>YAWE</h1>
-				<br>
-				<a href="options.html" data-internal>Options</a>
-			</div>
-		</div>
-		<div id="loading" class="container" style="display:none;">
-			<div class="progress progress-striped active">
-  				<div class="progress-bar" role="progressbar" style="width: 100%">
-    				<span class="sr-only">Loading...</span>
-  				</div>
-			</div>
-		</div>
-		<script src="js/app.js"></script>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <link charset="utf-8" rel="stylesheet" type="text/css">
+    <base>
+    <title></title>
+</head>
+<body>
+    <div class="topbar container">
+        <a class="btn topbar-btn icon-left-open" href="#" id="back"></a> <a class="btn topbar-btn icon-right-open" href="#" id="forward"></a>
+        <form class="form-search topbar-form" id="search-form" name="search-form" role="search">
+            <div class="form-group">
+                <input autofocus="" class="form-control" id="search" placeholder="Search" tabindex="1" type="search">
+            </div>
+        </form>
+        <div class="dropdown">
+            <a class="btn topbar-btn icon-menu" href="#"></a>
+            <ul aria-labelledby="dropdownmenu" class="dropdown-menu dropdown-menu-right" role="menu">
+                <li role="presentation">
+                    <a data-internal="" href="#" id="newTab">New Tab</a>
+                </li>
+                <li role="presentation">
+                    <a data-internal="" href="options.html">Options</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container" id="content">
+        <div id="YAWE">
+            <h1>YAWE</h1><br>
+            <a data-internal="" href="options.html">Options</a>
+        </div>
+    </div>
+    <div class="container" id="loading" style="display:none;">
+        <div class="progress progress-striped active">
+            <div class="progress-bar" role="progressbar" style="width: 100%">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js">
+    </script>
+</body>
 </html>

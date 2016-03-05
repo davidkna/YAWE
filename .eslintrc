@@ -1,7 +1,6 @@
 {
-	"extends": "airbnb",
-	"rules": {
-		"indent": [2, "tab"],
-		"semi": [2, "never"]
-	}
+  "extends": "airbnb",
+  "rules": {
+    "semi": [2, "never"]
+  }
 }

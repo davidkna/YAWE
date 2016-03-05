@@ -1,58 +1,92 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" charset="utf-8"></link>
-
-	</head>
-	<body>
-		<div class="topbar container">
-			<a class="btn topbar-btn icon-left-open"></a>
-			<a class="btn topbar-btn icon-right-open" disabled></a>
-			<form class="form-search topbar-form">
-				<div class="form-group">
-					<input type="search" placeholder="Search"class="form-control" disabled  id="search">
-				</div>
-			</form>
-			<a class="btn topbar-btn icon-menu" disabled></a>
-		</div>
-		<div class="container"  id="content">
-			<h1 class="page-header">Options</h1>
-			<form>
-				<div class="form-group">
-  		  			<label for="url">Wiki URL</label>
-    				<input type="url" class="form-control" id="url" placeholder="https://en.wikipedia.org/">
-					<p class="help-block"><b>Only</b> https supported.</p>
-    			</div>
-    			<div class="form-group">
-    				<label for="theme">Theme</label>
-    				<select class="form-control" id="theme">
-         				<option value="custom">Bootstrap (Default)</option>
-    	    			<option value="cerulean">Cerulean</option>
-    	    			<option value="classic">Classic (Bootstrap 2)</option>
-        				<option value="cosmo">Cosmo</option>
-         				<option value="cyborg">Cyborg</option>
-						<option value="darkly">Darkly</option>
-        				<option value="flatly">Flatly</option>
- 		       			<option value="journal">Journal</option>
- 		       			<option value="lumen">Lumen</option>
-						<option value="paper">Paper</option>
-        				<option value="readable">Readable</option>
-						<option value="sandstone">Sandstone</option>
-          				<option value="simplex">Simplex</option>
-          				<option value="slate">Slate</option>
-         				<option value="spacelab">Spacelab</option>
-         				<option value="superhero">Superhero</option>
- 	        			<option value="united">United</option>
-						<option value="yeti">Yeti</option>
-    	    		</select>
-       				<p class="help-block">Most themes by <a href="http://bootswatch.com/" target="_newtab">Bootswatch</a>. All themes use <a href="http://getbootstrap.com/" target="_newtab">Bootstrap</a>.</p>
-  				</div>
-				<button type="submit" class="btn btn-primary" id="save">Submit</button>
-			</form>
-			<hr>
-			<div class="well">Icon fonts from <a href="http://fontawesome.io" target="_newtab">Font Awesome</a> (<a href="http://scripts.sil.org/OFL">SIL OFL 1.1 License</a>) by <a href="http://twitter.com/davegandy" target="_newtab">Dave Gandy</a> and <a href="http://typicons.com" target="_newtab">Typicons</a> (<a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_newtab">CC-BY-SA 3.0 License</a>) by Steven Hutchings</div>
-		</div>
-		<script src="js/options.js"></script>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <link charset="utf-8" rel="stylesheet" type="text/css">
+    <title></title>
+</head>
+<body>
+    <div class="topbar container">
+        <a class="btn topbar-btn icon-left-open"></a> <a class="btn topbar-btn icon-right-open"></a>
+        <form class="form-search topbar-form">
+            <div class="form-group">
+                <input class="form-control" disabled id="search" placeholder="Search" type="search">
+            </div>
+        </form><a class="btn topbar-btn icon-menu"></a>
+    </div>
+    <div class="container" id="content">
+        <h1 class="page-header">Options</h1>
+        <form>
+            <div class="form-group">
+                <label for="url">Wiki URL</label> <input class="form-control" id="url" placeholder="https://en.wikipedia.org/" type="url">
+                <p class="help-block"><b>Only</b> https supported.</p>
+            </div>
+            <div class="form-group">
+                <label for="theme">Theme</label> <select class="form-control" id="theme">
+                    <option value="custom">
+                        Bootstrap (Default)
+                    </option>
+                    <option value="cerulean">
+                        Cerulean
+                    </option>
+                    <option value="classic">
+                        Classic (Bootstrap 2)
+                    </option>
+                    <option value="cosmo">
+                        Cosmo
+                    </option>
+                    <option value="cyborg">
+                        Cyborg
+                    </option>
+                    <option value="darkly">
+                        Darkly
+                    </option>
+                    <option value="flatly">
+                        Flatly
+                    </option>
+                    <option value="journal">
+                        Journal
+                    </option>
+                    <option value="lumen">
+                        Lumen
+                    </option>
+                    <option value="paper">
+                        Paper
+                    </option>
+                    <option value="readable">
+                        Readable
+                    </option>
+                    <option value="sandstone">
+                        Sandstone
+                    </option>
+                    <option value="simplex">
+                        Simplex
+                    </option>
+                    <option value="slate">
+                        Slate
+                    </option>
+                    <option value="spacelab">
+                        Spacelab
+                    </option>
+                    <option value="superhero">
+                        Superhero
+                    </option>
+                    <option value="united">
+                        United
+                    </option>
+                    <option value="yeti">
+                        Yeti
+                    </option>
+                </select>
+                <p class="help-block">Most themes by <a href="http://bootswatch.com/" target="_newtab">Bootswatch</a>. All themes use <a href="http://getbootstrap.com/" target="_newtab">Bootstrap</a>.</p>
+            </div><button class="btn btn-primary" id="save" type="submit">Submit</button>
+        </form>
+        <hr>
+        <div class="well">
+            Icon fonts from <a href="http://fontawesome.io" target="_newtab">Font Awesome</a> (<a href="http://scripts.sil.org/OFL">SIL OFL 1.1 License</a>) by <a href="http://twitter.com/davegandy" target="_newtab">Dave Gandy</a> and <a href="http://typicons.com" target="_newtab">Typicons</a> (<a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_newtab">CC-BY-SA 3.0 License</a>) by Steven Hutchings
+        </div>
+    </div>
+    <script src="js/options.js">
+    </script>
+</body>
 </html>
