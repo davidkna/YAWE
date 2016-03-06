@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   $('link').setAttribute('href', `bootswatch/${options.theme}/style.css`)
   loadFromHash()
 
-
   $('#back').addEventListener('click', (event) => {
     event.preventDefault()
     history.back()

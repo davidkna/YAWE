@@ -1,6 +1,7 @@
 import csscomb from 'gulp-csscomb'
 import eslint from 'gulp-eslint'
 import htmlmin from 'gulp-htmlmin'
+import jscs from 'gulp-jscs'
 import imagemin from 'gulp-imagemin'
 import postcss from 'gulp-postcss'
 
@@ -132,7 +133,6 @@ function scss(browsers) {
     .pipe(postcss(processors))
 }
 
-
 gulp.task('scss:web', () =>
   scss(['last 2 versions', 'Firefox ESR'])
     .pipe(gulp.dest('dist/bootswatch/'))
@@ -159,4 +159,7 @@ gulp.task('lint', () =>
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
+    .pipe(jscs())
+    .pipe(jscs.reporter())
+    .pipe(jscs.reporter('fail'))
 )

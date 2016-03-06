@@ -14,6 +14,7 @@ import { $, http2https, options, timestamp } from './helper'
         return
       }
     }
+
     setVal(el, 'custom')
   }
 

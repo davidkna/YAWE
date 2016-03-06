@@ -19,6 +19,7 @@ export function http2https(url) {
   if (!url.match(/^http/)) {
     return `https://${url}`
   }
+
   return url.replace(/^http:/, 'https:')
 }
 
@@ -64,6 +65,7 @@ function getOptions() {
     localStorage.setItem('settings', JSON.stringify(defaultOptions))
     return defaultOptions
   }
+
   return JSON.parse(localStorage.getItem('settings'))
 }
 
@@ -74,6 +76,7 @@ export function fromQueryString(str) {
     .replace(/^[\?#]/, '')
     .split('&')
     .forEach(n => {
+      // jscs:disable disallowArrayDestructuringReturn
       const [key, value] = n.split('=')
       result[key] = decodeURIComponent(value)
     })
@@ -87,4 +90,5 @@ export function toQueryString(obj) {
     .join('&')
 }
 
+// jscs:disable disallowSemicolons
 export const options = getOptions(); // eslint-disable-line semi

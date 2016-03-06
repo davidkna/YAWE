@@ -20,9 +20,9 @@ function prepareResponse(response, articleName) {
         `<h${level}>${current.line}</h${level}>
         ${current.text}`
     }
+
     return result
   }, [])
-
 
   return {
     articleName: response.mobileview.normalizedtitle || articleName.replace(/_/g, ' '),
@@ -44,8 +44,7 @@ function outputResponse(preparedResponse) {
       <details>
         <summary><h2>${current.title}</h2></summary>
         <div class="panel-body">${current.content}</div>
-      </details>`
-  , '')
+      </details>`, '')
 
   $content.innerHTML =
     `${head}
@@ -117,6 +116,7 @@ function loadArticle(article) {
         const error = new Error(response.error.info)
         throw error
       }
+
       return response
     })
 }
@@ -155,10 +155,11 @@ export function isWikiUrl(testUrl) {
   const parsedUrl = urlparse(testUrl)
   const wikiUrl = urlparse(options.url)
 
-  if (! /^https?:$/.test(parsedUrl.protocol)) return false
+  if (!/^https?:$/.test(parsedUrl.protocol)) return false
   if (parsedUrl.host) {
     if (parsedUrl.host !== wikiUrl.host) return false
   }
+
   if (parsedUrl.pathname.startsWith('../wiki/')) return true
 
   if (wikiUrl.pathname === '/') {
