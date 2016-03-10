@@ -5,6 +5,7 @@ export function $(expr, container) {
   return typeof expr === 'string' ? (container || document).querySelector(expr) : expr || null
 }
 
+// Finds first parent DOM element that is a link - if it exists
 export function findParentLink(el) {
   for (let i = el; i.parentNode; i = i.parentNode) {
     if ((i.nodeName || i.tagName).toLowerCase() === 'a') {
@@ -15,6 +16,7 @@ export function findParentLink(el) {
   return null
 }
 
+// Transforms http or plain url to https
 export function http2https(url) {
   if (!url.match(/^http/)) {
     return `https://${url}`
@@ -69,7 +71,7 @@ function getOptions() {
   return JSON.parse(localStorage.getItem('settings'))
 }
 
-// Transforms query string to Map
+// Transforms query string to javascript object
 export function fromQueryString(str) {
   const result = {}
   str
@@ -83,6 +85,7 @@ export function fromQueryString(str) {
   return result
 }
 
+// Transforms Javascript Object to query string
 export function toQueryString(obj) {
   return Object
     .keys(obj)
