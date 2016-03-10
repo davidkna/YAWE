@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 5.7.1
+    version: 5.8.0
 
 dependencies:
   override:
@@ -15,7 +15,7 @@ test:
       cd dist
       zip -r $CIRCLE_ARTIFACTS/chrome.zip *
     - |
-      gulp scss:opera
+      gulp scss:opera js
       cd dist
       zip -r $CIRCLE_ARTIFACTS/opera.zip *
     - |
