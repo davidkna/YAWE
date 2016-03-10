@@ -110,7 +110,7 @@ gulp.task('js:options', () =>
     rollupify('options.js')
 )
 gulp.task('js:options_min', () =>
-    rollupify('options.js', [uglify])
+    rollupify('options.js', [uglify()])
 )
 
 gulp.task('js:app', () =>
