@@ -14,9 +14,13 @@ import { default as Awesomplete } from 'awesomplete'
 initDomElems()
 const { $base, $search, $content } = domElems
 
+// Load theme
 $('link').setAttribute('href', `bootswatch/${options.theme}/style.css`)
+
+// Load article directly - base on url
 loadFromHash()
 
+// Back/Forward support
 $('#back').addEventListener('click', (event) => {
   event.preventDefault()
   history.back()
@@ -25,18 +29,26 @@ $('#forward').addEventListener('click', (event) => {
   event.preventDefault()
   history.forward()
 })
+
+// New Tab support
 $('#newTab').addEventListener('click', (event) => {
   event.preventDefault()
   window.open(`${options.url}wiki/${$('#search').value}`, '_newtab')
 })
 
+// Make options link work properly
+$('a[href="options.html"]').addEventListener('click', () => {
+  $base.setAttribute('href', '')
+})
+
+// Listen to url changes
 addEventListener('hashchange', loadFromHash)
 
+// Autocomplete
 const awesome = new Awesomplete($('#search'), {
   minChars: 1,
   maxItems: 10,
 })
-
 $search.addEventListener('input', () => {
   search($search.value, (response) => {
     awesome.list = response
@@ -44,6 +56,7 @@ $search.addEventListener('input', () => {
   })
 })
 
+// Internal wiki link support
 $content.addEventListener('click', (event) => {
   const target = findParentLink(event.target)
   if (target) {
@@ -63,10 +76,7 @@ $content.addEventListener('click', (event) => {
   }
 })
 
-$('a[href="options.html"]').addEventListener('click', () => {
-  $base.setAttribute('href', '')
-})
-
+// Minimal dropdown menu
 $('.dropdown .btn').addEventListener('click', (event) => {
   event.preventDefault()
   event.target.classList.toggle('active')
@@ -74,6 +84,7 @@ $('.dropdown .btn').addEventListener('click', (event) => {
   $('.dropdown-menu').classList.toggle('show')
 })
 
+// Load article on submit
 $('#search-form').addEventListener('submit', (event) => {
   event.preventDefault()
   getArticle($search.value)
