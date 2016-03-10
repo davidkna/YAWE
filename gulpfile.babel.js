@@ -1,20 +1,28 @@
-import csscomb from 'gulp-csscomb'
-import eslint from 'gulp-eslint'
-import htmlmin from 'gulp-htmlmin'
-import jscs from 'gulp-jscs'
-import imagemin from 'gulp-imagemin'
-import postcss from 'gulp-postcss'
-
 import gulp from 'gulp'
 import del from 'del'
 
+// Linting
+import eslint from 'gulp-eslint'
+import jscs from 'gulp-jscs'
+
+// CSS
 import autoprefixer from 'autoprefixer'
+import csscomb from 'gulp-csscomb'
 import cssnano from 'cssnano'
+import postcss from 'gulp-postcss'
 import sass from 'gulp-sass'
 
+// HTML
+import htmlmin from 'gulp-htmlmin'
+
+// Images
+import imagemin from 'gulp-imagemin'
+
+// Rollup
 import rollup from 'rollup'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
+import uglify from 'rollup-plugin-uglify'
 
 gulp.task('clean', callback => del('dist/', callback))
 
@@ -24,8 +32,7 @@ gulp.task('release:chrome', ['clean'], () => {
 
 gulp.task('chrome', [
   'generic',
-  'js:app',
-  'js:options',
+  'js_min',
   'scss:chrome',
   'img',
   'html',
@@ -41,8 +48,7 @@ gulp.task('release:firefox', ['clean'], () => {
 
 gulp.task('opera', [
   'generic',
-  'js:app',
-  'js:options',
+  'js',
   'scss:opera',
   'img',
   'html',
@@ -55,8 +61,7 @@ gulp.task('release:firefox', ['clean'], () => {
 
 gulp.task('firefox', [
   'generic',
-  'js:app',
-  'js:options',
+  'js',
   'scss:firefox',
   'img',
   'html',
@@ -88,28 +93,38 @@ gulp.task('img', () =>
     .pipe(gulp.dest('dist/images'))
 )
 
-gulp.task('js:options', () =>
-  rollup.rollup({
-    entry: './src/js/options.js',
+function rollupify(file, plugins = []) {
+  return rollup.rollup({
+    entry: `./src/js/${file}`,
+    plugins,
   }).then(bundle =>
     bundle.write({
-      dest: './dist/js/options.js',
-    })
-  )
+      dest: `./dist/js/${file}`,
+    }))
+}
+
+gulp.task('js', ['js:app', 'js:options'])
+gulp.task('js_min', ['js:app_min', 'js:options_min'])
+
+gulp.task('js:options', () =>
+    rollupify('options.js')
+)
+gulp.task('js:options_min', () =>
+    rollupify('options.js', [uglify])
 )
 
 gulp.task('js:app', () =>
-  rollup.rollup({
-    entry: './src/js/app.js',
-    plugins: [
-      commonjs(),
-      nodeResolve(),
-    ],
-  }).then(bundle =>
-    bundle.write({
-      dest: './dist/js/app.js',
-    })
-  )
+  rollupify('app.js', [
+    commonjs(),
+    nodeResolve(),
+  ])
+)
+gulp.task('js:app_min', () =>
+  rollupify('app.js', [
+    commonjs(),
+    nodeResolve(),
+    uglify(),
+  ])
 )
 
 function scss(browsers) {
@@ -155,7 +170,7 @@ gulp.task('scss:opera', () =>
 
 gulp.task('lint', () =>
   gulp
-    .src(['**/*.js', '!node_modules/**', '!vendor/**', '!dist/**'])
+    .src(['*.js', '**/*.js', '!node_modules/**', '!vendor/**', '!dist/**'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
