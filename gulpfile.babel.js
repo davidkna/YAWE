@@ -29,6 +29,12 @@ gulp.task('clean', callback => del('dist/', callback))
 gulp.task('release:chrome', ['clean'], () => {
   gulp.run('chrome')
 })
+gulp.task('release:opera', ['clean'], () => {
+  gulp.run('opera')
+})
+gulp.task('release:firefox', ['clean'], () => {
+  gulp.run('firefox')
+})
 
 gulp.task('chrome', [
   'generic',
@@ -37,15 +43,6 @@ gulp.task('chrome', [
   'img',
   'html',
 ])
-
-gulp.task('release:opera', ['clean'], () => {
-  gulp.run('opera')
-})
-
-gulp.task('release:firefox', ['clean'], () => {
-  gulp.run('opera')
-})
-
 gulp.task('opera', [
   'generic',
   'js',
@@ -53,12 +50,6 @@ gulp.task('opera', [
   'img',
   'html',
 ])
-
-// Works in firefox nightly
-gulp.task('release:firefox', ['clean'], () => {
-  gulp.run('firefox')
-})
-
 gulp.task('firefox', [
   'generic',
   'js',
@@ -93,7 +84,16 @@ gulp.task('img', () =>
     .pipe(gulp.dest('dist/images'))
 )
 
-function rollupify(file, plugins = []) {
+function rollupify(file, enableUglify = false) {
+  const plugins = file !== 'app.js' ? [] : [
+    commonjs(),
+    nodeResolve(),
+  ]
+
+  if (enableUglify) {
+    plugins.push(uglify())
+  }
+
   return rollup.rollup({
     entry: `./src/js/${file}`,
     plugins,
@@ -110,21 +110,14 @@ gulp.task('js:options', () =>
     rollupify('options.js')
 )
 gulp.task('js:options_min', () =>
-    rollupify('options.js', [uglify()])
+    rollupify('options.js', true)
 )
 
 gulp.task('js:app', () =>
-  rollupify('app.js', [
-    commonjs(),
-    nodeResolve(),
-  ])
+  rollupify('app.js')
 )
 gulp.task('js:app_min', () =>
-  rollupify('app.js', [
-    commonjs(),
-    nodeResolve(),
-    uglify(),
-  ])
+  rollupify('app.js', true)
 )
 
 function scss(browsers) {
