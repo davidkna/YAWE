@@ -22,6 +22,7 @@ import imagemin from 'gulp-imagemin'
 import { rollup } from 'rollup'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
+import { minify } from 'uglify-js'
 import uglify from 'rollup-plugin-uglify'
 
 gulp.task('clean', callback => del('dist/', callback))
@@ -91,7 +92,7 @@ function rollupify(file, enableUglify = false) {
   ]
 
   if (enableUglify) {
-    plugins.push(uglify())
+    plugins.push(uglify({}, minify))
   }
 
   return rollup({
