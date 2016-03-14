@@ -19,7 +19,7 @@ import htmlmin from 'gulp-htmlmin'
 import imagemin from 'gulp-imagemin'
 
 // Rollup
-import rollup from 'rollup'
+import { rollup } from 'rollup'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import uglify from 'rollup-plugin-uglify'
@@ -94,7 +94,7 @@ function rollupify(file, enableUglify = false) {
     plugins.push(uglify())
   }
 
-  return rollup.rollup({
+  return rollup({
     entry: `./src/js/${file}`,
     plugins,
   }).then(bundle =>
