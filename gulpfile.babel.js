@@ -92,7 +92,15 @@ function rollupify(file, enableUglify = false) {
   ]
 
   if (enableUglify) {
-    plugins.push(uglify({}, minify))
+    plugins.push(uglify({
+      mangle: {
+        screw_ie8: true,
+        toplevel: true,
+      },
+      compress: {
+        screw_ie8: true,
+      },
+    }, minify))
   }
 
   return rollup({
