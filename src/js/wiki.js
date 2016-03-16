@@ -132,12 +132,6 @@ export function getArticle(article) {
     $loading,
   } = domElems
 
-  function cleanup() {
-    $content.style.display = 'block'
-    $loading.style.display = 'none'
-    $body.classList.remove('loading')
-  }
-
   prepareRequest(article)
 
   loadArticle(article)
@@ -145,10 +139,15 @@ export function getArticle(article) {
       scroll(0, 0)
       const preparedResponse = prepareResponse(response, article)
       outputResponse(preparedResponse)
-    }).catch(errorMsg => {
+    })
+    .catch(errorMsg => {
       $content.innerHTML = wrapError(errorMsg)
     })
-    .then(cleanup)
+    .then(() => {
+      $content.style.display = 'block'
+      $loading.style.display = 'none'
+      $body.classList.remove('loading')
+    })
 }
 
 export function isWikiUrl(testUrl) {
