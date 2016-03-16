@@ -38,6 +38,6 @@
     "uglify-js": "mishoo/UglifyJS2#harmony"
   },
   "dependencies": {
-    "awesomplete": "LeaVerou/awesomplete#gh-pages"
+    "awesomplete": "1.1.0"
   }
 }
