@@ -7,8 +7,8 @@ import jscs from 'gulp-jscs'
 
 // CSS
 import autoprefixer from 'autoprefixer'
+import cleancss from 'gulp-clean-css'
 import csscomb from 'gulp-csscomb'
-import cssnano from 'cssnano'
 import postcss from 'gulp-postcss'
 import sass from 'gulp-sass'
 
@@ -130,24 +130,22 @@ gulp.task('js:app_min', () =>
 )
 
 function scss(browsers) {
-  const processors = [
-    autoprefixer({
-      browsers,
-      cascade: false,
-      remove: true,
-    }),
-    cssnano({
-      autoprefixer: false,
-    }),
-  ]
-
   return gulp
     .src('vendor/bootswatch/**/style.scss')
     .pipe(sass({
       includePaths: ['vendor/bootstrap/', 'src/scss'],
     }).on('error', sass.logError))
     .pipe(csscomb())
-    .pipe(postcss(processors))
+    .pipe(
+      postcss([
+        autoprefixer({
+          browsers,
+          cascade: false,
+          remove: true,
+        }),
+      ])
+    )
+    .pipe(cleancss())
 }
 
 gulp.task('scss:web', () =>
