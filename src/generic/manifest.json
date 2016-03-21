@@ -5,8 +5,7 @@
 	"description": "View and Search for Wikipedia Articles",
 	"applications": {
 		"gecko": {
-			"id": "yawe@knaack.me",
-			"strict_min_version": "44.0.0"
+			"id": "yawe@knaack.me"
 		}
 	},
 	"icons": {
