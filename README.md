@@ -4,4 +4,4 @@
 
 License: [CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-Download for [Chrome](https://chrome.google.com/webstore/detail/daffpdngkoncjmbmpbmpkpehjjkffinb/), [Opera](https://addons.opera.com/de/extensions/details/yawe-yet-another-wiki-extension/) and [Firefox](https://github.com/davidkna/YAWE/releases/latest) (Nightly only, unsigned)
+Download for [Chrome](https://chrome.google.com/webstore/detail/daffpdngkoncjmbmpbmpkpehjjkffinb/), [Opera](https://addons.opera.com/de/extensions/details/yawe-yet-another-wiki-extension/) and [Firefox](https://addons.mozilla.org/de/firefox/addon/yawe/)
