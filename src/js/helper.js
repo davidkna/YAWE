@@ -78,8 +78,7 @@ export function fromQueryString(str) {
     .replace(/^[\?#]/, '')
     .split('&')
     .forEach(n => {
-      // jscs:disable disallowArrayDestructuringReturn
-      const [key, value] = n.split('=')
+      const [key, value] = n.split('=') // jscs:disable disallowArrayDestructuringReturn
       result[key] = decodeURIComponent(value)
     })
   return result
@@ -93,5 +92,4 @@ export function toQueryString(obj) {
     .join('&')
 }
 
-// jscs:disable disallowSemicolons
-export const options = getOptions(); // eslint-disable-line semi
+export const options = getOptions()

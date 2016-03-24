@@ -9,6 +9,8 @@ import {
   initDomElems,
 } from './wiki'
 
+import './navigation'
+
 import { default as Awesomplete } from 'awesomplete'
 
 initDomElems()
@@ -19,16 +21,6 @@ $('link').setAttribute('href', `bootswatch/${options.theme}/style.css`)
 
 // Load article directly - base on url
 loadFromHash()
-
-// Back/Forward support
-$('#back').addEventListener('click', (event) => {
-  event.preventDefault()
-  history.back()
-})
-$('#forward').addEventListener('click', (event) => {
-  event.preventDefault()
-  history.forward()
-})
 
 // New Tab support
 $('#newTab').addEventListener('click', (event) => {
