@@ -35,25 +35,25 @@ gulp.task('release:firefox', ['clean'], () => {
 })
 
 gulp.task('chrome', [
-  'generic',
+  'common',
   'js_min',
   'scss:chrome',
-  'img',
-  'html',
 ])
 gulp.task('opera', [
-  'generic',
+  'common',
   'js',
   'scss:opera',
-  'img',
-  'html',
 ])
 gulp.task('firefox', [
-  'generic',
+  'common',
   'js',
   'scss:firefox',
-  'img',
+])
+
+gulp.task('common', [
+  'generic',
   'html',
+  'img',
 ])
 
 gulp.task('generic', () =>
