@@ -133,7 +133,7 @@ function scss(browsers) {
   return gulp
     .src('vendor/bootswatch/**/style.scss')
     .pipe(sass({
-      includePaths: ['vendor/bootstrap/', 'src/scss'],
+      includePaths: ['vendor/', 'src/scss'],
     }).on('error', sass.logError))
     .pipe(csscomb())
     .pipe(
