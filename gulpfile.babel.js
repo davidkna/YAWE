@@ -166,7 +166,7 @@ gulp.task('scss:opera', () =>
 
 gulp.task('lint', () =>
   gulp
-    .src(['*.js', '**/*.js', '!node_modules/**', '!vendor/**', '!dist/**'])
+    .src(['./gulpfile.babel.js', './src/js/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
