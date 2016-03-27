@@ -1,7 +1,6 @@
 export { toQueryString, fromQueryString } from './helper/query-string'
 export { getJSON } from './helper/ajax'
 
-
 // Returns first element that matches CSS selector {expr}.
 // Querying can optionally be restricted to {container}’s descendants
 // Source: http://lea.verou.me/2015/04/jquery-considered-harmful/
