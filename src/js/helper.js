@@ -1,3 +1,7 @@
+export { toQueryString, fromQueryString } from './helper/query-string'
+export { getJSON } from './helper/ajax'
+
+
 // Returns first element that matches CSS selector {expr}.
 // Querying can optionally be restricted to {container}’s descendants
 // Source: http://lea.verou.me/2015/04/jquery-considered-harmful/
@@ -25,29 +29,6 @@ export function http2https(url) {
   return url.replace(/^http:/, 'https:')
 }
 
-// Check HTTP status code
-function checkStatus(response) {
-  const status = response.status
-  if (status >= 200 && status < 300) {
-    return response
-  }
-
-  const error = new Error(`HTTP Error ${status}: ${response.statusText}`)
-  throw error
-}
-
-// Parse fetched JSON
-function parseJSON(response) {
-  return response.json()
-}
-
-// Returns promise with fetched data from url parsed as JSON
-export function getJSON(url) {
-  return fetch(url)
-    .then(checkStatus)
-    .then(parseJSON)
-}
-
 // Creates timestamp for saves
 export function timestamp() {
   return Math.floor(Date.now() / 1000)
@@ -69,28 +50,6 @@ function getOptions() {
   }
 
   return JSON.parse(localStorage.getItem('settings'))
-}
-
-// Transforms query string to javascript object
-export function fromQueryString(str) {
-  const result = {}
-  str
-    .replace(/^[\?#]/, '')
-    .split('&')
-    .forEach(n => {
-      // jscs:disable disallowArrayDestructuringReturn
-      const [key, value] = n.split('=')
-      result[key] = decodeURIComponent(value)
-    })
-  return result
-}
-
-// Transforms Javascript Object to query string
-export function toQueryString(obj) {
-  return Object
-    .keys(obj)
-    .map(key => `${key}=${encodeURIComponent(obj[key])}`)
-    .join('&')
 }
 
 // jscs:disable disallowSemicolons
