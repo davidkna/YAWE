@@ -52,5 +52,4 @@ function getOptions() {
   return JSON.parse(localStorage.getItem('settings'))
 }
 
-// jscs:disable disallowSemicolons
-export const options = getOptions(); // eslint-disable-line semi
+export const options = getOptions()

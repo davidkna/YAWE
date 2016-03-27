@@ -1,68 +1,59 @@
 import { $, http2https, options, timestamp } from './helper'
+import './navigation'
 
-(() => {
-  // get <select> value
-  function getVal(el) {
-    return el
-      .options[el.selectedIndex]
-      .getAttribute('value')
+// get <select> value
+function getVal(el) {
+  return el.options[el.selectedIndex].getAttribute('value')
+}
+
+// set <select> value
+function setVal(el, val) {
+  for (let i = 0; i < el.options.length; i++) {
+    if (el.options[i].value === val) {
+      el.selectedIndex = i // eslint-disable-line no-param-reassign
+      return
+    }
   }
 
-  // set <select> value
-  function setVal(el, val) {
-    for (let i = 0; i < el.options.length; i++) {
-      if (el.options[i].value === val) {
-        el.selectedIndex = i // eslint-disable-line no-param-reassign
-        return
-      }
-    }
+  setVal(el, 'custom')
+}
 
-    setVal(el, 'custom')
+// Save on submit
+$('form', $('#content')).addEventListener('submit', (event) => {
+  event.preventDefault()
+  let url = http2https($('#url').value)
+  const theme = getVal($('#theme'))
+
+  if (url[url.length - 1] !== '/') {
+    url += '/'
   }
 
-  // Save on submit
-  $('form', $('#content')).addEventListener('submit', (event) => {
-    event.preventDefault()
-    let url = http2https($('#url').value)
-    const theme = getVal($('#theme'))
+  if (url === '') {
+    url = 'https://en.wikipedia.org/'
+  }
 
-    if (url[url.length - 1] !== '/') {
-      url += '/'
-    }
+  localStorage.setItem('settings', JSON.stringify({
+    url,
+    theme,
+    timestamp,
+  }))
 
-    if (url === '') {
-      url = 'https://en.wikipedia.org/'
-    }
+  location.replace('app.html')
+})
 
-    localStorage.setItem('settings', JSON.stringify({
-      url,
-      theme,
-      timestamp,
-    }))
+// Theme preview
+$('#theme').addEventListener('change', () => {
+  $('link').setAttribute('href', `bootswatch/${getVal($('#theme'))}/style.css`)
+})
 
-    location.replace('app.html')
-  })
+// Set initial values
+$('#url').setAttribute('value', options.url)
+setVal($('#theme'), options.theme)
 
-  // Theme preview
-  $('#theme').addEventListener('change', () => {
-    $('link').setAttribute('href', `bootswatch/${getVal($('#theme'))}/style.css`)
-  })
+// Load theme
+$('link').setAttribute('href', `bootswatch/${options.theme}/style.css`)
 
-  // Set initial values
-  $('#url').setAttribute('value', options.url)
-  setVal($('#theme'), options.theme)
-
-  // Load theme
-  $('link').setAttribute('href', `bootswatch/${options.theme}/style.css`)
-
-  // Back...
-  $('.icon-left-open').addEventListener('click', (event) => {
-    event.preventDefault()
-    history.back()
-  })
-
-  // fix url to https on blur
-  $('#url').addEventListener('blur', (event) => {
-    $('#url').value = http2https(event.target.value)
-  })
-})()
+// fix url to https on blur
+$('#url').addEventListener('blur', (event) => {
+  $('#url').value = http2https(event.target.value)
+})

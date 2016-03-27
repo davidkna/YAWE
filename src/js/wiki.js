@@ -110,7 +110,7 @@ function loadArticle(article) {
     redirect: 'yes',
   }
 
-  return getJSON(`${options.url}w/api.php?${toQueryString(wikiOptions)}`)
+  return getJSON(`${options.url}w/api.php`, wikiOptions)
     .then(response => {
       if (response.error) {
         const error = new Error(response.error.info)
@@ -193,15 +193,15 @@ export function articleNameFromUrl(articleUrl) {
 }
 
 export function search(query, callback) {
-  const ajaxOptions = toQueryString({
+  const ajaxOptions = {
     format: 'json',
     action: 'opensearch',
     search: query,
     suggest: true,
     limit: 10,
-  })
+  }
 
-  getJSON(`${options.url}w/api.php?${ajaxOptions}`)
+  getJSON(`${options.url}w/api.php`, ajaxOptions)
     .then((response) => {
       callback(response[1])
     })

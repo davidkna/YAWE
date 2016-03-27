@@ -15,9 +15,6 @@ import sass from 'gulp-sass'
 // HTML
 import htmlmin from 'gulp-htmlmin'
 
-// Images
-import imagemin from 'gulp-imagemin'
-
 // Rollup
 import { rollup } from 'rollup'
 import commonjs from 'rollup-plugin-commonjs'
@@ -38,25 +35,25 @@ gulp.task('release:firefox', ['clean'], () => {
 })
 
 gulp.task('chrome', [
-  'generic',
+  'common',
   'js_min',
   'scss:chrome',
-  'img',
-  'html',
 ])
 gulp.task('opera', [
-  'generic',
+  'common',
   'js',
   'scss:opera',
-  'img',
-  'html',
 ])
 gulp.task('firefox', [
-  'generic',
+  'common',
   'js',
   'scss:firefox',
-  'img',
+])
+
+gulp.task('common', [
+  'generic',
   'html',
+  'img',
 ])
 
 gulp.task('generic', () =>
@@ -81,7 +78,6 @@ gulp.task('img', () =>
       './src/images/icon_48x48.png',
       './src/images/icon_128x128.png',
     ])
-    .pipe(imagemin())
     .pipe(gulp.dest('dist/images'))
 )
 
@@ -133,7 +129,7 @@ function scss(browsers) {
   return gulp
     .src('vendor/bootswatch/**/style.scss')
     .pipe(sass({
-      includePaths: ['vendor/bootstrap/', 'src/scss'],
+      includePaths: ['vendor/', 'src/scss'],
     }).on('error', sass.logError))
     .pipe(csscomb())
     .pipe(
@@ -170,7 +166,7 @@ gulp.task('scss:opera', () =>
 
 gulp.task('lint', () =>
   gulp
-    .src(['*.js', '**/*.js', '!node_modules/**', '!vendor/**', '!dist/**'])
+    .src(['./gulpfile.babel.js', './src/js/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
