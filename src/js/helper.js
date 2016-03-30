@@ -1,5 +1,4 @@
 export { toQueryString, fromQueryString } from './helper/query-string'
-export { getJSON } from './helper/ajax'
 
 // Returns first element that matches CSS selector {expr}.
 // Querying can optionally be restricted to {container}’s descendants
