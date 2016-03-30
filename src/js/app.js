@@ -42,7 +42,7 @@ addEventListener('hashchange', loadFromHash)
 const awesome = new Awesomplete($('#search'), {
   minChars: 1,
   maxItems: 10,
-  sort: constant(-1),
+  sort: constant(0),
 })
 $search.addEventListener('input', () => {
   search($search.value, (response) => {
