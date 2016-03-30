@@ -83,7 +83,9 @@ gulp.task('img', () =>
 
 function rollupify(file, enableUglify = false) {
   const plugins = file !== 'app.js' ? [] : [
-    commonjs(),
+    commonjs({
+      exclude: ['node_modules/lodash-es/**'],
+    }),
     nodeResolve(),
   ]
 

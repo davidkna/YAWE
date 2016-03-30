@@ -37,6 +37,7 @@
     "uglify-js": "mishoo/UglifyJS2#harmony"
   },
   "dependencies": {
-    "awesomplete": "1.1.0"
+    "awesomplete": "1.1.0",
+    "lodash-es": "4.6.1"
   }
 }
