@@ -1,15 +1,16 @@
 // Transforms query string to javascript object
 export function fromQueryString(str) {
-  const result = {}
-  str
+  return str
     .replace(/^[\?#]/, '')
     .split('&')
-    .forEach(n => {
+    .reduce((result, current) => {
       // jscs:disable disallowArrayDestructuringReturn
-      const [key, value] = n.split('=')
-      result[key] = decodeURIComponent(value)
-    })
-  return result
+      const [key, value] = current.split('=')
+
+      const _result = result
+      _result[key] = decodeURIComponent(value)
+      return _result
+    }, {})
 }
 
 // Transforms Javascript Object to query string
