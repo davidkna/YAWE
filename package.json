@@ -38,6 +38,6 @@
   },
   "dependencies": {
     "awesomplete": "1.1.0",
-    "lodash-es": "4.6.1"
+    "lodash-es": "4.7.0"
   }
 }
