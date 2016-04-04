@@ -1,6 +1,6 @@
 // My Imports
 import { $, options, fromQueryString, toQueryString } from './helper'
-import getJSON from './helper/ajax'
+import getJSON from 'helper/ajax'
 
 export let domElems = {}
 

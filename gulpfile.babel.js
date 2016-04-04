@@ -17,6 +17,7 @@ import htmlmin from 'gulp-htmlmin'
 
 // Rollup
 import { rollup } from 'rollup'
+import alias from 'rollup-plugin-alias'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import { minify } from 'uglify-js'
@@ -47,6 +48,12 @@ gulp.task('opera', [
 gulp.task('firefox', [
   'common',
   'js',
+  'scss:firefox',
+])
+gulp.task('web', [
+  'common',
+  'js:options_min',
+  'js:app_web',
   'scss:firefox',
 ])
 
@@ -81,10 +88,15 @@ gulp.task('img', () =>
     .pipe(gulp.dest('dist/images'))
 )
 
-function rollupify(file, enableUglify = false) {
+function rollupify(file, enableUglify = false, web = false) {
   const plugins = file !== 'app.js' ? [] : [
+    alias({
+      'helper/ajax': web ? 'node_modules/jsonp-promise/dist/index.js' : './helper/fetch',
+    }),
     commonjs({
-      exclude: ['node_modules/lodash-es/**'],
+      exclude: [
+        'node_modules/lodash-es/**',
+      ],
     }),
     nodeResolve(),
   ]
@@ -125,6 +137,9 @@ gulp.task('js:app', () =>
 )
 gulp.task('js:app_min', () =>
   rollupify('app.js', true)
+)
+gulp.task('js:app_web', () =>
+  rollupify('app.js', true, true)
 )
 
 function scss(browsers) {
