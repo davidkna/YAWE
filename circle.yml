@@ -15,6 +15,10 @@ test:
       cd dist
       zip -r $CIRCLE_ARTIFACTS/chrome.zip *
     - |
+      gulp scss:web js:app_web
+      cd dist
+      zip -r $CIRCLE_ARTIFACTS/web.zip *
+    - |
       gulp scss:opera js
       cd dist
       zip -r $CIRCLE_ARTIFACTS/opera.zip *
