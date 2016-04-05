@@ -7,7 +7,7 @@
     "url": "git+https://github.com/davidkna/YAWE.git"
   },
   "author": "David Knaack",
-  "license": "CC-BY-NC-SA-4.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/davidkna/YAWE/issues"
   },
