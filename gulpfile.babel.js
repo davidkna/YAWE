@@ -225,7 +225,9 @@ function scss(browsers) {
   }
 
   return gulp
-    .src(themes.map(theme => `vendor/bootswatch/${theme}/style.scss`))
+    .src(themes.map(theme => `vendor/bootswatch/${theme}/style.scss`), {
+      base: 'vendor/bootswatch',
+    })
     .pipe(sass({
       includePaths: ['vendor/', 'src/scss'],
     }).on('error', sass.logError))
