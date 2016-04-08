@@ -5,6 +5,8 @@ machine:
 dependencies:
   override:
     - npm install --global gulp-cli
+    - npm prune
+    - npm update
     - npm install
 
 test:
