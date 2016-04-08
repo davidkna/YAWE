@@ -154,7 +154,6 @@ gulp.task('lint', () =>
     .pipe(jscs.reporter('fail'))
 )
 
-
 const themes = [
   'cerulean',
   'classic',
