@@ -11,6 +11,7 @@ import cleancss from 'gulp-clean-css'
 import csscomb from 'gulp-csscomb'
 import postcss from 'gulp-postcss'
 import sass from 'gulp-sass'
+import uncss from 'gulp-uncss'
 
 // HTML
 import htmlmin from 'gulp-htmlmin'
@@ -38,23 +39,23 @@ gulp.task('release:firefox', ['clean'], () => {
 gulp.task('chrome', [
   'common',
   'js_min',
-  'scss:chrome',
+  'scss_chrome',
 ])
 gulp.task('opera', [
   'common',
   'js',
-  'scss:opera',
+  'scss_opera',
 ])
 gulp.task('firefox', [
   'common',
   'js',
-  'scss:firefox',
+  'scss_firefox',
 ])
 gulp.task('web', [
   'common',
   'js:options_min',
   'js:app_web',
-  'scss:firefox',
+  'scss_firefox',
 ])
 
 gulp.task('common', [
@@ -142,45 +143,6 @@ gulp.task('js:app_web', () =>
   rollupify('app.js', true, true)
 )
 
-function scss(browsers) {
-  return gulp
-    .src('vendor/bootswatch/**/style.scss')
-    .pipe(sass({
-      includePaths: ['vendor/', 'src/scss'],
-    }).on('error', sass.logError))
-    .pipe(csscomb())
-    .pipe(
-      postcss([
-        autoprefixer({
-          browsers,
-          cascade: false,
-          remove: true,
-        }),
-      ])
-    )
-    .pipe(cleancss())
-}
-
-gulp.task('scss:web', () =>
-  scss(['last 2 versions', 'Firefox ESR'])
-    .pipe(gulp.dest('dist/bootswatch/'))
-)
-
-gulp.task('scss:firefox', () =>
-  scss(['Firefox ESR'])
-    .pipe(gulp.dest('dist/bootswatch/'))
-)
-
-gulp.task('scss:chrome', () =>
-  scss(['last 2 Chrome versions'])
-    .pipe(gulp.dest('dist/bootswatch/'))
-)
-
-gulp.task('scss:opera', () =>
-  scss(['last 2 Opera versions'])
-    .pipe(gulp.dest('dist/bootswatch/'))
-)
-
 gulp.task('lint', () =>
   gulp
     .src(['./gulpfile.babel.js', './src/js/*.js'])
@@ -191,3 +153,96 @@ gulp.task('lint', () =>
     .pipe(jscs.reporter())
     .pipe(jscs.reporter('fail'))
 )
+
+
+const themes = [
+  'cerulean',
+  'classic',
+  'cosmo',
+  'custom',
+  'cyborg',
+  'darkly',
+  'flatly',
+  'journal',
+  'lumen',
+  'paper',
+  'readable',
+  'sandstone',
+  'simplex',
+  'slate',
+  'spacelab',
+  'superhero',
+  'united',
+  'yeti',
+]
+
+const targets = [
+  {
+    name: 'web',
+    browsers: ['last 2 versions', 'Firefox ESR'],
+  },
+  {
+    name: 'firefox',
+    browsers: ['Firefox ESR'],
+  },
+  {
+    name: 'chrome',
+    browsers: ['last 2 Chrome versions'],
+  },
+    {
+    name: 'chrome',
+    browsers: ['last 2 Opera versions'],
+  },
+]
+
+function scss(browsers) {
+  const autoprefixerConfig = {
+    browsers,
+    cascade: false,
+    remove: true,
+  }
+
+  const uncssConfig = {
+    html: [
+      'src/*.html', '.uncss_helper.html',
+    ],
+    ignore: [
+      '.awesomeplete',
+      '.tex',
+      '.visually-hidden',
+      '.mw-editsection',
+      '.noprint',
+      '.hlist.navbar.mini',
+      '.dablink',
+      '.hatnote',
+      '.progress',
+      '.progress-bar',
+      '.loading',
+      '.panel-body',
+      'table',
+      'summary',
+      'details',
+    ],
+  }
+
+  return gulp
+    .src(themes.map(theme => `vendor/bootswatch/${theme}/style.scss`))
+    .pipe(sass({
+      includePaths: ['vendor/', 'src/scss'],
+    }).on('error', sass.logError))
+    .pipe(uncss(uncssConfig))
+    .pipe(csscomb())
+    .pipe(cleancss())
+    .pipe(
+      postcss([
+        autoprefixer(autoprefixerConfig),
+      ])
+    )
+}
+
+targets.forEach(target => {
+  gulp.task(`scss_${target.name}`, () =>
+      scss(target.browsers)
+        .pipe(gulp.dest('dist/bootswatch/'))
+    )
+})
