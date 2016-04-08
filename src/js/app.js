@@ -43,6 +43,7 @@ const awesome = new Awesomplete($('#search'), {
   minChars: 1,
   maxItems: 10,
   sort: constant(0),
+  filter: constant(true),
 })
 $search.addEventListener('input', () => {
   search($search.value, (response) => {
