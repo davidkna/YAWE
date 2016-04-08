@@ -188,7 +188,7 @@ const targets = [
     name: 'chrome',
     browsers: ['last 2 Chrome versions'],
   },
-    {
+  {
     name: 'chrome',
     browsers: ['last 2 Opera versions'],
   },
