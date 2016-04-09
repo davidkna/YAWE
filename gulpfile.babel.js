@@ -206,6 +206,7 @@ function scss(browsers) {
       'src/*.html', '.uncss_helper.html',
     ],
     ignore: [
+      '.active',
       '.awesomeplete',
       '.dablink',
       '.dropdown',
