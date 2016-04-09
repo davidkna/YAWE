@@ -177,20 +177,20 @@ const themes = [
 
 const targets = [
   {
-    name: 'web',
-    browsers: ['last 2 versions', 'Firefox ESR'],
+    name: 'chrome',
+    browsers: ['last 2 Chrome versions'],
   },
   {
     name: 'firefox',
     browsers: ['Firefox ESR'],
   },
   {
-    name: 'chrome',
-    browsers: ['last 2 Chrome versions'],
+    name: 'opera',
+    browsers: ['last 2 Opera versions'],
   },
   {
-    name: 'chrome',
-    browsers: ['last 2 Opera versions'],
+    name: 'web',
+    browsers: ['last 2 versions', 'Firefox ESR'],
   },
 ]
 
