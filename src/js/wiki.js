@@ -1,10 +1,16 @@
 import DOMPurify from 'dompurify'
 
 // My Imports
-import { $, options, fromQueryString, toQueryString } from './helper'
+import { $, options, fromQueryString } from './helper'
 import getJSON from 'helper/ajax'
 
-export let domElems = {}
+export const domElems = {
+  $base: $('base'),
+  $body: $('body'),
+  $search: $('#search'),
+  $content: $('#content'),
+  $loading: $('#loading'),
+}
 
 // Helpers
 function prepareResponse(response, articleName) {
@@ -77,16 +83,6 @@ function urlparse(url) {
   return a
 }
 
-export function initDomElems() {
-  domElems = {
-    $base: $('base'),
-    $body: $('body'),
-    $search: $('#search'),
-    $content: $('#content'),
-    $loading: $('#loading'),
-  }
-}
-
 // Exports
 export function loadFromHash() {
   if (location.hash !== '') {
@@ -110,13 +106,6 @@ function prepareRequest(article) {
   $content.style.display = 'none'
   $loading.style.display = 'block'
   $body.classList.add('loading')
-  if (fromQueryString(location.hash).article !== article) {
-    removeEventListener('hashchange', loadFromHash)
-    location.hash = toQueryString({
-      article,
-    })
-    addEventListener('hashchange', loadFromHash)
-  }
 }
 
 function loadArticle(article) {
@@ -141,7 +130,7 @@ function loadArticle(article) {
     })
 }
 
-export function getArticle(article) {
+function getArticle(article) {
   const {
     $body,
     $content,

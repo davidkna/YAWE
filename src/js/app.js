@@ -1,21 +1,18 @@
 import constant from 'lodash-es/constant'
 
-import { $, findParentLink, options } from './helper'
+import { $, findParentLink, options, toQueryString } from './helper'
 import {
   articleNameFromUrl,
   domElems,
-  getArticle,
   isWikiUrl,
   loadFromHash,
   search,
-  initDomElems,
 } from './wiki'
 
 import './navigation'
 
 import { default as Awesomplete } from 'awesomplete'
 
-initDomElems()
 const { $base, $search, $content } = domElems
 
 // Load theme
@@ -62,7 +59,9 @@ $content.addEventListener('click', (event) => {
 
       $search.value = searchTerm
       $content.scrollTop = 0
-      getArticle(searchTerm)
+      location.hash = toQueryString({
+        article: searchTerm,
+      })
     } else {
       if (target.dataset.internal !== '') {
         event.preventDefault()
@@ -83,5 +82,7 @@ $('.dropdown .btn').addEventListener('click', (event) => {
 // Load article on submit
 $('#search-form').addEventListener('submit', (event) => {
   event.preventDefault()
-  getArticle($search.value)
+  location.hash = toQueryString({
+    article: $search.value
+  })
 })
