@@ -142,6 +142,7 @@ function getArticle(article) {
     $loading.style.display = 'none'
     $body.classList.remove('loading')
   }
+
   function wrapError(msg) {
     const div = document.createElement('div')
     div.classList.add('alert')
@@ -149,6 +150,7 @@ function getArticle(article) {
     div.innerText = msg
     return div
   }
+
   prepareRequest(article)
 
   loadArticle(article)

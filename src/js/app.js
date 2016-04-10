@@ -83,6 +83,6 @@ $('.dropdown .btn').addEventListener('click', (event) => {
 $('#search-form').addEventListener('submit', (event) => {
   event.preventDefault()
   location.hash = toQueryString({
-    article: $search.value
+    article: $search.value,
   })
 })
