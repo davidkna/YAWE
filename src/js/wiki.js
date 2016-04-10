@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify'
+
 // My Imports
 import { $, options, fromQueryString, toQueryString } from './helper'
 import getJSON from 'helper/ajax'
@@ -32,24 +34,41 @@ function prepareResponse(response, articleName) {
   }
 }
 
+function purify(html) {
+  return DOMPurify.sanitize(html, {
+    RETURN_DOM_FRAGMENT: true,
+    RETURN_DOM_IMPORT: true,
+  })
+}
+
 function outputResponse(preparedResponse) {
   const { $content } = domElems
   const { articleName, summary, sections } = preparedResponse
 
-  const head =
-    `<h1>${articleName}</h1>
-    ${summary}`
+  const h1 = document.createElement('h1')
+  h1.innerText = articleName
+  $content.appendChild(h1)
+  $content.appendChild(purify(summary))
 
-  const body = sections.reduce((previous, current) =>
-    `${previous}
-      <details>
-        <summary><h2>${current.title}</h2></summary>
-        <div class="panel-body">${current.content}</div>
-      </details>`, '')
+  sections.forEach(section => {
+    const { title, content } = section
+    const $details = document.createElement('details')
+    const $summary = document.createElement('summary')
+    const $h2 = document.createElement('h2')
 
-  $content.innerHTML =
-    `${head}
-     ${body}`
+    $h2.innerText = title
+
+    $summary.appendChild($h2)
+    $details.appendChild($summary)
+
+    const $body = document.createElement('div')
+    $body.classList.add('panel-body')
+    $body.appendChild(purify(content))
+
+    $details.appendChild($body)
+
+    $content.appendChild($details)
+  })
 }
 
 function urlparse(url) {
@@ -123,31 +142,36 @@ function loadArticle(article) {
 }
 
 export function getArticle(article) {
-  function wrapError(msg) {
-    return `<div class='alert alert-danger'>${msg}</div>`
-  }
-
   const {
     $body,
     $content,
     $loading,
   } = domElems
 
+  function show() {
+    $content.style.display = 'block'
+    $loading.style.display = 'none'
+    $body.classList.remove('loading')
+  }
+  function wrapError(msg) {
+    const div = document.createElement('div')
+    div.classList.add('alert')
+    div.classList.add('alert-danger')
+    div.innerText = msg
+    return div
+  }
   prepareRequest(article)
 
   loadArticle(article)
     .then(response => {
       scroll(0, 0)
       const preparedResponse = prepareResponse(response, article)
+      show()
       outputResponse(preparedResponse)
     })
     .catch(errorMsg => {
-      $content.innerHTML = wrapError(errorMsg)
-    })
-    .then(() => {
-      $content.style.display = 'block'
-      $loading.style.display = 'none'
-      $body.classList.remove('loading')
+      show()
+      $content.appendChild(wrapError(errorMsg))
     })
 }
 
