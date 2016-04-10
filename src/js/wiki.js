@@ -52,7 +52,7 @@ function outputResponse(preparedResponse) {
   const { articleName, summary, sections } = preparedResponse
 
   const h1 = document.createElement('h1')
-  h1.innerText = articleName
+  h1.textContent = articleName
   $content.appendChild(h1)
   $content.appendChild(purify(summary))
 
@@ -62,7 +62,7 @@ function outputResponse(preparedResponse) {
     const $summary = document.createElement('summary')
     const $h2 = document.createElement('h2')
 
-    $h2.innerText = title
+    $h2.textContent = title
 
     $summary.appendChild($h2)
     $details.appendChild($summary)
@@ -147,7 +147,7 @@ function getArticle(article) {
     const div = document.createElement('div')
     div.classList.add('alert')
     div.classList.add('alert-danger')
-    div.innerText = msg
+    div.textContent = msg
     return div
   }
 
