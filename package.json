@@ -43,6 +43,6 @@
     "awesomplete": "1.1.0",
     "dompurify": "0.7.4",
     "jsonp-promise": "davidkna/jsonp-promise",
-    "lodash-es": "4.10.0"
+    "lodash-es": "4.11.0"
   }
 }
