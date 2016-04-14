@@ -13,33 +13,6 @@ export const domElems = {
 }
 
 // Helpers
-function prepareResponse(response, articleName) {
-  const [first, ...responseSections] = response.mobileview.sections
-
-  const sections = responseSections.reduce((prev, current) => {
-    const result = prev
-    if (current.toclevel === 1) {
-      result.push({
-        title: current.line,
-        content: current.text,
-      })
-    } else {
-      const level = current.toclevel <= 6 ? current.toclevel : 6
-      result[result.length - 1].content +=
-        `<h${level}>${current.line}</h${level}>
-        ${current.text}`
-    }
-
-    return result
-  }, [])
-
-  return {
-    articleName: response.mobileview.normalizedtitle || articleName.replace(/_/g, ' '),
-    summary: first.text,
-    sections,
-  }
-}
-
 function purify(html) {
   return DOMPurify.sanitize(html, {
     RETURN_DOM_FRAGMENT: true,
@@ -47,34 +20,45 @@ function purify(html) {
   })
 }
 
-function outputResponse(preparedResponse) {
+function displayArticle(response, articleName, show) {
+  const [{ text }, ...sections] = response.mobileview.sections
   const { $content } = domElems
-  const { articleName, summary, sections } = preparedResponse
 
-  const h1 = document.createElement('h1')
-  h1.textContent = articleName
-  $content.appendChild(h1)
-  $content.appendChild(purify(summary))
+  const $h1 = document.createElement('h1')
+  $h1.textContent = response.mobileview.normalizedtitle || articleName.replace(/_/g, ' ')
+  $content.appendChild($h1)  
+  $content.appendChild(purify(text))
+  show()
+  let $target
 
-  sections.forEach(section => {
-    const { title, content } = section
-    const $details = document.createElement('details')
-    const $summary = document.createElement('summary')
-    const $h2 = document.createElement('h2')
+  sections.forEach((section) => {
+    const title = section.line
+    const content = section.text
 
-    $h2.textContent = title
+    if (section.toclevel === 1) {
+      const $details = document.createElement('details')
+      const $summary = document.createElement('summary')
+      const $h2 = document.createElement('h2')
+      const $body = document.createElement('div')
 
-    $summary.appendChild($h2)
-    $details.appendChild($summary)
+      $h2.textContent = title
+      $summary.appendChild($h2)
+      $details.appendChild($summary)
+      $body.classList.add('panel-body')
+      $body.appendChild(purify(content))
 
-    const $body = document.createElement('div')
-    $body.classList.add('panel-body')
-    $body.appendChild(purify(content))
+      $details.appendChild($body)
 
-    $details.appendChild($body)
-
-    $content.appendChild($details)
-  })
+      $content.appendChild($details)
+      $target = $body
+    } else {
+      const level = section.toclevel <= 6 ? section.toclevel : 6
+      const $hx = document.createElement(`h${level}`)
+      $hx.textContent = title
+      $target.appendChild($hx)
+      $target.appendChild(purify(content))
+    }
+  }, false)
 }
 
 function urlparse(url) {
@@ -141,24 +125,22 @@ function getArticle(article) {
     $content.style.display = 'block'
     $loading.style.display = 'none'
     $body.classList.remove('loading')
+    scroll(0, 0)
   }
 
   function wrapError(msg) {
-    const div = document.createElement('div')
-    div.classList.add('alert')
-    div.classList.add('alert-danger')
-    div.textContent = msg
-    return div
+    const $div = document.createElement('div')
+    $div.classList.add('alert')
+    $div.classList.add('alert-danger')
+    $div.textContent = msg
+    return $div
   }
 
   prepareRequest(article)
 
   loadArticle(article)
     .then(response => {
-      scroll(0, 0)
-      const preparedResponse = prepareResponse(response, article)
-      show()
-      outputResponse(preparedResponse)
+      displayArticle(response, article, show)
     })
     .catch(errorMsg => {
       show()
