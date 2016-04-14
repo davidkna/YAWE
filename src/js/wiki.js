@@ -26,7 +26,7 @@ function displayArticle(response, articleName, show) {
 
   const $h1 = document.createElement('h1')
   $h1.textContent = response.mobileview.normalizedtitle || articleName.replace(/_/g, ' ')
-  $content.appendChild($h1)  
+  $content.appendChild($h1)
   $content.appendChild(purify(text))
   show()
   let $target
