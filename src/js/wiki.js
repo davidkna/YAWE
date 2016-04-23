@@ -2,7 +2,7 @@ import DOMPurify from 'dompurify'
 
 // My Imports
 import { $, options, fromQueryString } from './helper'
-import getJSON from 'helper/ajax'
+import getJSON from 'helper/ajax' // eslint-disable-line import/no-unresolved
 
 export const domElems = {
   $base: $('base'),
