@@ -29,7 +29,7 @@
     "gulp-eslint": "2.0.0",
     "gulp-htmlmin": "2.0.0",
     "gulp-jscs": "3.0.2",
-    "gulp-postcss": "6.1.0",
+    "gulp-postcss": "6.1.1",
     "gulp-sass": "2.3.1",
     "gulp-uncss": "1.0.5",
     "node-sass": "3.6.0",
