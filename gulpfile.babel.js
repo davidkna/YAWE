@@ -89,14 +89,19 @@ gulp.task('img', () =>
     .pipe(gulp.dest('dist/images'))
 )
 
-function rollupify(file, enableUglify = false, web = false) {
+function rollupConfig(file, enableUglify = false, web = false) {
   const plugins = file !== 'app.js' ? [] : [
     alias({
-      'helper/ajax': web ? 'node_modules/jsonp-promise/dist/index.js' : './helper/fetch',
+      './helper/fetch': web ? 'node_modules/jsonp-promise/src/index.js' : './helper/fetch',
     }),
     commonjs({
+      include: [
+        'node_modules/dompurify/**',
+      ],
       exclude: [
-        'node_modules/lodash-es/**',
+        'node_modules/awesomeplete/**',
+        'node_modules/jsop-promise/**',
+        'src/**',
       ],
     }),
     nodeResolve(),
@@ -113,11 +118,14 @@ function rollupify(file, enableUglify = false, web = false) {
       },
     }, minify))
   }
-
-  return rollup({
+  return {
     entry: `./src/js/${file}`,
     plugins,
-  }).then(bundle =>
+  }
+}
+
+function rollupify(file, enableUglify = false, web = false) {
+  return rollup(rollupConfig(file, enableUglify, web)).then(bundle =>
     bundle.write({
       dest: `./dist/js/${file}`,
     }))
