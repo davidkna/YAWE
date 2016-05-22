@@ -118,6 +118,7 @@ function rollupConfig(file, enableUglify = false, web = false) {
       },
     }, minify))
   }
+
   return {
     entry: `./src/js/${file}`,
     plugins,
