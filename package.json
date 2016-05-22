@@ -42,7 +42,6 @@
   "dependencies": {
     "awesomplete": "davidkna/awesomplete",
     "dompurify": "0.7.4",
-    "jsonp-promise": "davidkna/jsonp-promise",
-    "lodash-es": "4.12.0"
+    "jsonp-promise": "davidkna/jsonp-promise"
   }
 }

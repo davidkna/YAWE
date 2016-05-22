@@ -1,5 +1,3 @@
-import constant from 'lodash-es/constant'
-
 import { $, findParentLink, options, toQueryString } from './helper'
 import {
   articleNameFromUrl,
@@ -39,8 +37,6 @@ addEventListener('hashchange', loadFromHash)
 const awesome = new Awesomplete($('#search'), {
   minChars: 1,
   maxItems: 10,
-  sort: constant(0),
-  filter: constant(true),
 })
 $search.addEventListener('input', () => {
   search($search.value, (response) => {
