@@ -34,10 +34,7 @@ $('a[href="options.html"]').addEventListener('click', () => {
 addEventListener('hashchange', loadFromHash)
 
 // Autocomplete
-const awesome = new Awesomplete($('#search'), {
-  minChars: 1,
-  maxItems: 10,
-})
+const awesome = new Awesomplete($('#search'))
 $search.addEventListener('input', () => {
   search($search.value, (response) => {
     awesome.list = response
