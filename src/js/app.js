@@ -34,13 +34,7 @@ $('a[href="options.html"]').addEventListener('click', () => {
 addEventListener('hashchange', loadFromHash)
 
 // Autocomplete
-const awesome = new Awesomplete($('#search'))
-$search.addEventListener('input', () => {
-  search($search.value, (response) => {
-    awesome.list = response
-    awesome.evaluate()
-  })
-})
+new Awesomplete($('#search'), search) // eslint-disable-line  no-new
 
 // Internal wiki link support
 $content.addEventListener('click', (event) => {

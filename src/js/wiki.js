@@ -190,7 +190,7 @@ export function articleNameFromUrl(articleUrl) {
   return beautify(getName(articleUrl))
 }
 
-export function search(query, callback) {
+export function search(query) {
   const ajaxOptions = {
     format: 'json',
     action: 'opensearch',
@@ -199,8 +199,6 @@ export function search(query, callback) {
     limit: 10,
   }
 
-  getJSON(`${options.url}w/api.php`, ajaxOptions)
-    .then((response) => {
-      callback(response[1])
-    })
+  return getJSON(`${options.url}w/api.php`, ajaxOptions)
+    .then(response => response[1])
 }
