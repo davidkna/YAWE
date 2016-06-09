@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "awesomplete": "davidkna/awesomplete",
-    "dompurify": "0.8.1",
+    "dompurify": "0.8.2",
     "jsonp-promise": "davidkna/jsonp-promise"
   }
 }
