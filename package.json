@@ -35,7 +35,7 @@
     "rollup": "0.31.1",
     "rollup-plugin-alias": "1.2.0",
     "rollup-plugin-commonjs": "davidkna/rollup-plugin-commonjs",
-    "rollup-plugin-node-resolve": "1.7.0",
+    "rollup-plugin-node-resolve": "1.6.0",
     "rollup-plugin-uglify": "0.3.1",
     "uglify-js": "mishoo/UglifyJS2#harmony"
   },
