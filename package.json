@@ -32,7 +32,7 @@
     "gulp-sass": "2.3.2",
     "gulp-uncss": "1.0.5",
     "node-sass": "3.8.0",
-    "rollup": "0.31.2",
+    "rollup": "0.32.0",
     "rollup-plugin-alias": "1.2.0",
     "rollup-plugin-commonjs": "davidkna/rollup-plugin-commonjs",
     "rollup-plugin-node-resolve": "1.6.0",
