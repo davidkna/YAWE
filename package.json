@@ -16,7 +16,7 @@
     "autoprefixer": "6.3.6",
     "babel-core": "latest",
     "babel-plugin-transform-es2015-modules-commonjs": "latest",
-    "del": "2.2.0",
+    "del": "2.2.1",
     "eslint": "2.13.0",
     "eslint-config-airbnb-base": "3.0.1",
     "eslint-plugin-import": "1.9.2",
