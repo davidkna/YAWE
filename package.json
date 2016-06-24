@@ -34,7 +34,7 @@
     "node-sass": "3.8.0",
     "rollup": "0.32.4",
     "rollup-plugin-alias": "1.2.0",
-    "rollup-plugin-commonjs": "davidkna/rollup-plugin-commonjs",
+    "rollup-plugin-commonjs": "3.1.0",
     "rollup-plugin-node-resolve": "1.6.0",
     "rollup-plugin-uglify": "1.0.1",
     "uglify-js": "mishoo/UglifyJS2#harmony"
