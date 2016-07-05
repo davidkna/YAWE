@@ -1,3 +1,5 @@
+import { default as Awesomplete } from 'awesomplete'
+
 import { $, findParentLink, options, toQueryString } from './helper'
 import {
   articleNameFromUrl,
@@ -8,8 +10,6 @@ import {
 } from './wiki'
 
 import './navigation'
-
-import { default as Awesomplete } from 'awesomplete'
 
 const { $base, $search, $content } = domElems
 
