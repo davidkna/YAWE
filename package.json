@@ -25,7 +25,7 @@
     "gulp-clean-css": "2.0.10",
     "gulp-concat": "2.6.0",
     "gulp-csscomb": "3.0.7",
-    "gulp-eslint": "3.0.0",
+    "gulp-eslint": "3.0.1",
     "gulp-htmlmin": "2.0.0",
     "gulp-jscs": "4.0.0",
     "gulp-postcss": "6.1.1",
