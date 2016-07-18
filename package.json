@@ -30,7 +30,7 @@
     "gulp-jscs": "4.0.0",
     "gulp-postcss": "6.1.1",
     "gulp-sass": "2.3.2",
-    "gulp-uncss": "1.0.5",
+    "gulp-uncss": "1.0.6",
     "node-sass": "3.8.0",
     "rollup": "0.34.1",
     "rollup-plugin-alias": "1.2.0",
