@@ -49,11 +49,9 @@ $content.addEventListener('click', (event) => {
       location.hash = toQueryString({
         article: searchTerm,
       })
-    } else {
-      if (target.dataset.internal !== '') {
-        event.preventDefault()
-        window.open(target.href, '_newtab')
-      }
+    } else if (target.dataset.internal !== '') {
+      event.preventDefault()
+      window.open(target.href, '_newtab')
     }
   }
 })
