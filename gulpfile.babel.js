@@ -19,7 +19,6 @@ import htmlmin from 'gulp-htmlmin'
 
 // Rollup
 import { rollup } from 'rollup'
-import alias from 'rollup-plugin-alias'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import { minify } from 'uglify-js'
@@ -90,11 +89,8 @@ gulp.task('img', () =>
     .pipe(gulp.dest('dist/images'))
 )
 
-function rollupConfig(file, enableUglify = false, web = false) {
+function rollupConfig(file, enableUglify = false) {
   const plugins = file !== 'app.js' ? [] : [
-    alias({
-      './helper/fetch': web ? 'node_modules/jsonp-promise/src/index.js' : './helper/fetch',
-    }),
     commonjs({
       include: [
         'node_modules/dompurify/**',
@@ -126,8 +122,8 @@ function rollupConfig(file, enableUglify = false, web = false) {
   }
 }
 
-function rollupify(file, enableUglify = false, web = false) {
-  return rollup(rollupConfig(file, enableUglify, web)).then(bundle =>
+function rollupify(file, enableUglify = false) {
+  return rollup(rollupConfig(file, enableUglify)).then(bundle =>
     bundle.write({
       dest: `./dist/js/${file}`,
     }))
@@ -150,7 +146,7 @@ gulp.task('js:app_min', () =>
   rollupify('app.js', true)
 )
 gulp.task('js:app_web', () =>
-  rollupify('app.js', true, true)
+  rollupify('app.js', true)
 )
 
 gulp.task('lint', () =>

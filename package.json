@@ -33,7 +33,6 @@
     "gulp-uncss": "1.0.6",
     "node-sass": "3.8.0",
     "rollup": "0.34.3",
-    "rollup-plugin-alias": "1.2.0",
     "rollup-plugin-commonjs": "3.3.1",
     "rollup-plugin-node-resolve": "2.0.0",
     "rollup-plugin-uglify": "1.0.1",
@@ -42,6 +41,5 @@
   "dependencies": {
     "awesomplete": "davidkna/awesomplete",
     "dompurify": "0.8.2",
-    "jsonp-promise": "davidkna/jsonp-promise"
   }
 }
