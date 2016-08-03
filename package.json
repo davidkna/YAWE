@@ -40,6 +40,6 @@
   },
   "dependencies": {
     "awesomplete": "davidkna/awesomplete",
-    "dompurify": "0.8.2",
+    "dompurify": "0.8.2"
   }
 }
