@@ -19,7 +19,7 @@
     "del": "2.2.2",
     "eslint": "3.3.1",
     "eslint-config-airbnb-base": "5.0.2",
-    "eslint-plugin-import": "1.13.0",
+    "eslint-plugin-import": "1.14.0",
     "gulp": "3.9.1",
     "gulp-babel": "6.1.2",
     "gulp-clean-css": "2.0.12",
