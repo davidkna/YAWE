@@ -45,6 +45,13 @@ gulp.task('nomin', [
   'js',
 ])
 
+gulp.task('common', [
+  'generic',
+  'html',
+  'img',
+  'scss',
+])
+
 gulp.task('generic', () =>
   gulp
     .src(['./src/generic/*', '!./src/generic/*.js'])
