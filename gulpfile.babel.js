@@ -167,7 +167,7 @@ const themes = [
 ]
 
 const autoprefixerConfig = {
-  browsers: ['Chrome >= 51, Firefox >= 49, Opera >= 38, Edge'],
+  browsers: ['Chrome >= 51', 'Firefox >= 49', 'Opera >= 38', 'Edge 14'],
   cascade: false,
   remove: true,
 }
