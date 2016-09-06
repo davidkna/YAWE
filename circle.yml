@@ -15,16 +15,8 @@ test:
     - |
       gulp release:chrome
       cd dist
-      zip -r $CIRCLE_ARTIFACTS/chrome.zip *
+      zip -r $CIRCLE_ARTIFACTS/min.zip *
     - |
-      gulp scss_web js:app_web
+      gulp js
       cd dist
-      zip -r $CIRCLE_ARTIFACTS/web.zip *
-    - |
-      gulp scss_opera js
-      cd dist
-      zip -r $CIRCLE_ARTIFACTS/opera.zip *
-    - |
-      gulp scss_firefox
-      cd dist
-      zip -r $CIRCLE_ARTIFACTS/firefox.xpi *
+      zip -r $CIRCLE_ARTIFACTS/nomin.zip *

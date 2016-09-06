@@ -27,41 +27,22 @@ import uglify from 'rollup-plugin-uglify'
 gulp.task('clean', callback => del('dist/', callback))
 
 gulp.task('release:chrome', ['clean'], () => {
-  gulp.run('chrome')
+  gulp.run('min')
 })
 gulp.task('release:opera', ['clean'], () => {
-  gulp.run('opera')
+  gulp.run('nomin')
 })
 gulp.task('release:firefox', ['clean'], () => {
-  gulp.run('firefox')
+  gulp.run('nomin')
 })
 
-gulp.task('chrome', [
+gulp.task('min', [
   'common',
   'js_min',
-  'scss_chrome',
 ])
-gulp.task('opera', [
+gulp.task('nomin', [
   'common',
   'js',
-  'scss_opera',
-])
-gulp.task('firefox', [
-  'common',
-  'js',
-  'scss_firefox',
-])
-gulp.task('web', [
-  'common',
-  'js:options_min',
-  'js:app_web',
-  'scss_firefox',
-])
-
-gulp.task('common', [
-  'generic',
-  'html',
-  'img',
 ])
 
 gulp.task('generic', () =>
@@ -145,9 +126,6 @@ gulp.task('js:app', () =>
 gulp.task('js:app_min', () =>
   rollupify('app.js', true)
 )
-gulp.task('js:app_web', () =>
-  rollupify('app.js', true)
-)
 
 gulp.task('lint', () =>
   gulp
@@ -181,28 +159,9 @@ const themes = [
   'yeti',
 ]
 
-const targets = [
-  {
-    name: 'chrome',
-    browsers: ['last 2 Chrome versions'],
-  },
-  {
-    name: 'firefox',
-    browsers: ['Firefox ESR'],
-  },
-  {
-    name: 'opera',
-    browsers: ['last 2 Opera versions'],
-  },
-  {
-    name: 'web',
-    browsers: ['last 2 versions', 'Firefox ESR'],
-  },
-]
-
 function scss(browsers) {
   const autoprefixerConfig = {
-    browsers,
+    browsers: ['Chrome >= 51, Firefox >= 49, Opera >= 38, Edge'],
     cascade: false,
     remove: true,
   }
@@ -253,7 +212,7 @@ function scss(browsers) {
 }
 
 targets.forEach(target => {
-  gulp.task(`scss_${target.name}`, () =>
+  gulp.task('scss', () =>
       scss(target.browsers)
         .pipe(gulp.dest('dist/bootswatch/'))
     )
