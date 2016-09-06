@@ -159,61 +159,57 @@ const themes = [
   'yeti',
 ]
 
-function scss(browsers) {
-  const autoprefixerConfig = {
-    browsers: ['Chrome >= 51, Firefox >= 49, Opera >= 38, Edge'],
-    cascade: false,
-    remove: true,
-  }
-
-  const uncssConfig = {
-    html: [
-      'src/*.html', '.uncss_helper.html',
-    ],
-    ignore: [
-      '.active',
-      '.awesomeplete',
-      '.btn',
-      '.dablink',
-      '.dropdown',
-      '.hatnote',
-      '.hlist.navbar.mini',
-      '.icon-menu',
-      '.loading',
-      '.mw-editsection',
-      '.noprint',
-      '.panel-body',
-      '.progress',
-      '.progress-bar',
-      '.show',
-      '.tex',
-      '.visually-hidden',
-      'details',
-      'summary',
-      'table',
-    ],
-  }
-
-  return gulp
-    .src(themes.map(theme => `vendor/bootswatch/${theme}/style.scss`), {
-      base: 'vendor/bootswatch',
-    })
-    .pipe(sass({
-      includePaths: ['vendor/', 'src/scss'],
-    }).on('error', sass.logError))
-    .pipe(uncss(uncssConfig))
-    .pipe(csscomb())
-    .pipe(cleancss())
-    .pipe(
-      postcss([
-        autoprefixer(autoprefixerConfig),
-      ])
-    )
+const autoprefixerConfig = {
+  browsers: ['Chrome >= 51, Firefox >= 49, Opera >= 38, Edge'],
+  cascade: false,
+  remove: true,
 }
 
-targets.forEach(target => {
-  gulp.task('scss', () =>
-      scss(target.browsers)
-        .pipe(gulp.dest('dist/bootswatch/'))
-    )
+const uncssConfig = {
+  html: [
+    'src/*.html', '.uncss_helper.html',
+  ],
+  ignore: [
+    '.active',
+    '.awesomeplete',
+    '.btn',
+    '.dablink',
+    '.dropdown',
+    '.hatnote',
+    '.hlist.navbar.mini',
+    '.icon-menu',
+    '.loading',
+    '.mw-editsection',
+    '.noprint',
+    '.panel-body',
+    '.progress',
+    '.progress-bar',
+    '.show',
+    '.tex',
+    '.visually-hidden',
+    'details',
+    'summary',
+    'table',
+  ],
+}
+
+themes.forEach(theme => {
+  gulp.task(`scss_${theme}`, () =>
+        gulp.src(`vendor/bootswatch/${theme}/style.scss`, {
+          base: 'vendor/bootswatch'
+        })
+        .pipe(sass({
+          includePaths: ['vendor/', 'src/scss'],
+        }).on('error', sass.logError))
+        .pipe(uncss(uncssConfig))
+        .pipe(csscomb())
+        .pipe(cleancss())
+        .pipe(
+          postcss([
+            autoprefixer(autoprefixerConfig),
+          ])
+        ).pipe(gulp.dest('dist/bootswatch/'))
+  )
 })
+
+gulp.task('scss', themes.map(theme => `scss_${theme}`))
