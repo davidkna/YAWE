@@ -4,19 +4,18 @@ machine:
 
 dependencies:
   override:
-    - npm install --global gulp-cli
     - npm prune
     - npm update
     - npm install
 
 test:
   override:
-    - gulp lint
+    - npm run gulp lint
     - |
-      gulp release:chrome
+      npm run gulp release:chrome
       cd dist
       zip -r $CIRCLE_ARTIFACTS/min.zip *
     - |
-      gulp js
+      npm run gulp js
       cd dist
       zip -r $CIRCLE_ARTIFACTS/nomin.zip *
