@@ -196,7 +196,7 @@ const uncssConfig = {
 themes.forEach(theme => {
   gulp.task(`scss_${theme}`, () =>
         gulp.src(`vendor/bootswatch/${theme}/style.scss`, {
-          base: 'vendor/bootswatch'
+          base: 'vendor/bootswatch',
         })
         .pipe(sass({
           includePaths: ['vendor/', 'src/scss'],
@@ -208,7 +208,8 @@ themes.forEach(theme => {
           postcss([
             autoprefixer(autoprefixerConfig),
           ])
-        ).pipe(gulp.dest('dist/bootswatch/'))
+        )
+        .pipe(gulp.dest('dist/bootswatch/'))
   )
 })
 
