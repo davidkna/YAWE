@@ -8,7 +8,7 @@ function getVal(el) {
 
 // set <select> value
 function setVal(el, val) {
-  for (let i = 0; i < el.options.length; i++) {
+  for (let i = 0; i < el.options.length; i += 1) {
     if (el.options[i].value === val) {
       el.selectedIndex = i // eslint-disable-line no-param-reassign
       return
