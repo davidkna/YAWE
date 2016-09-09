@@ -1,2 +1,3 @@
 dist/**/*.js
 vendor/**/*.js
+site/**/*.js
