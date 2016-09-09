@@ -200,7 +200,6 @@ const uncssConfig = {
   ],
 }
 
-
 gulp.task('scss', () =>
       gulp.src(themes.map(theme => `vendor/bootswatch/${theme}/style.scss`), {
         base: 'vendor/bootswatch',
