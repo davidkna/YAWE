@@ -200,22 +200,21 @@ const uncssConfig = {
   ],
 }
 
-themes.forEach(theme => {
-  gulp.task(`scss_${theme}`, () =>
-        gulp.src(`vendor/bootswatch/${theme}/style.scss`)
-        .pipe(sass({
-          includePaths: ['vendor/', 'src/scss'],
-        }).on('error', sass.logError))
-        .pipe(uncss(uncssConfig))
-        .pipe(csscomb())
-        .pipe(cleancss())
-        .pipe(
-          postcss([
-            autoprefixer(autoprefixerConfig),
-          ])
-        )
-        .pipe(gulp.dest(`dist/bootswatch/${theme}`))
-  )
-})
 
-gulp.task('scss', themes.map(theme => `scss_${theme}`))
+gulp.task('scss', () =>
+      gulp.src(themes.map(theme => `vendor/bootswatch/${theme}/style.scss`), {
+        base: 'vendor/bootswatch',
+      })
+      .pipe(sass({
+        includePaths: ['vendor/', 'src/scss'],
+      }).on('error', sass.logError))
+      .pipe(uncss(uncssConfig))
+      .pipe(csscomb())
+      .pipe(cleancss())
+      .pipe(
+        postcss([
+          autoprefixer(autoprefixerConfig),
+        ])
+      )
+      .pipe(gulp.dest('dist/bootswatch/'))
+)
