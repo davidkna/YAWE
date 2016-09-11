@@ -1,4 +1,4 @@
-import { default as Awesomplete } from 'awesomplete'
+import { default as Autocomplete } from 'yawe-autcomplete'
 
 import { $, findParentLink, options, toQueryString } from './helper'
 import {
@@ -34,7 +34,7 @@ $('a[href="options.html"]').addEventListener('click', () => {
 addEventListener('hashchange', loadFromHash)
 
 // Autocomplete
-new Awesomplete($('#search'), search) // eslint-disable-line  no-new
+new Autocomplete($('#search'), search) // eslint-disable-line  no-new
 
 // Internal wiki link support
 $content.addEventListener('click', (event) => {
