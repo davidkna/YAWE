@@ -104,7 +104,7 @@ function loadArticle(article) {
   }
 
   return getJSON(`${options.url}w/api.php`, wikiOptions)
-    .then(response => {
+    .then((response) => {
       if (response.error) {
         const error = new Error(response.error.info)
         throw error
@@ -139,10 +139,10 @@ function getArticle(article) {
   prepareRequest(article)
 
   loadArticle(article)
-    .then(response => {
+    .then((response) => {
       displayArticle(response, article, show)
     })
-    .catch(errorMsg => {
+    .catch((errorMsg) => {
       show()
       $content.appendChild(wrapError(errorMsg))
     })
