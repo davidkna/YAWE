@@ -93,16 +93,7 @@ gulp.task('img', () =>
 
 function rollupConfig(file, enableUglify = false) {
   const plugins = file !== 'app.js' ? [] : [
-    commonjs({
-      include: [
-        'node_modules/dompurify/**',
-      ],
-      exclude: [
-        'node_modules/awesomeplete/**',
-        'node_modules/jsop-promise/**',
-        'src/**',
-      ],
-    }),
+    commonjs(),
     nodeResolve(),
   ]
 
