@@ -39,8 +39,8 @@
     "uglify-js": "mishoo/UglifyJS2#harmony"
   },
   "dependencies": {
-    "yawe-autocomplete": "davidkna/yawe-autocomplete",
-    "dompurify": "0.8.3"
+    "dompurify": "0.8.3",
+    "yawe-autocomplete": "davidkna/yawe-autocomplete"
   },
   "scripts": {
     "gulp": "gulp "
