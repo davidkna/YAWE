@@ -46,22 +46,36 @@ gulp.task('nomin', [
 ])
 
 gulp.task('common', [
-  'generic',
   'html',
   'img',
+  'manifest',
   'scss',
 ])
 
-gulp.task('generic', () =>
+gulp.task('manifest', () =>
   gulp
-    .src(['./src/generic/*', '!./src/generic/*.js'])
+    .src('./src/manifest.json')
     .pipe(gulp.dest('dist'))
 )
 
+const htmlOptions = {
+  collapseBooleanAttributes: true,
+  collapseInlineTagWhitespace: true,
+  collapseWhitespace: true,
+  minifyCSS: true,
+  removeAttributeQuotes: true,
+  removeComments: true,
+  removeRedundantAttributes: true,
+  removeScriptTypeAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+  sortAttributes: true,
+  sortClassName: true,
+}
+
 gulp.task('html', () =>
   gulp
-    .src('./src/*.html')
-    .pipe(htmlmin())
+    .src(['./src/html/*.html'])
+    .pipe(htmlmin(htmlOptions))
     .pipe(gulp.dest('dist'))
 )
 
@@ -197,6 +211,7 @@ const uncssConfig = {
     'details',
     'summary',
     'table',
+    '#yawe',
   ],
 }
 
