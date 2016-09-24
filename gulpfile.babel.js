@@ -22,7 +22,8 @@ import { rollup } from 'rollup'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import { minify } from 'uglify-js'
-import uglify from 'rollup-plugin-uglify'
+
+const uglify = require('rollup-plugin-uglify')
 
 gulp.task('clean', callback => del('dist/', callback))
 
