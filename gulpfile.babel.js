@@ -63,6 +63,7 @@ const htmlOptions = {
   collapseBooleanAttributes: true,
   collapseInlineTagWhitespace: true,
   collapseWhitespace: true,
+  decodeEntities: true,
   minifyCSS: true,
   removeAttributeQuotes: true,
   removeComments: true,
