@@ -188,6 +188,8 @@ const uncssConfig = {
     '.awesomeplete',
     '.btn',
     '.dablink',
+    'div.awesomplete > ul:empty',
+    'div.awesomplete > ul[hidden]',
     '.dropdown',
     '.hatnote',
     '.hlist.navbar.mini',
