@@ -14,8 +14,8 @@ test:
     - |
       npm run gulp release:chrome
       cd dist
-      zip -r $CIRCLE_ARTIFACTS/min.zip *
+      zip -r $CIRCLE_ARTIFACTS/min-r$CIRCLE_BUILD_NUM.zip *
     - |
       npm run gulp js
       cd dist
-      zip -r $CIRCLE_ARTIFACTS/nomin.zip *
+      zip -r $CIRCLE_ARTIFACTS/nomin-r$CIRCLE_BUILD_NUM.zip *
