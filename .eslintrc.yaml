@@ -1,9 +1,6 @@
-{
-  "extends": "airbnb-base",
-  "rules": {
-    "semi": [2, "never"]
-  },
-  "env": {
-    "browser": true
-  }
-}
+extends:
+  - "airbnb-base"
+rules:
+  semi: [2, never]
+env:
+  browser: true
