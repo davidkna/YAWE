@@ -18,7 +18,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "latest",
     "del": "2.2.2",
     "eslint": "3.8.0",
-    "eslint-config-airbnb-base": "8.0.0",
+    "eslint-config-airbnb-base": "9.0.0",
     "eslint-plugin-import": "2.0.1",
     "gulp": "3.9.1",
     "gulp-babel": "6.1.2",
