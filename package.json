@@ -39,7 +39,7 @@
     "uglify-js": "mishoo/UglifyJS2#harmony"
   },
   "dependencies": {
-    "dompurify": "0.8.3",
+    "dompurify": "0.8.4",
     "yawe-autocomplete": "1.2.1"
   },
   "scripts": {
