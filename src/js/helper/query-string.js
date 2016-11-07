@@ -8,7 +8,7 @@ function decode(str) {
 // Transforms query string to javascript object
 export function fromQueryString(str) {
   return str
-    .replace(/^[\?#]/, '')
+    .replace(/^[?#]/, '')
     .split('&')
     .reduce((result, current) => {
       const { key, value } = decode(current)
