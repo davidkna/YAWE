@@ -56,7 +56,7 @@ gulp.task('common', [
 gulp.task('manifest', () =>
   gulp
     .src('./src/manifest.json')
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist')),
 )
 
 const htmlOptions = {
@@ -78,7 +78,7 @@ gulp.task('html', () =>
   gulp
     .src(['./src/html/*.html'])
     .pipe(htmlmin(htmlOptions))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('dist')),
 )
 
 gulp.task('img', () =>
@@ -90,7 +90,7 @@ gulp.task('img', () =>
       './src/images/icon_48x48.png',
       './src/images/icon_128x128.png',
     ])
-    .pipe(gulp.dest('dist/images'))
+    .pipe(gulp.dest('dist/images')),
 )
 
 function rollupConfig(file, enableUglify = false) {
@@ -128,17 +128,17 @@ gulp.task('js', ['js:app', 'js:options'])
 gulp.task('js_min', ['js:app_min', 'js:options_min'])
 
 gulp.task('js:options', () =>
-    rollupify('options.js')
+    rollupify('options.js'),
 )
 gulp.task('js:options_min', () =>
-    rollupify('options.js', true)
+    rollupify('options.js', true),
 )
 
 gulp.task('js:app', () =>
-  rollupify('app.js')
+  rollupify('app.js'),
 )
 gulp.task('js:app_min', () =>
-  rollupify('app.js', true)
+  rollupify('app.js', true),
 )
 
 gulp.task('lint', () =>
@@ -149,7 +149,7 @@ gulp.task('lint', () =>
     .pipe(eslint.failAfterError())
     .pipe(jscs())
     .pipe(jscs.reporter())
-    .pipe(jscs.reporter('fail'))
+    .pipe(jscs.reporter('fail')),
 )
 
 const themes = [
@@ -223,7 +223,7 @@ gulp.task('scss', () =>
       .pipe(
         postcss([
           autoprefixer(autoprefixerConfig),
-        ])
+        ]),
       )
-      .pipe(gulp.dest('dist/bootswatch/'))
+      .pipe(gulp.dest('dist/bootswatch/')),
 )
