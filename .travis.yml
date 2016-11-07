@@ -5,4 +5,4 @@ node_js:
   - "6"
 script:
   - npm run gulp lint
-  - npm run gulp release:chrome
+  - npm run gulp releaseChrome
