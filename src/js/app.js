@@ -1,4 +1,4 @@
-import { default as Autocomplete } from 'yawe-autocomplete'
+import Autocomplete from 'yawe-autocomplete'
 
 import { $, findParentLink, options, toQueryString } from './helper'
 import {
