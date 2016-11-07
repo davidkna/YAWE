@@ -25,39 +25,15 @@ import { minify } from 'uglify-js'
 
 const uglify = require('rollup-plugin-uglify')
 
-gulp.task('clean', callback => del('dist/', callback))
+export function clean() {
+  return del('dist/')
+}
 
-gulp.task('release:chrome', ['clean'], () => {
-  gulp.run('min')
-})
-gulp.task('release:opera', ['clean'], () => {
-  gulp.run('nomin')
-})
-gulp.task('release:firefox', ['clean'], () => {
-  gulp.run('nomin')
-})
-
-gulp.task('min', [
-  'common',
-  'js_min',
-])
-gulp.task('nomin', [
-  'common',
-  'js',
-])
-
-gulp.task('common', [
-  'html',
-  'img',
-  'manifest',
-  'scss',
-])
-
-gulp.task('manifest', () =>
-  gulp
+export function manifest() {
+  return gulp
     .src('./src/manifest.json')
-    .pipe(gulp.dest('dist')),
-)
+    .pipe(gulp.dest('dist'))
+}
 
 const htmlOptions = {
   collapseBooleanAttributes: true,
@@ -74,15 +50,15 @@ const htmlOptions = {
   sortClassName: true,
 }
 
-gulp.task('html', () =>
-  gulp
+export function html() {
+  return gulp
     .src(['./src/html/*.html'])
     .pipe(htmlmin(htmlOptions))
-    .pipe(gulp.dest('dist')),
-)
+    .pipe(gulp.dest('dist'))
+}
 
-gulp.task('img', () =>
-  gulp
+export function img() {
+  return gulp
     .src([
       './src/images/icon_16x16.png',
       './src/images/icon_19x19.png',
@@ -90,8 +66,8 @@ gulp.task('img', () =>
       './src/images/icon_48x48.png',
       './src/images/icon_128x128.png',
     ])
-    .pipe(gulp.dest('dist/images')),
-)
+    .pipe(gulp.dest('dist/images'))
+}
 
 function rollupConfig(file, enableUglify = false) {
   const plugins = file !== 'app.js' ? [] : [
@@ -124,33 +100,36 @@ function rollupify(file, enableUglify = false) {
     }))
 }
 
-gulp.task('js', ['js:app', 'js:options'])
-gulp.task('js_min', ['js:app_min', 'js:options_min'])
+export function jsApp(cb) {
+  rollupify('app.js')
+      .then(() => cb())
+}
 
-gulp.task('js:options', () =>
-    rollupify('options.js'),
-)
-gulp.task('js:options_min', () =>
-    rollupify('options.js', true),
-)
+export function jsOptions(cb) {
+  rollupify('options.js')
+    .then(() => cb())
+}
 
-gulp.task('js:app', () =>
-  rollupify('app.js'),
-)
-gulp.task('js:app_min', () =>
-  rollupify('app.js', true),
-)
+export function jsAppMin(cb) {
+  rollupify('app.js', true)
+    .then(() => cb())
+}
 
-gulp.task('lint', () =>
-  gulp
+export function jsOptionsMin(cb) {
+  rollupify('options.js', true)
+    .then(() => cb())
+}
+
+export function lint() {
+  return gulp
     .src(['./gulpfile.babel.js', './src/js/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
     .pipe(jscs())
     .pipe(jscs.reporter())
-    .pipe(jscs.reporter('fail')),
-)
+    .pipe(jscs.reporter('fail'))
+}
 
 const themes = [
   'cerulean',
@@ -210,10 +189,10 @@ const uncssConfig = {
   ],
 }
 
-gulp.task('scss', () =>
-      gulp.src(themes.map(theme => `vendor/bootswatch/${theme}/style.scss`), {
-        base: 'vendor/bootswatch',
-      })
+export function scss() {
+  return gulp.src(themes.map(theme => `vendor/bootswatch/${theme}/style.scss`), {
+    base: 'vendor/bootswatch',
+  })
       .pipe(sass({
         includePaths: ['vendor/', 'src/scss'],
       }).on('error', sass.logError))
@@ -225,5 +204,42 @@ gulp.task('scss', () =>
           autoprefixer(autoprefixerConfig),
         ]),
       )
-      .pipe(gulp.dest('dist/bootswatch/')),
-)
+      .pipe(gulp.dest('dist/bootswatch/'))
+}
+
+export function js() {
+  return gulp.parallel(jsApp, jsOptions)
+}
+
+export function common() {
+  return gulp.parallel(
+    html,
+    img,
+    manifest,
+    scss,
+  )
+}
+
+export function jsMin() {
+  return gulp.parallel(jsAppMin, jsOptionsMin)
+}
+
+export function min() {
+  return gulp.parallel(common, jsMin)
+}
+
+export function noMin() {
+  return gulp.parallel(common, js)
+}
+
+export function releaseChrome() {
+  return gulp.series(clean, min)
+}
+
+export function releaseOpera() {
+  return gulp.series(clean, noMin)
+}
+
+export function releaseFirefox() {
+  return gulp.series(clean, noMin)
+}
