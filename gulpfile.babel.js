@@ -211,6 +211,10 @@ export function js() {
   return gulp.parallel(jsApp, jsOptions)
 }
 
+export function jsMin() {
+  return gulp.parallel(jsAppMin, jsOptionsMin)
+}
+
 export function common() {
   return gulp.parallel(
     html,
@@ -218,10 +222,6 @@ export function common() {
     manifest,
     scss,
   )
-}
-
-export function jsMin() {
-  return gulp.parallel(jsAppMin, jsOptionsMin)
 }
 
 export function min() {
