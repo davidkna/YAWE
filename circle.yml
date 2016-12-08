@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 6.9.1
+    version: 7.0.0
 
 dependencies:
   override:
@@ -12,7 +12,7 @@ test:
   override:
     - npm run gulp lint
     - |
-      npm run gulp release:chrome
+      npm run gulp releaseChrome
       cd dist
       zip -r $CIRCLE_ARTIFACTS/min-r$CIRCLE_BUILD_NUM.zip *
     - |
