@@ -33,7 +33,7 @@
     "gulp-uncss": "1.0.6",
     "node-sass": "4.5.0",
     "rollup": "0.41.4",
-    "rollup-plugin-commonjs": "7.0.0",
+    "rollup-plugin-commonjs": "7.0.1",
     "rollup-plugin-node-resolve": "2.0.0",
     "rollup-plugin-uglify": "1.0.1",
     "uglify-js": "mishoo/UglifyJS2#harmony"
