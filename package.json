@@ -22,7 +22,7 @@
     "eslint-plugin-import": "2.2.0",
     "gulp": "3.9.1",
     "gulp-babel": "6.1.2",
-    "gulp-clean-css": "3.0.3",
+    "gulp-clean-css": "3.0.4",
     "gulp-concat": "2.6.1",
     "gulp-csscomb": "3.0.8",
     "gulp-eslint": "3.0.1",
