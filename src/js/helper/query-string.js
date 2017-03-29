@@ -20,7 +20,7 @@ export function fromQueryString(str) {
 
 function encode(k, v) {
   const key = encodeURIComponent(k)
-  const value = decodeURIComponent(v)
+  const value = encodeURIComponent(v)
 
   return { key, value }
 }
