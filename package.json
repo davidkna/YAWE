@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "dompurify": "0.8.5",
-    "yawe-autocomplete": "1.2.1"
+    "yawe-autocomplete": "1.2.2"
   },
   "scripts": {
     "gulp": "gulp "
