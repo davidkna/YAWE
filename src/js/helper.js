@@ -3,14 +3,14 @@ export { toQueryString, fromQueryString } from './helper/query-string'
 // Returns first element that matches CSS selector {expr}.
 // Querying can optionally be restricted to {container}’s descendants
 // Source: http://lea.verou.me/2015/04/jquery-considered-harmful/
-export function $(expr, container) {
-  return typeof expr === 'string' ? (container || document).querySelector(expr) : expr || null
+export function $(expr, container=document) {
+  return container.querySelector(expr)
 }
 
 // Finds first parent DOM element that is a link - if it exists
 export function findParentLink(el) {
   for (let i = el; i.parentNode; i = i.parentNode) {
-    if ((i.nodeName || i.tagName).toLowerCase() === 'a') {
+    if (i.nodeName.toLowerCase() === 'a') {
       return i
     }
   }
