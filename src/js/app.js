@@ -57,11 +57,12 @@ $content.addEventListener('click', (event) => {
 })
 
 // Minimal dropdown menu
-$('.dropdown .btn').addEventListener('click', (event) => {
+$('.dropdown').addEventListener('click', (event) => {
   event.preventDefault()
-  event.target.classList.toggle('active')
+  event.target.parentNode.classList.toggle('show')
 
-  $('.dropdown-menu').classList.toggle('show')
+  const expanded = Boolean(event.target.getAttibute('aria-expanded'))
+  event.target.setAttribute('aria-expanded', (!expanded).toString())
 })
 
 // Load article on submit

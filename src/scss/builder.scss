@@ -1,37 +1,18 @@
 @charset 'UTF-8';
 
-@import 'bootstrap/mixins';
+
+
+
+
+@import 'bootstrap/bootstrap';
 
 // No collapsing
 $grid-float-breakpoint: 0;
+
 // Variables
 @import 'variables';
-// Just in case
-@import 'bootstrap/variables';
-
-// Reset
-@import 'bootstrap/normalize';
 @import 'icons';
-
-// Core CSS
-@import 'bootstrap/scaffolding';
-@import 'bootstrap/type';
-@import 'bootstrap/code';
-@import 'grid';
-@import 'tables';
-@import 'bootstrap/forms';
-@import 'bootstrap/buttons';
-
-// Components
-@import 'bootstrap/component-animations';
-@import 'bootstrap/dropdowns';
-@import 'bootstrap/input-groups';
-@import 'bootstrap/navs';
-@import 'topbar';
-@import 'bootstrap/alerts';
-@import 'bootstrap/progress-bars';
-@import 'bootstrap/panels';
-@import 'bootstrap/wells';
+// @import 'topbar';
 @import 'awesomeplete';
 
 // Bootswatch
@@ -42,4 +23,3 @@ $grid-float-breakpoint: 0;
 
 // Utility classes
 @import 'bootstrap/utilities';
-@import 'bootstrap/responsive-utilities';

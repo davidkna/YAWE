@@ -120,6 +120,7 @@ function rollupConfig(file, enableUglify = false) {
 function rollupify(file, enableUglify = false) {
   return rollup(rollupConfig(file, enableUglify)).then(bundle =>
     bundle.write({
+      format: 'es',
       dest: `./dist/js/${file}`,
     }))
 }
@@ -217,7 +218,7 @@ gulp.task('scss', () =>
       .pipe(sass({
         includePaths: ['vendor/', 'src/scss'],
       }).on('error', sass.logError))
-      .pipe(uncss(uncssConfig))
+      // .pipe(uncss(uncssConfig))
       .pipe(csscomb())
       .pipe(cleancss())
       .pipe(

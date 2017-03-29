@@ -44,7 +44,11 @@ function displayArticle(response, articleName, show) {
       $h2.textContent = title
       $summary.appendChild($h2)
       $details.appendChild($summary)
-      $body.classList.add('panel-body')
+
+      $details.classList.add('card')
+      $summary.classList.add('card-header')
+      $body.classList.add('card-body')
+
       $body.appendChild(purify(content))
 
       $details.appendChild($body)

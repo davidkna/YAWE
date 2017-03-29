@@ -27,17 +27,37 @@ export function http2https(url) {
   return url.replace(/^http:/, 'https:')
 }
 
-// Creates timestamp for saves
-export function timestamp() {
-  return Math.floor(Date.now() / 1000)
-}
-
 // Options to use if none set
 const defaultOptions = {
   theme: 'custom',
   url: 'https://en.wikipedia.org/',
-  timestamp: timestamp(),
 }
+
+const availableThemes = [
+  'cerulean',
+  'cosmo',
+  'custom',
+  'cyborg',
+  'darkly',
+  'default',
+  'flatly',
+  'help',
+  'journal',
+  'litera',
+  'lumen',
+  'lux',
+  'materia',
+  'minty',
+  'pulse',
+  'sandstone',
+  'simplex',
+  'slate',
+  'solar',
+  'spacelab',
+  'superhero',
+  'united',
+  'yeti',
+]
 
 // Returns user settings from localStorage
 function getOptions() {
@@ -45,6 +65,9 @@ function getOptions() {
   if (!options) {
     localStorage.setItem('settings', JSON.stringify(defaultOptions))
     return defaultOptions
+  } else if (!availableThemes.includes(options.themes)) {
+    options.theme = defaultOptions.theme
+    localStorage.setItem('settings', JSON.stringify(defaultOptions))
   }
 
   return JSON.parse(localStorage.getItem('settings'))

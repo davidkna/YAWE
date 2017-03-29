@@ -1,4 +1,4 @@
-import { $, http2https, options, timestamp } from './helper'
+import { $, http2https, options } from './helper'
 import './navigation'
 
 // get <select> value
@@ -35,7 +35,6 @@ $('form', $('#content')).addEventListener('submit', (event) => {
   localStorage.setItem('settings', JSON.stringify({
     url,
     theme,
-    timestamp,
   }))
 
   location.replace('app.html')

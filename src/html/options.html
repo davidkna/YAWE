@@ -6,14 +6,25 @@
     <title></title>
 </head>
 <body>
-    <div class="topbar container">
-        <a class="btn topbar-btn icon-left-open" id="back"></a> <a class="btn topbar-btn icon-right-open" id="forward"></a>
-        <form class="form-search topbar-form">
-            <div class="form-group">
-                <input class="form-control" disabled id="search" placeholder="Search" type="search">
-            </div>
-        </form><a disabled class="btn topbar-btn icon-menu"></a>
-    </div>
+    <nav class="navbar navbar-light bg-faded">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link btn icon-left-open" href="#" id="back"></a></li>
+            <li class="nav-item"><a class="nav-link btn icon-right-open" href="#" id="forward"></a></li>
+            <form class="form-inline disabled" id="search-form" name="search-form" role="search">
+            <div class="awesomplete navbar-item">
+                <input autofocus autocomplete="off" class="form-control" id="search" placeholder="Search" tabindex="1" type="search">
+                <ul hidden></ul>
+                </div>
+            </form>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle icon-menu" id="navbarMenu" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarMenu">
+                  <a data-internal="" class="dropdown-item" id="newTab" href="#">New Tab</a>
+                  <a data-internal="" class="dropdown-item" href="options.html">Options</a>
+              </div>
+            </li>
+        </ul>
+    </nav>
     <div class="container" id="content">
         <h1 class="page-header">Options</h1>
         <form>
@@ -25,12 +36,6 @@
                 <label for="theme">Theme</label> <select class="form-control" id="theme">
                     <option value="custom">
                         Bootstrap (Default)
-                    </option>
-                    <option value="cerulean">
-                        Cerulean
-                    </option>
-                    <option value="classic">
-                        Classic (Bootstrap 2)
                     </option>
                     <option value="cosmo">
                         Cosmo
@@ -50,11 +55,17 @@
                     <option value="lumen">
                         Lumen
                     </option>
-                    <option value="paper">
-                        Paper
+                    <option value="lux">
+                        Lux
                     </option>
-                    <option value="readable">
-                        Readable
+                    <option value="materia">
+                        Materia
+                    </option>
+                    <option value="minty">
+                        Minty
+                    </option>
+                    <option value="pulse">
+                        Pulse
                     </option>
                     <option value="sandstone">
                         Sandstone
@@ -64,6 +75,9 @@
                     </option>
                     <option value="slate">
                         Slate
+                    </option>
+                    <option value="solar">
+                        Solar
                     </option>
                     <option value="spacelab">
                         Spacelab
