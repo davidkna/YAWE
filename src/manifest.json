@@ -1,12 +1,12 @@
 {
 	"name": "YAWE (Yet Another Wiki Extension)",
 	"short_name": "YAWE",
-	"version": "4.1.2",
+	"version": "4.2.0",
 	"description": "View and Search for Wikipedia Articles",
 	"applications": {
 		"gecko": {
 			"id": "jid0-DPhEBG7AOfT3WFrfbEc8TplXMmY@jetpack",
-      "strict_min_version": "49.0"
+      "strict_min_version": "52.0"
 		}
 	},
 	"icons": {
@@ -24,6 +24,6 @@
 		"default_popup": "index.html"
 	},
 	"manifest_version": 2,
-	"minimum_chrome_version": "51",
-	"minimum_opera_version": "38"
+	"minimum_chrome_version": "57",
+	"minimum_opera_version": "44"
 }
