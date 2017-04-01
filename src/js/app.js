@@ -26,8 +26,9 @@ $('#newTab').addEventListener('click', (event) => {
 })
 
 // Make options link work properly
-$('a[href="options.html"]').addEventListener('click', () => {
+$('a[href="options.html"]', $('.dropdown-menu')).addEventListener('click', () => {
   $base.setAttribute('href', '')
+  location.href = 'options.html'
 })
 
 // Listen to url changes
@@ -61,7 +62,7 @@ $('.dropdown').addEventListener('click', (event) => {
   event.preventDefault()
   event.target.parentNode.classList.toggle('show')
 
-  const expanded = Boolean(event.target.getAttibute('aria-expanded'))
+  const expanded = Boolean(event.target.getAttribute('aria-expanded'))
   event.target.setAttribute('aria-expanded', (!expanded).toString())
 })
 
