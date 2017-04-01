@@ -154,7 +154,7 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
     }
   }
 
-  &.dropdown-toggle::before {
+  &.dropdown-toggle::after {
     display: inline-block;
     width: 0;
     height: 0;

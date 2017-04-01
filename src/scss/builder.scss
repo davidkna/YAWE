@@ -9,11 +9,13 @@ $navbar-toggler-padding-x:           .75rem;
 $navbar-toggler-padding-y:           .25rem;
 $navbar-toggler-font-size:           1.25rem;
 
-@import 'bootstrap/bootstrap';
 // Variables
 @import 'variables';
+
 @import 'icons';
-// @import 'topbar';
+
+@import 'bootstrap';
+
 @import 'awesomeplete';
 
 // Bootswatch
@@ -21,6 +23,3 @@ $navbar-toggler-font-size:           1.25rem;
 
 // Global stuff
 @import 'global';
-
-// Utility classes
-@import 'bootstrap/utilities';

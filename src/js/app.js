@@ -57,16 +57,6 @@ $content.addEventListener('click', (event) => {
   }
 })
 
-// Minimal dropdown menu
-$('.dropdown').addEventListener('click', (event) => {
-  event.preventDefault()
-  event.target.parentNode.classList.toggle('show')
-
-  const expanded = Boolean(event.target.getAttribute('aria-expanded'))
-  event.target.setAttribute('aria-expanded', (!expanded).toString())
-  event.target.classList.toggle('active')
-})
-
 // Load article on submit
 $('#search-form').addEventListener('submit', (event) => {
   event.preventDefault()

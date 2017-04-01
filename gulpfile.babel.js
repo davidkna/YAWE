@@ -10,9 +10,9 @@ import jscs from 'gulp-jscs'
 import autoprefixer from 'autoprefixer'
 import cleancss from 'gulp-clean-css'
 import csscomb from 'gulp-csscomb'
+import flexbugs from 'postcss-flexbugs-fixes'
 import postcss from 'gulp-postcss'
 import sass from 'gulp-sass'
-import uncss from 'gulp-uncss'
 
 // HTML
 import htmlmin from 'gulp-htmlmin'
@@ -185,50 +185,19 @@ const autoprefixerConfig = {
   remove: true,
 }
 
-const uncssConfig = {
-  html: [
-    'src/*.html', '.uncss_helper.html',
-  ],
-  ignore: [
-    '.active',
-    '.awesomeplete',
-    '.btn',
-    '.dablink',
-    'div.awesomplete > ul:empty',
-    'div.awesomplete > ul[hidden]',
-    '.dropdown',
-    '.hatnote',
-    '.hlist.navbar.mini',
-    '.icon-menu',
-    '.loading',
-    '.mw-editsection',
-    '.noprint',
-    '.panel-body',
-    '.progress',
-    '.progress-bar',
-    '.show',
-    '.tex',
-    '.visually-hidden',
-    'details',
-    'summary',
-    'table',
-    '#yawe',
-  ],
-}
-
 gulp.task('scss', () =>
       gulp.src(themes.map(theme => `vendor/bootswatch/${theme}/style.scss`), {
         base: 'vendor/bootswatch',
       })
       .pipe(sass({
-        includePaths: ['vendor/', 'src/scss'],
+        includePaths: ['vendor/', 'src/scss/', 'node_modules/'],
       }).on('error', sass.logError))
-      // .pipe(uncss(uncssConfig))
       .pipe(csscomb())
       .pipe(cleancss())
       .pipe(
         postcss([
           autoprefixer(autoprefixerConfig),
+          flexbugs,
         ]),
       )
       .pipe(gulp.dest('dist/bootswatch/')),

@@ -30,8 +30,8 @@
     "gulp-jscs": "4.0.0",
     "gulp-postcss": "6.4.0",
     "gulp-sass": "3.1.0",
-    "gulp-uncss": "1.0.6",
     "node-sass": "4.5.2",
+    "postcss-flexbugs-fixes": "2.1.0",
     "rollup": "0.41.6",
     "rollup-plugin-commonjs": "8.0.1",
     "rollup-plugin-node-resolve": "3.0.0",
@@ -39,6 +39,7 @@
     "uglify-js": "mishoo/UglifyJS2#harmony"
   },
   "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
     "dompurify": "0.8.5",
     "yawe-autocomplete": "1.2.3"
   },

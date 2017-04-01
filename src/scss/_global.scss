@@ -50,6 +50,16 @@ summary h2 {
     @include button-size(.5rem, 1rem, 1rem, $btn-border-radius);
 }
 
+.navbar {
+    display: block;
+    border-width: 0 0 1px 0;
+}
+
+.navbar-nav {
+    justify-content: space-between;
+}
+
+
 .navbar .form-inline {
     padding-top: 0;
     padding-bottom: 0;
@@ -64,20 +74,11 @@ summary h2 {
   text-align: center;
   height: 34rem - 2 * $navbar-padding-y - 1rem * $line-height-base - $dropdown-padding-y;
 }
-/*
+
 #content
 {
     overflow: auto;
-
-    margin-top: $navbar-height;
-    padding-top: $line-height-computed;
-
-    @media (width: 458px)
-    {
-        width: 458px;
-        height: 555px - $navbar-height;
-    }
-}*/
+}
 
 .mw-editsection,
 .hlist.navbar.mini
