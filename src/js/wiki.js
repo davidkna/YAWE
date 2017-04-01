@@ -32,8 +32,8 @@ function displayArticle(response, articleName, show) {
   let $target
 
   sections.forEach((section) => {
-    const title = section.line
-    const content = section.text
+    const title = purify(section.line).textContent
+    const content = purify(section.text)
 
     if (section.toclevel === 1) {
       const $details = document.createElement('details')
@@ -47,9 +47,9 @@ function displayArticle(response, articleName, show) {
 
       $details.classList.add('card')
       $summary.classList.add('card-header')
-      $body.classList.add('card-body')
+      $body.classList.add('card-block')
 
-      $body.appendChild(purify(content))
+      $body.appendChild(content)
 
       $details.appendChild($body)
 
@@ -60,7 +60,7 @@ function displayArticle(response, articleName, show) {
       const $hx = document.createElement(`h${level}`)
       $hx.textContent = title
       $target.appendChild($hx)
-      $target.appendChild(purify(content))
+      $target.appendChild(content)
     }
   }, false)
 }

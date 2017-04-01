@@ -64,6 +64,7 @@ $('.dropdown').addEventListener('click', (event) => {
 
   const expanded = Boolean(event.target.getAttribute('aria-expanded'))
   event.target.setAttribute('aria-expanded', (!expanded).toString())
+  event.target.classList.toggle('active')
 })
 
 // Load article on submit

@@ -42,8 +42,17 @@ summary
     cursor: pointer;
 }
 
+summary h2 {
+    font-size: $font-size-lg;
+}
+
 .nav-link.btn {
-    @include button-size($btn-padding-y, $btn-padding-x, $font-size-base, $btn-border-radius);
+    @include button-size(.5rem, 1rem, 1rem, $btn-border-radius);
+}
+
+.navbar .form-inline {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
  

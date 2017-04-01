@@ -59,16 +59,18 @@ const availableThemes = [
 
 // Returns user settings from localStorage
 function getOptions() {
-  const options = localStorage.getItem('settings')
-  if (!options) {
+  const stored = localStorage.getItem('settings')
+  if (!stored) {
     localStorage.setItem('settings', JSON.stringify(defaultOptions))
     return defaultOptions
-  } else if (!availableThemes.includes(options.themes)) {
+  }
+  const options = JSON.parse(stored)
+  if (!availableThemes.includes(options.theme)) {
     options.theme = defaultOptions.theme
-    localStorage.setItem('settings', JSON.stringify(defaultOptions))
+    localStorage.setItem('settings', JSON.stringify(options))
   }
 
-  return JSON.parse(localStorage.getItem('settings'))
+  return options
 }
 
 export const options = getOptions()
