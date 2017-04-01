@@ -15,6 +15,11 @@ img.tex, .texhtml, .mwe-math-element
     display: inline-block;
 }
 
+.container {
+    @include make-container();
+    @include make-container-max-widths();
+}
+
 .thumb
 {
     @extend .card;
@@ -55,9 +60,13 @@ summary h2 {
     display: block;
     border-width: 0 0 1px 0;
 }
-
 .navbar-nav {
     justify-content: space-between;
+}
+@media (min-width: nth($grid-breakpoints, 2)) {
+    .navbar-nav {
+        justify-content: center;
+    }
 }
 
 
