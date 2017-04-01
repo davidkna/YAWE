@@ -9,9 +9,10 @@ body
     @extend .alert-info;
 }
 
-img.tex
+img.tex, .texhtml, .mwe-math-element
 {
     @extend code;
+    display: inline-block;
 }
 
 .thumb
