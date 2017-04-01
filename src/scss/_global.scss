@@ -63,7 +63,7 @@ summary h2 {
 .navbar-nav {
     justify-content: space-between;
 }
-@media (min-width: nth($grid-breakpoints, 2)) {
+@include media-breakpoint-up(sm) {
     .navbar-nav {
         justify-content: center;
     }

@@ -56,3 +56,9 @@ $('link').setAttribute('href', `bootswatch/${options.theme}/style.css`)
 $('#url').addEventListener('blur', (event) => {
   $('#url').value = http2https(event.target.value)
 })
+
+// New Tab support
+$('#newTab').addEventListener('click', (event) => {
+  event.preventDefault()
+  window.open(location.href, '_newtab')
+})
