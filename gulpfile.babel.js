@@ -45,6 +45,7 @@ gulp.task('nomin', [
 gulp.task('common', [
   'html',
   'img',
+  'fonts',
   'manifest',
   'scss',
 ])
@@ -59,6 +60,12 @@ gulp.task('html', () =>
   gulp
     .src(['./src/html/*.html'])
     .pipe(gulp.dest('dist')),
+)
+
+gulp.task('fonts', () =>
+  gulp
+    .src(['./vendor/fontello/fontello.woff2'])
+    .pipe(gulp.dest('dist/fonts')),
 )
 
 gulp.task('img', () =>
