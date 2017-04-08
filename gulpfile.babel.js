@@ -1,4 +1,3 @@
-/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 import gulp from 'gulp'
 import del from 'del'
 
@@ -13,9 +12,6 @@ import csscomb from 'gulp-csscomb'
 import flexbugs from 'postcss-flexbugs-fixes'
 import postcss from 'gulp-postcss'
 import sass from 'gulp-sass'
-
-// HTML
-import htmlmin from 'gulp-htmlmin'
 
 // Rollup
 import { rollup } from 'rollup'
@@ -59,26 +55,9 @@ gulp.task('manifest', () =>
     .pipe(gulp.dest('dist')),
 )
 
-const htmlOptions = {
-  collapseBooleanAttributes: true,
-  collapseWhitespace: true,
-  decodeEntities: true,
-  minifyCSS: true,
-  ignoreCustomComments: [],
-  ignoreCustomFragments: [],
-  removeAttributeQuotes: true,
-  removeComments: true,
-  removeRedundantAttributes: true,
-  removeScriptTypeAttributes: true,
-  removeStyleLinkTypeAttributes: true,
-  sortAttributes: true,
-  sortClassName: true,
-}
-
 gulp.task('html', () =>
   gulp
     .src(['./src/html/*.html'])
-    .pipe(htmlmin(htmlOptions))
     .pipe(gulp.dest('dist')),
 )
 
