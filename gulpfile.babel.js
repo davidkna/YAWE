@@ -9,7 +9,6 @@ import jscs from 'gulp-jscs'
 import autoprefixer from 'autoprefixer'
 import cleancss from 'gulp-clean-css'
 import csscomb from 'gulp-csscomb'
-import flexbugs from 'postcss-flexbugs-fixes'
 import postcss from 'gulp-postcss'
 import sass from 'gulp-sass'
 
@@ -185,7 +184,6 @@ gulp.task('scss', () =>
       .pipe(
         postcss([
           autoprefixer(autoprefixerConfig),
-          flexbugs,
         ]),
       )
       .pipe(gulp.dest('dist/bootswatch/')),
