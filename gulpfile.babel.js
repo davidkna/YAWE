@@ -179,7 +179,9 @@ gulp.task('scss', () =>
         includePaths: ['vendor/', 'src/scss/', 'node_modules/'],
       }).on('error', sass.logError))
       .pipe(csscomb())
-      .pipe(cleancss())
+      .pipe(cleancss({
+        level: 2,
+      }))
       .pipe(
         postcss([
           autoprefixer(autoprefixerConfig),
