@@ -15,6 +15,7 @@ $enable-print-styles: false;
 // Variables
 @import 'variables';
 
+// Icons
 @import 'icons';
 
 @import 'bootstrap';
@@ -24,5 +25,5 @@ $enable-print-styles: false;
 // Bootswatch
 @import 'bootswatch';
 
-// Global stuff
+// Changes / Additions for YAWE
 @import 'global';
