@@ -200,7 +200,14 @@ gulp.task('scss', () =>
           },
           wrapAt: false,
         },
-        level: 2,
+        level: {
+          1: {
+            all: true,
+          },
+          2: {
+            all: true,
+          },
+        },
       }))
       .pipe(
         postcss([
