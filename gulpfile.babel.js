@@ -179,6 +179,27 @@ gulp.task('scss', () =>
       }).on('error', sass.logError))
       .pipe(csscomb())
       .pipe(cleancss({
+        format: {
+          breaks: {
+            afterAtRule: true,
+            afterBlockBegins: true,
+            afterBlockEnds: true,
+            afterComment: true,
+            afterProperty: true,
+            afterRuleBegins: true,
+            afterRuleEnds: true,
+            beforeBlockEnds: true,
+            betweenSelectors: true,
+          },
+          indentBy: 2,
+          indentWith: 'space',
+          spaces: {
+            aroundSelectorRelation: false,
+            beforeBlockBegins: true,
+            beforeValue: false,
+          },
+          wrapAt: false,
+        },
         level: 2,
       }))
       .pipe(
