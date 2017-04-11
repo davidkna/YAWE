@@ -42,7 +42,7 @@ $('form', $('#content')).addEventListener('submit', (event) => {
 
 // Theme preview
 $('#theme').addEventListener('change', () => {
-  $('link').setAttribute('href', `bootswatch/${getVal($('#theme'))}/style.css`)
+  $('link').setAttribute('href', `themes/${getVal($('#theme'))}/style.css`)
 })
 
 // Set initial values
@@ -50,7 +50,7 @@ $('#url').setAttribute('value', options.url)
 setVal($('#theme'), options.theme)
 
 // Load theme
-$('link').setAttribute('href', `bootswatch/${options.theme}/style.css`)
+$('link').setAttribute('href', `themes/${options.theme}/style.css`)
 
 // fix url to https on blur
 $('#url').addEventListener('blur', (event) => {

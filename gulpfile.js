@@ -55,7 +55,7 @@ gulp.task('html', () =>
 
 gulp.task('themes', () =>
   gulp
-    .src(['./node-modules/yawe-themes/themes/'])
+    .src(['./node_modules/yawe-themes/themes/**/*'])
     .pipe(gulp.dest('dist/themes'))
 )
 

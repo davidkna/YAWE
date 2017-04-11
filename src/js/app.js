@@ -14,7 +14,7 @@ import './navigation'
 const { $base, $search, $content } = domElems
 
 // Load theme
-$('link').setAttribute('href', `bootswatch/${options.theme}/style.css`)
+$('link').setAttribute('href', `themes/${options.theme}/style.css`)
 
 // Load article directly - base on url
 loadFromHash()
