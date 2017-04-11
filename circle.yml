@@ -4,18 +4,16 @@ machine:
 
 dependencies:
   override:
-    - npm prune
-    - npm update
-    - npm install
+    - yarn
 
 test:
   override:
-    - npm run gulp lint
+    - yarn run gulp lint
     - |
-      npm run gulp release:chrome
+      yarn run gulp release:chrome
       cd dist
       zip -r $CIRCLE_ARTIFACTS/min-r$CIRCLE_BUILD_NUM.zip *
     - |
-      npm run gulp js
+      yarn run gulp js
       cd dist
       zip -r $CIRCLE_ARTIFACTS/nomin-r$CIRCLE_BUILD_NUM.zip *
