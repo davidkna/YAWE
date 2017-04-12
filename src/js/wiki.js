@@ -90,7 +90,7 @@ function prepareRequest(article) {
   } = domElems
 
   $base.setAttribute('href', `${options.url}wiki/${article}`)
-  $content.innerHTML = ''
+  $content.textContent = ''
   $content.style.display = 'none'
   $loading.style.display = 'block'
   $body.classList.add('loading')
