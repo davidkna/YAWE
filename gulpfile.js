@@ -9,7 +9,7 @@ const eslint = require('gulp-eslint')
 const { rollup } = require('rollup')
 const commonjs = require('rollup-plugin-commonjs')
 const nodeResolve = require('rollup-plugin-node-resolve')
-const { minify } = require('uglify-js')
+const { minify } = require('uglify-es')
 
 const uglify = require('rollup-plugin-uglify')
 
