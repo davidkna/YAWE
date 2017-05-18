@@ -31,7 +31,7 @@
     "uglify-es": "3.0.8"
   },
   "dependencies": {
-    "dompurify": "0.8.8",
+    "dompurify": "0.9.0",
     "yawe-autocomplete": "1.2.4",
     "yawe-themes": "1.0.0"
   },
