@@ -80,11 +80,11 @@ function rollupConfig(file, enableUglify = false) {
   if (enableUglify) {
     plugins.push(uglify({
       mangle: {
-        screw_ie8: true,
         toplevel: true
       },
       compress: {
-        screw_ie8: true
+        unsafe: true,
+        passes: 3
       }
     }, minify))
   }
