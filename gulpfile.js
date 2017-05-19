@@ -83,6 +83,7 @@ function rollupConfig(file, enableUglify = false) {
         toplevel: true
       },
       compress: {
+        toplevel: true,
         unsafe: true,
         passes: 3
       }
