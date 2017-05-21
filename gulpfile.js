@@ -86,7 +86,8 @@ function rollupConfig(file, enableUglify = false) {
         toplevel: true,
         unsafe: true,
         passes: 3
-      }
+      },
+      toplevel: true
     }, minify))
   }
 
