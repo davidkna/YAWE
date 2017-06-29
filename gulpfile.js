@@ -88,7 +88,7 @@ function rollupConfig(file, enableUglify = false) {
         passes: 3
       },
       toplevel: true,
-      ecma: 8,
+      ecma: 8
     }, minify))
   }
 
