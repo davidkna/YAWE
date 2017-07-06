@@ -16,7 +16,7 @@
     "node": ">=6"
   },
   "devDependencies": {
-    "autoprefixer": "7.1.1",
+    "autoprefixer": "7.1.2",
     "del": "3.0.0",
     "eslint": "4.1.1",
     "eslint-config-airbnb-base": "11.2.0",
