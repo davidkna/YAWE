@@ -1,7 +1,7 @@
 import DOMPurify from 'dompurify'
 
 // My Imports
-import { $, options, fromQueryString } from './helper'
+import { $, options } from './helper'
 import getJSON from './helper/fetch'
 
 export const domElems = {
@@ -20,15 +20,14 @@ function purify(html) {
   })
 }
 
-function displayArticle(response, articleName, show) {
+function parseArticle(response, articleName) {
   const [{ text }, ...sections] = response.mobileview.sections
-  const { $content } = domElems
+  const fragment = document.createDocumentFragment()
 
   const $h1 = document.createElement('h1')
   $h1.textContent = response.mobileview.normalizedtitle || articleName.replace(/_/g, ' ')
-  $content.appendChild($h1)
-  $content.appendChild(purify(text))
-  show()
+  fragment.appendChild($h1)
+  fragment.appendChild(purify(text))
   let $target
 
   sections.forEach((section) => {
@@ -53,7 +52,7 @@ function displayArticle(response, articleName, show) {
 
       $details.appendChild($body)
 
-      $content.appendChild($details)
+      fragment.appendChild($details)
       $target = $body
     } else {
       const level = section.toclevel <= 6 ? section.toclevel : 6
@@ -63,6 +62,7 @@ function displayArticle(response, articleName, show) {
       $target.appendChild(content)
     }
   }, false)
+  return fragment
 }
 
 function urlparse(url) {
@@ -71,17 +71,7 @@ function urlparse(url) {
   return a
 }
 
-// Exports
-export function loadFromHash() {
-  if (location.hash !== '') {
-    const { $search } = domElems
-    const hash = fromQueryString(location.hash)
-    $search.value = hash.article
-    getArticle(hash.article, true) // eslint-disable-line no-use-before-define
-  }
-}
-
-function prepareRequest(article) {
+function switchToLoadingView(article) {
   const {
     $base,
     $body,
@@ -90,13 +80,26 @@ function prepareRequest(article) {
   } = domElems
 
   $base.setAttribute('href', `${options.url}wiki/${article}`)
-  $content.textContent = ''
   $content.style.display = 'none'
   $loading.style.display = 'block'
   $body.classList.add('loading')
+  $content.textContent = ''
 }
 
-function loadArticle(article) {
+function switchToArticleView(domElement) {
+  const {
+    $body,
+    $content,
+    $loading,
+  } = domElems
+  $body.classList.remove('loading')
+  $content.appendChild(domElement)
+  $content.style.display = 'block'
+  $loading.style.display = 'none'
+  scroll(0, 0)
+}
+
+function getArticle(article) {
   // https://en.wikipedia.org/w/api.php?action=help&modules=mobileview
   const wikiOptions = {
     action: 'mobileview',
@@ -118,38 +121,21 @@ function loadArticle(article) {
     })
 }
 
-function getArticle(article) {
-  const {
-    $body,
-    $content,
-    $loading,
-  } = domElems
+function showError(msg) {
+  const $div = document.createElement('div')
+  $div.classList.add('alert')
+  $div.classList.add('alert-danger')
+  $div.textContent = msg
+  return $div
+}
 
-  function show() {
-    $content.style.display = 'block'
-    $loading.style.display = 'none'
-    $body.classList.remove('loading')
-    scroll(0, 0)
-  }
+export function viewArticle(article) {
+  switchToLoadingView(article)
 
-  function wrapError(msg) {
-    const $div = document.createElement('div')
-    $div.classList.add('alert')
-    $div.classList.add('alert-danger')
-    $div.textContent = msg
-    return $div
-  }
-
-  prepareRequest(article)
-
-  loadArticle(article)
-    .then((response) => {
-      displayArticle(response, article, show)
-    })
-    .catch((errorMsg) => {
-      show()
-      $content.appendChild(wrapError(errorMsg))
-    })
+  getArticle(article)
+    .then(response => parseArticle(response, article))
+    .catch(showError)
+    .then(domElement => switchToArticleView(domElement))
 }
 
 export function isWikiUrl(testUrl) {
@@ -194,7 +180,7 @@ export function articleNameFromUrl(articleUrl) {
   return beautify(getName(articleUrl))
 }
 
-export function search(query) {
+export function getAutocompleteSuggestions(query) {
   const ajaxOptions = {
     format: 'json',
     action: 'opensearch',

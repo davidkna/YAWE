@@ -1,12 +1,12 @@
 import Autocomplete from 'yawe-autocomplete'
 
-import { $, findParentLink, options, toQueryString } from './helper'
+import { $, findParentLink, options, toQueryString, fromQueryString } from './helper'
 import {
   articleNameFromUrl,
   domElems,
   isWikiUrl,
-  loadFromHash,
-  search,
+  viewArticle,
+  getAutocompleteSuggestions,
 } from './wiki'
 
 import './navigation'
@@ -17,6 +17,13 @@ const { $base, $search, $content } = domElems
 $('link').setAttribute('href', `themes/${options.theme}/style.css`)
 
 // Load article directly - base on url
+function loadFromHash() {
+  if (location.hash !== '') {
+    const hash = fromQueryString(location.hash)
+    $search.value = hash.article
+    viewArticle(hash.article) // eslint-disable-line no-use-before-define
+  }
+}
 loadFromHash()
 
 // New Tab support
@@ -35,7 +42,7 @@ $('a[href="options.html"]', $('.dropdown-menu')).addEventListener('click', () =>
 addEventListener('hashchange', loadFromHash)
 
 // Autocomplete
-new Autocomplete($('#search'), search) // eslint-disable-line  no-new
+new Autocomplete($('#search'), getAutocompleteSuggestions) // eslint-disable-line  no-new
 
 // Internal wiki link support
 $content.addEventListener('click', (event) => {
