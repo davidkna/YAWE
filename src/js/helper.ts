@@ -3,15 +3,15 @@ export { toQueryString, fromQueryString } from './helper/query-string'
 // Returns first element that matches CSS selector {expr}.
 // Querying can optionally be restricted to {container}’s descendants
 // Source: http://lea.verou.me/2015/04/jquery-considered-harmful/
-export function $(expr, container = document) {
-  return container.querySelector(expr)
+export function $(expr: string, container: Element | Document = document): HTMLElement | null { // tslint-disable-line
+  return <HTMLElement>container.querySelector(expr)
 }
 
 // Finds first parent DOM element that is a link - if it exists
-export function findParentLink(el) {
+export function findParentLink(el: Node): HTMLLinkElement | null {
   for (let i = el; i.parentNode; i = i.parentNode) {
     if (i.nodeName.toLowerCase() === 'a') {
-      return i
+      return <HTMLLinkElement>i
     }
   }
 
@@ -19,7 +19,7 @@ export function findParentLink(el) {
 }
 
 // Transforms http or plain url to https
-export function http2https(url) {
+export function http2https(url: string): string {
   if (!url.match(/^http/)) {
     return `https://${url}`
   }

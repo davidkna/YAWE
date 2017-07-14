@@ -4,14 +4,12 @@ const del = require('del')
 
 // Linting
 const eslint = require('gulp-eslint')
+const tslint = require('gulp-tslint')
 
-// Rollup
-const { rollup } = require('rollup')
-const commonjs = require('rollup-plugin-commonjs')
-const nodeResolve = require('rollup-plugin-node-resolve')
-const { minify } = require('uglify-es')
-
-const uglify = require('rollup-plugin-uglify')
+// Webpack
+const webpack = require('webpack')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const path = require('path')
 
 gulp.task('clean', callback => del('dist/', callback))
 
@@ -71,63 +69,71 @@ gulp.task('img', () =>
     .pipe(gulp.dest('dist/images'))
 )
 
-function rollupConfig(file, enableUglify = false) {
-  const plugins = file !== 'app.js' ? [] : [
-    commonjs(),
-    nodeResolve()
+function webpackConfig(enableUglify = false) {
+  const plugins = [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'commons',
+      filename: 'commons.js'
+    })
   ]
 
   if (enableUglify) {
-    plugins.push(uglify({
-      mangle: {
-        toplevel: true
-      },
-      compress: {
-        toplevel: true,
-        unsafe: true,
-        passes: 3
-      },
-      toplevel: true,
-      ecma: 8
-    }, minify))
+    plugins.push(new UglifyJSPlugin())
+    plugins.push(new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }))
   }
 
   return {
-    entry: `./src/js/${file}`,
+    entry: {
+      app: './src/js/app.ts',
+      options: './src/js/options.ts'
+    },
+    output: {
+      filename: '[name].js',
+      path: path.resolve(__dirname, 'dist/js')
+    },
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js']
+    },
+    module: {
+      loaders: [
+        // all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
+        { test: /\.tsx?$/, loader: 'ts-loader' }
+      ]
+    },
     plugins
   }
 }
 
-function rollupify(file, enableUglify = false) {
-  return rollup(rollupConfig(file, enableUglify)).then(bundle =>
-    bundle.write({
-      format: 'es',
-      dest: `./dist/js/${file}`
-    }))
+function webpackify(file, enableUglify = false) {
+  return webpack(webpackConfig(file, enableUglify))
 }
 
-gulp.task('js', ['js:app', 'js:options'])
-gulp.task('js_min', ['js:app_min', 'js:options_min'])
+gulp.task('js', (cb) => {
+  webpackify().run(cb)
+})
 
-gulp.task('js:options', () =>
-    rollupify('options.js')
-)
-gulp.task('js:options_min', () =>
-    rollupify('options.js', true)
-)
+gulp.task('js_min', (cb) => {
+  webpackify(true).run(cb)
+})
 
-gulp.task('js:app', () =>
-  rollupify('app.js')
-)
-gulp.task('js:app_min', () =>
-  rollupify('app.js', true)
-)
+gulp.task('lint', ['eslint', 'tslint'])
 
-gulp.task('lint', () =>
+gulp.task('eslint', () =>
   gulp
-    .src(['./gulpfile.js', './src/js/*.js'])
+    .src('./gulpfile.js')
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
 )
 
+gulp.task('tslint', () =>
+  gulp
+    .src('./src/**/*.ts')
+    .pipe(tslint({
+      formatter: "verbose"
+    }))
+    .pipe(tslint.report())
+)

@@ -1,4 +1,4 @@
-import Autocomplete from 'yawe-autocomplete'
+import YaweAutocomplete from 'yawe-autocomplete'
 
 import { $, findParentLink, options, toQueryString, fromQueryString } from './helper'
 import {
@@ -29,7 +29,7 @@ loadFromHash()
 // New Tab support
 $('#newTab').addEventListener('click', (event) => {
   event.preventDefault()
-  window.open(`${options.url}wiki/${$('#search').value}`, '_newtab')
+  window.open(`${options.url}wiki/${$search.value}`, '_newtab')
 })
 
 // Make options link work properly
@@ -42,11 +42,11 @@ $('a[href="options.html"]', $('.dropdown-menu')).addEventListener('click', () =>
 addEventListener('hashchange', loadFromHash)
 
 // Autocomplete
-new Autocomplete($('#search'), getAutocompleteSuggestions) // eslint-disable-line  no-new
+new YaweAutocomplete($('#search'), getAutocompleteSuggestions) // eslint-disable-line  no-new
 
 // Internal wiki link support
 $content.addEventListener('click', (event) => {
-  const target = findParentLink(event.target)
+  const target = findParentLink(<Node>event.target)
   if (target) {
     if (isWikiUrl(target.href)) {
       event.preventDefault()

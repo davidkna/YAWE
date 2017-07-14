@@ -18,7 +18,7 @@ function parseJSON(response) {
 
 // Returns promise with fetched data from url parsed as JSON
 export default function getJSON(url, queryParams = {}) {
-  queryParams.origin = '*' // eslint-disable-line no-param-reassign
+  queryParams['origin'] = '*' // eslint-disable-line no-param-reassign
   return fetch(`${url}?${toQueryString(queryParams)}`)
     .then(checkStatus)
     .then(parseJSON)

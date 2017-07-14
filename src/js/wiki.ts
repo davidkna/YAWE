@@ -1,19 +1,19 @@
-import DOMPurify from 'dompurify'
+const DOMPurify = require('dompurify')
 
 // My Imports
 import { $, options } from './helper'
 import getJSON from './helper/fetch'
 
 export const domElems = {
-  $base: $('base'),
-  $body: $('body'),
-  $search: $('#search'),
-  $content: $('#content'),
-  $loading: $('#loading'),
+  $base: <HTMLBaseElement>$('base'),
+  $body: <HTMLBodyElement>$('body'),
+  $search: <HTMLInputElement>$('#search'),
+  $content: <HTMLDivElement>$('#content'),
+  $loading: <HTMLDivElement>$('#loading'),
 }
 
 // Helpers
-function purify(html) {
+function purify(html: string) {
   return DOMPurify.sanitize(html, {
     RETURN_DOM_FRAGMENT: true,
     RETURN_DOM_IMPORT: true,
@@ -162,7 +162,7 @@ export function articleNameFromUrl(articleUrl) {
     return decodeURIComponent(name.replace(/_/g, ' '))
   }
 
-  function getName() {
+  function getName(articleUrl) {
     const parsedUrl = urlparse(articleUrl)
     const wikiUrl = urlparse(options.url)
 

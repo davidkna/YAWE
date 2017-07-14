@@ -18,10 +18,14 @@ function setVal(el, val) {
   setVal(el, 'custom')
 }
 
+const $content = <HTMLDivElement>$('#content')
+const $form = <HTMLFormElement>$('form', $content)
+const $url = <HTMLInputElement>$('#url', $form)
+
 // Save on submit
-$('form', $('#content')).addEventListener('submit', (event) => {
+$form.addEventListener('submit', (event) => {
   event.preventDefault()
-  let url = http2https($('#url').value)
+  let url = http2https($url.value)
   const theme = getVal($('#theme'))
 
   if (url[url.length - 1] !== '/') {
@@ -46,15 +50,15 @@ $('#theme').addEventListener('change', () => {
 })
 
 // Set initial values
-$('#url').setAttribute('value', options.url)
+$url.setAttribute('value', options.url)
 setVal($('#theme'), options.theme)
 
 // Load theme
 $('link').setAttribute('href', `themes/${options.theme}/style.css`)
 
 // fix url to https on blur
-$('#url').addEventListener('blur', (event) => {
-  $('#url').value = http2https(event.target.value)
+$url.addEventListener('blur', (event) => {
+  $url.value = http2https($url.value)
 })
 
 // New Tab support
