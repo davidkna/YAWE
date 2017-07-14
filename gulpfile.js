@@ -78,7 +78,18 @@ function webpackConfig(enableUglify = false) {
   ]
 
   if (enableUglify) {
-    plugins.push(new UglifyJSPlugin())
+    plugins.push(new UglifyJSPlugin({
+      mangle: {
+        toplevel: true
+      },
+      compress: {
+        toplevel: true,
+        unsafe: true,
+        passes: 3
+      },
+      toplevel: true,
+      ecma: 8
+    }))
     plugins.push(new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
