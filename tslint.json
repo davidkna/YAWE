@@ -3,6 +3,13 @@
       "semicolon": [
           true,
           "never"
+      ],
+      "import-name": false,
+      "function-name": [false],
+      "align": [false],
+      "variable-name": [
+        true,
+        "ban-keywords", "check-format", "allow-pascal-case"
       ]
   },
   "extends": "tslint-config-airbnb"

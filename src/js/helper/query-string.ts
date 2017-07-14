@@ -29,7 +29,7 @@ function encode(k, v) {
 export function toQueryString(obj) {
   return Object
     .keys(obj)
-    .map(k => {
+    .map((k) => {
       const { key, value } = encode(k, obj[k])
       return `${key}=${value}`
     })
