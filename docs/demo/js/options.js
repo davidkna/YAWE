@@ -1,1 +1,155 @@
-function e(e,t=document){return t.querySelector(e)}function t(e){return e.match(/^http/)?e.replace(/^http:/,"https:"):`https://${e}`}function r(e){return e.options[e.selectedIndex].getAttribute("value")}function n(e,t){for(let r=0;r<e.options.length;r+=1)if(e.options[r].value===t)return void(e.selectedIndex=r);n(e,"custom")}const s={theme:"custom",url:"https://en.wikipedia.org/"},a=["cerulean","cosmo","custom","cyborg","darkly","flatly","journal","litera","lumen","lux","materia","minty","pulse","sandstone","simplex","slate","solar","spacelab","superhero","united","yeti"],l=(()=>{const e=localStorage.getItem("settings");if(!e)return localStorage.setItem("settings",JSON.stringify(s)),s;const t=JSON.parse(e);return a.includes(t.theme)||(t.theme=s.theme,localStorage.setItem("settings",JSON.stringify(t))),t})();e("#back").addEventListener("click",e=>{e.preventDefault(),history.back()}),e("#forward").addEventListener("click",e=>{e.preventDefault(),history.forward()}),e(".dropdown").addEventListener("click",e=>{e.preventDefault(),e.target.parentNode.classList.toggle("show");const t=!!e.target.getAttribute("aria-expanded");e.target.setAttribute("aria-expanded",""+!t),e.target.classList.toggle("active")}),e("form",e("#content")).addEventListener("submit",n=>{n.preventDefault();let s=t(e("#url").value);const a=r(e("#theme"));"/"!==s[s.length-1]&&(s+="/"),""===s&&(s="https://en.wikipedia.org/"),localStorage.setItem("settings",JSON.stringify({url:s,theme:a})),location.replace("app.html")}),e("#theme").addEventListener("change",()=>{e("link").setAttribute("href",`themes/${r(e("#theme"))}/style.css`)}),e("#url").setAttribute("value",l.url),n(e("#theme"),l.theme),e("link").setAttribute("href",`themes/${l.theme}/style.css`),e("#url").addEventListener("blur",r=>{e("#url").value=t(r.target.value)}),e("#newTab").addEventListener("click",e=>{e.preventDefault(),window.open(location.href,"_newtab")});
+// Transforms query string to javascript object
+
+
+// Transforms Javascript Object to query string
+
+// Returns first element that matches CSS selector {expr}.
+// Querying can optionally be restricted to {container}’s descendants
+// Source: http://lea.verou.me/2015/04/jquery-considered-harmful/
+function $(expr, container = document) {
+  return container.querySelector(expr)
+}
+
+// Finds first parent DOM element that is a link - if it exists
+
+
+// Transforms http or plain url to https
+function http2https(url) {
+  if (!url.match(/^http/)) {
+    return `https://${url}`
+  }
+
+  return url.replace(/^http:/, 'https:')
+}
+
+// Options to use if none set
+const defaultOptions = {
+  theme: 'custom',
+  url: 'https://en.wikipedia.org/',
+};
+
+const availableThemes = [
+  'cerulean',
+  'cosmo',
+  'custom',
+  'cyborg',
+  'darkly',
+  'flatly',
+  'journal',
+  'litera',
+  'lumen',
+  'lux',
+  'materia',
+  'minty',
+  'pulse',
+  'sandstone',
+  'simplex',
+  'slate',
+  'solar',
+  'spacelab',
+  'superhero',
+  'united',
+  'yeti',
+];
+
+// Returns user settings from localStorage
+function getOptions() {
+  const stored = localStorage.getItem('settings');
+  if (!stored) {
+    localStorage.setItem('settings', JSON.stringify(defaultOptions));
+    return defaultOptions
+  }
+
+  const options = JSON.parse(stored);
+  if (!availableThemes.includes(options.theme)) {
+    options.theme = defaultOptions.theme;
+    localStorage.setItem('settings', JSON.stringify(options));
+  }
+
+  return options
+}
+
+const options = getOptions();
+
+// Back/Forward support
+$('#back').addEventListener('click', (event) => {
+  event.preventDefault();
+  history.back();
+});
+
+$('#forward').addEventListener('click', (event) => {
+  event.preventDefault();
+  history.forward();
+});
+
+// Minimal dropdown menu
+$('.dropdown').addEventListener('click', (event) => {
+  event.preventDefault();
+  event.target.parentNode.classList.toggle('show');
+
+  const expanded = Boolean(event.target.getAttribute('aria-expanded'));
+  event.target.setAttribute('aria-expanded', (!expanded).toString());
+  event.target.classList.toggle('active');
+});
+
+// get <select> value
+function getVal(el) {
+  return el.options[el.selectedIndex].getAttribute('value')
+}
+
+// set <select> value
+function setVal(el, val) {
+  for (let i = 0; i < el.options.length; i += 1) {
+    if (el.options[i].value === val) {
+      el.selectedIndex = i; // eslint-disable-line no-param-reassign
+      return
+    }
+  }
+
+  setVal(el, 'custom');
+}
+
+// Save on submit
+$('form', $('#content')).addEventListener('submit', (event) => {
+  event.preventDefault();
+  let url = http2https($('#url').value);
+  const theme = getVal($('#theme'));
+
+  if (url[url.length - 1] !== '/') {
+    url += '/';
+  }
+
+  if (url === '') {
+    url = 'https://en.wikipedia.org/';
+  }
+
+  localStorage.setItem('settings', JSON.stringify({
+    url,
+    theme,
+  }));
+
+  location.replace('app.html');
+});
+
+// Theme preview
+$('#theme').addEventListener('change', () => {
+  $('link').setAttribute('href', `themes/${getVal($('#theme'))}/style.css`);
+});
+
+// Set initial values
+$('#url').setAttribute('value', options.url);
+setVal($('#theme'), options.theme);
+
+// Load theme
+$('link').setAttribute('href', `themes/${options.theme}/style.css`);
+
+// fix url to https on blur
+$('#url').addEventListener('blur', (event) => {
+  $('#url').value = http2https(event.target.value);
+});
+
+// New Tab support
+$('#newTab').addEventListener('click', (event) => {
+  event.preventDefault();
+  window.open(location.href, '_newtab');
+});
