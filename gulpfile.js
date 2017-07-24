@@ -1,4 +1,4 @@
-/* eslint "comma-dangle": ["error", { "functions": "never" }]*/
+/* eslint "comma-dangle": ["error", { "functions": "never" }] */
 const gulp = require('gulp')
 const del = require('del')
 
