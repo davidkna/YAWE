@@ -42,20 +42,17 @@ gulp.task('common', [
 gulp.task('manifest', () =>
   gulp
     .src('./src/manifest.json')
-    .pipe(gulp.dest('dist'))
-)
+    .pipe(gulp.dest('dist')))
 
 gulp.task('html', () =>
   gulp
     .src(['./src/html/*.html'])
-    .pipe(gulp.dest('dist'))
-)
+    .pipe(gulp.dest('dist')))
 
 gulp.task('themes', () =>
   gulp
     .src(['./node_modules/yawe-themes/themes/**/*'])
-    .pipe(gulp.dest('dist/themes'))
-)
+    .pipe(gulp.dest('dist/themes')))
 
 gulp.task('img', () =>
   gulp
@@ -66,8 +63,7 @@ gulp.task('img', () =>
       './src/images/icon_48x48.png',
       './src/images/icon_128x128.png'
     ])
-    .pipe(gulp.dest('dist/images'))
-)
+    .pipe(gulp.dest('dist/images')))
 
 function webpackConfig(enableUglify = false) {
   const plugins = [
@@ -137,8 +133,7 @@ gulp.task('eslint', () =>
     .src('./gulpfile.js')
     .pipe(eslint())
     .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-)
+    .pipe(eslint.failAfterError()))
 
 gulp.task('tslint', () =>
   gulp
@@ -146,5 +141,4 @@ gulp.task('tslint', () =>
     .pipe(tslint({
       formatter: 'verbose'
     }))
-    .pipe(tslint.report())
-)
+    .pipe(tslint.report()))
