@@ -58,9 +58,6 @@ section {
 h1 {
   margin:.67em 0
 }
-pre {
-  font-family:monospace,monospace
-}
 a {
   background-color:transparent;
   -webkit-text-decoration-skip:objects;
@@ -2244,7 +2241,7 @@ div.awesomplete.show>ul {
   background-size:1rem 1rem
 }
 .progress-bar-animated {
-  animation:progress-bar-stripes 1s linear infinite
+  animation:1s linear infinite progress-bar-stripes
 }
 .align-baseline {
   vertical-align:baseline!important
@@ -2480,7 +2477,6 @@ a.bg-inverse:hover {
   align-content:stretch!important
 }
 .align-self-auto {
-  -ms-grid-row-align:auto!important;
   align-self:auto!important
 }
 .align-self-start {
@@ -2490,14 +2486,12 @@ a.bg-inverse:hover {
   align-self:flex-end!important
 }
 .align-self-center {
-  -ms-grid-row-align:center!important;
   align-self:center!important
 }
 .align-self-baseline {
   align-self:baseline!important
 }
 .align-self-stretch {
-  -ms-grid-row-align:stretch!important;
   align-self:stretch!important
 }
 @media (min-width:576px) {
@@ -2580,7 +2574,6 @@ a.bg-inverse:hover {
     align-content:stretch!important
   }
   .align-self-sm-auto {
-    -ms-grid-row-align:auto!important;
     align-self:auto!important
   }
   .align-self-sm-start {
@@ -2590,14 +2583,12 @@ a.bg-inverse:hover {
     align-self:flex-end!important
   }
   .align-self-sm-center {
-    -ms-grid-row-align:center!important;
     align-self:center!important
   }
   .align-self-sm-baseline {
     align-self:baseline!important
   }
   .align-self-sm-stretch {
-    -ms-grid-row-align:stretch!important;
     align-self:stretch!important
   }
 }
@@ -3393,7 +3384,6 @@ a.bg-inverse:hover {
     align-content:stretch!important
   }
   .align-self-md-auto {
-    -ms-grid-row-align:auto!important;
     align-self:auto!important
   }
   .align-self-md-start {
@@ -3403,14 +3393,12 @@ a.bg-inverse:hover {
     align-self:flex-end!important
   }
   .align-self-md-center {
-    -ms-grid-row-align:center!important;
     align-self:center!important
   }
   .align-self-md-baseline {
     align-self:baseline!important
   }
   .align-self-md-stretch {
-    -ms-grid-row-align:stretch!important;
     align-self:stretch!important
   }
   .float-md-left {
@@ -3826,7 +3814,6 @@ a.bg-inverse:hover {
     align-content:stretch!important
   }
   .align-self-lg-auto {
-    -ms-grid-row-align:auto!important;
     align-self:auto!important
   }
   .align-self-lg-start {
@@ -3836,14 +3823,12 @@ a.bg-inverse:hover {
     align-self:flex-end!important
   }
   .align-self-lg-center {
-    -ms-grid-row-align:center!important;
     align-self:center!important
   }
   .align-self-lg-baseline {
     align-self:baseline!important
   }
   .align-self-lg-stretch {
-    -ms-grid-row-align:stretch!important;
     align-self:stretch!important
   }
   .float-lg-left {
@@ -4259,7 +4244,6 @@ a.bg-inverse:hover {
     align-content:stretch!important
   }
   .align-self-xl-auto {
-    -ms-grid-row-align:auto!important;
     align-self:auto!important
   }
   .align-self-xl-start {
@@ -4269,14 +4253,12 @@ a.bg-inverse:hover {
     align-self:flex-end!important
   }
   .align-self-xl-center {
-    -ms-grid-row-align:center!important;
     align-self:center!important
   }
   .align-self-xl-baseline {
     align-self:baseline!important
   }
   .align-self-xl-stretch {
-    -ms-grid-row-align:stretch!important;
     align-self:stretch!important
   }
   .float-xl-left {
