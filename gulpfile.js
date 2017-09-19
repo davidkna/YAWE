@@ -67,9 +67,9 @@ gulp.task('img', () =>
 
 function webpackConfig(enableUglify = false) {
   const plugins = [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'commons',
-      filename: 'commons.js'
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
     })
   ]
 
@@ -85,10 +85,6 @@ function webpackConfig(enableUglify = false) {
       },
       toplevel: true,
       ecma: 8
-    }))
-    plugins.push(new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
     }))
   }
 
