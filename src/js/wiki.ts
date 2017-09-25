@@ -1,4 +1,4 @@
-const DOMPurify = require('dompurify')
+import DOMPurify from 'dompurify'
 
 // My Imports
 import { $, options } from './helper'
