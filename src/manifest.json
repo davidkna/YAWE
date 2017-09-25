@@ -7,7 +7,7 @@
 	"applications": {
 		"gecko": {
 			"id": "jid0-DPhEBG7AOfT3WFrfbEc8TplXMmY@jetpack",
-      "strict_min_version": "52.0"
+      "strict_min_version": "55.0"
 		}
 	},
 	"icons": {
@@ -25,6 +25,6 @@
 		"default_popup": "index.html"
 	},
 	"manifest_version": 2,
-	"minimum_chrome_version": "57",
-	"minimum_opera_version": "44"
+	"minimum_chrome_version": "60",
+	"minimum_opera_version": "47"
 }
