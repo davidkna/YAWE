@@ -75,16 +75,20 @@ function webpackConfig(enableUglify = false) {
 
   if (enableUglify) {
     plugins.push(new UglifyJSPlugin({
-      mangle: {
-        toplevel: true
-      },
-      compress: {
+      parallel: true,
+      sourceMap: true,
+      uglifyOptions: {
+        mangle: {
+          toplevel: true
+        },
+        compress: {
+          toplevel: true,
+          unsafe: true,
+          passes: 3
+        },
         toplevel: true,
-        unsafe: true,
-        passes: 3
-      },
-      toplevel: true,
-      ecma: 8
+        ecma: 8
+      }
     }))
   }
 

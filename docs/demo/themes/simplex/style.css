@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 @font-face {
   font-family:fontello;
   src:url(../fontello.woff2) format("woff2");
@@ -449,7 +448,7 @@ mark {
 .blockquote {
   padding:.5rem 1rem;
   margin-bottom:1rem;
-  font-size:1.01562rem;
+  font-size:1.01563rem;
   border-left:.25rem solid #ddd
 }
 .blockquote-footer {
@@ -723,7 +722,7 @@ table {
   cursor:not-allowed
 }
 select.form-control:not([size]):not([multiple]) {
-  height:calc(2.01562rem + 2px)
+  height:calc(2.01563rem + 2px)
 }
 select.form-control:focus::-ms-value {
   color:#444;
