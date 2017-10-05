@@ -17,7 +17,7 @@ gulp.task('release:chrome', ['clean'], () => {
   gulp.run('min')
 })
 gulp.task('release:opera', ['clean'], () => {
-  gulp.run('nomin')
+  gulp.run('min')
 })
 gulp.task('release:firefox', ['clean'], () => {
   gulp.run('nomin')
