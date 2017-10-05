@@ -2,7 +2,7 @@
 	"name": "YAWE (Yet Another Wiki Extension)",
 	"short_name": "YAWE",
   "author": "David Knaack",
-	"version": "4.2.3",
+	"version": "4.2.4",
 	"description": "View and Search for Wikipedia Articles",
 	"applications": {
 		"gecko": {
