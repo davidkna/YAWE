@@ -15,8 +15,8 @@ $('#forward').addEventListener('click', (event) => {
 $('.dropdown').addEventListener('click', (event) => {
   event.preventDefault()
   const target = <HTMLElement>event.target
-  const parent = <HTMLDivElement>target.parentNode
-  parent.classList.toggle('show')
+  const parent = <HTMLDivElement>target.parentElement
+  parent.querySelector('.dropdown-menu').classList.toggle('show')
 
   const expanded = Boolean(target.getAttribute('aria-expanded'))
   target.setAttribute('aria-expanded', (!expanded).toString())
