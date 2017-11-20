@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Neucha|Cabin+Sketch);
 @font-face {
   font-family:fontello;
   src:url(../fontello.woff2) format("woff2");
@@ -196,6 +196,10 @@ pre,
 samp {
   font-size:1em
 }
+pre {
+  overflow:auto;
+  -ms-overflow-style:scrollbar
+}
 figure {
   margin:0 0 1rem
 }
@@ -216,9 +220,6 @@ select,
 summary,
 textarea {
   touch-action:manipulation
-}
-table {
-  border-collapse:collapse
 }
 caption {
   padding-top:.75rem;
@@ -506,15 +507,6 @@ kbd kbd {
   padding:0;
   font-size:100%;
   font-weight:700
-}
-pre {
-  overflow:auto;
-  -ms-overflow-style:scrollbar;
-  display:block;
-  margin-top:0;
-  margin-bottom:1rem;
-  font-size:90%;
-  color:#212529
 }
 pre .mwe-math-element,
 pre .texhtml,
@@ -811,7 +803,6 @@ table {
   background-image:none;
   background-clip:padding-box;
   border:1px solid #ced4da;
-  border-radius:.25rem;
   transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s
 }
 .form-control::-ms-expand {
@@ -932,7 +923,6 @@ select.form-control-lg:not([size]):not([multiple]) {
   color:#868e96
 }
 .form-check-label {
-  padding-left:1.25rem;
   margin-bottom:0
 }
 .form-check-input {
@@ -1158,7 +1148,6 @@ select.form-control-lg:not([size]):not([multiple]) {
   padding:.375rem .75rem;
   font-size:1rem;
   line-height:1.5;
-  border-radius:.25rem;
   transition:background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
 }
 .btn:focus,
@@ -1291,7 +1280,6 @@ fieldset[disabled] a.btn {
   box-shadow:0 0 0 .2rem rgba(23,162,184,.5)
 }
 .btn-warning {
-  color:#111;
   background-color:#ffc107;
   border-color:#ffc107
 }
@@ -1727,8 +1715,7 @@ div.awesomplete>ul {
   list-style:none;
   background-color:#fff;
   background-clip:padding-box;
-  border:1px solid rgba(0,0,0,.15);
-  border-radius:.25rem
+  border:1px solid rgba(0,0,0,.15)
 }
 .dropup .dropdown-menu,
 .dropup div.awesomplete>ul {
@@ -1822,9 +1809,7 @@ div.awesomplete>ul.show {
   margin-bottom:-1px
 }
 .nav-tabs .nav-link {
-  border:1px solid transparent;
-  border-top-left-radius:.25rem;
-  border-top-right-radius:.25rem
+  border:1px solid transparent
 }
 .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
@@ -2237,8 +2222,7 @@ div.awesomplete>ul.show {
   word-wrap:break-word;
   background-color:#fff;
   background-clip:border-box;
-  border:1px solid rgba(0,0,0,.125);
-  border-radius:.25rem
+  border:1px solid rgba(0,0,0,.125)
 }
 .card>hr,
 .thumb>hr {
@@ -2457,8 +2441,7 @@ div.awesomplete>ul.show {
   position:absolute;
   top:0;
   right:0;
-  padding:.75rem 1.25rem;
-  color:inherit
+  padding:.75rem 1.25rem
 }
 .alert-primary {
   color:#004085;
@@ -4987,18 +4970,338 @@ div.awesomplete>ul>li[aria-selected=true]:hover {
   outline:0;
   background-color:#007bff
 }
+.navbar {
+  border-style:solid;
+  border-radius:25px 25px 55px 5px/5px 55px 25px 25px
+}
+.navbar.bg-light {
+  border-color:#343a40
+}
+.navbar.fixed-top {
+  border-radius:0 25px 225px 0/25px 0 25px 255px;
+  border-width:0 0 2px
+}
+.navbar.fixed-bottom {
+  border-radius:255px 25px 0/25px 225px 25px 0;
+  border-width:2px 0 0
+}
+.navbar-brand {
+  font-family:inherit;
+  font-weight:400;
+  text-decoration:none
+}
+.btn {
+  border-radius:.25rem;
+  text-decoration:none
+}
+.btn-warning {
+  color:#fff
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"
+}
+blockquote {
+  border-radius:15px 27px 25px 25px/25px 25px 305px 635px
+}
+table td,
+table th {
+  background-color:#fff
+}
+.table-bordered,
+table {
+  background-color:#343a40;
+  border-collapse:separate;
+  border-spacing:0;
+  border-radius:5px 25px/25px 5px;
+  overflow:hidden
+}
+.table-bordered td,
+.table-bordered th,
+table td,
+table th {
+  border-radius:5px 5px 25px 4px/5px 4px 3px 5px
+}
+.table-bordered .table-success td,
+.table-bordered .table-success th,
+.table-bordered .table-success:hover td,
+.table-bordered .table-success:hover th,
+table .table-success td,
+table .table-success th,
+table .table-success:hover td,
+table .table-success:hover th {
+  background-color:#28a745;
+  color:#fff
+}
+.table-bordered .table-info td,
+.table-bordered .table-info th,
+.table-bordered .table-info:hover td,
+.table-bordered .table-info:hover th,
+table .table-info td,
+table .table-info th,
+table .table-info:hover td,
+table .table-info:hover th {
+  background-color:#17a2b8;
+  color:#fff
+}
+.table-bordered .table-warning td,
+.table-bordered .table-warning th,
+.table-bordered .table-warning:hover td,
+.table-bordered .table-warning:hover th,
+table .table-warning td,
+table .table-warning th,
+table .table-warning:hover td,
+table .table-warning:hover th {
+  background-color:#ffc107;
+  color:#fff
+}
+.table-bordered .table-danger td,
+.table-bordered .table-danger th,
+.table-bordered .table-danger:hover td,
+.table-bordered .table-danger:hover th,
+table .table-danger td,
+table .table-danger th,
+table .table-danger:hover td,
+table .table-danger:hover th {
+  background-color:#dc3545;
+  color:#fff
+}
+.form-control,
+input {
+  border-radius:.25rem
+}
+select,
+select.form-control,
+textarea,
+textarea.form-control {
+  border-radius:.3rem!important
+}
+[type=checkbox],
+[type=radio] {
+  position:relative;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  cursor:pointer
+}
+[type=checkbox]:before {
+  content:"";
+  position:absolute;
+  left:-1.2em;
+  top:-.9em;
+  display:inline-block;
+  width:15px;
+  height:16px;
+  border:2px solid #343a40;
+  border-radius:2px 8px 2px 4px/5px 3px
+}
+[type=checkbox]:checked:after {
+  content:"x";
+  position:absolute;
+  left:4px;
+  top:-7px;
+  font-size:1.5rem;
+  color:#343a40
+}
+[type=checkbox]:disabled:before,
+[type=radio]:disabled:before {
+  border:2px solid #adb5bd
+}
+[type=radio]:before {
+  content:"";
+  position:absolute;
+  left:-1.2em;
+  top:-.9em;
+  display:inline-block;
+  width:16px;
+  height:16px;
+  border:2px solid #343a40;
+  border-radius:50% 45% 40% 50%/40% 50% 50% 45%
+}
+[type=radio]:checked:before {
+  background-color:#343a40
+}
+.form-check-label {
+  padding-left:2.5rem
+}
+.dropdown-menu,
+div.awesomplete>ul {
+  border-radius:555px 25px 25px/25px 25px 25px 555px;
+  overflow:hidden
+}
+.dropdown-divider {
+  border-top-width:2px
+}
+.list-group {
+  background-color:#343a40;
+  border:2px solid #343a40;
+  border-radius:45px 15px 35px 5px/15px 5px 15px 65px;
+  overflow:hidden
+}
+.list-group-item {
+  border-left:none;
+  border-right:none;
+  border-top:2px solid #343a40;
+  border-radius:255px 5px 225px/25px 225px 25px 255px
+}
+.list-group-item:first-child {
+  border-top:none
+}
+.list-group-item:last-child {
+  border-bottom:none
+}
+.list-group-item:hover .list-group-item-heading {
+  color:#fff
+}
+.dropdown-item,
+.list-group-item,
+.nav-link,
+.page-link {
+  text-decoration:none
+}
+.nav-tabs .nav-link {
+  border-radius:45px 15px 225px 5px/25px 225px 25px 255px
+}
+.breadcrumb {
+  border:2px solid #343a40
+}
+.pagination .page-link {
+  border-radius:425px 255px 25px 25px/25px 25px 5px
+}
+.progress {
+  border:2px solid #343a40;
+  margin-top:277.5px
+}
+.badge-pill {
+  border-radius:7rem 8rem 8rem/4rem 5rem 6rem 6rem
+}
+.badge-warning {
+  color:#fff
+}
+.alert-dismissible .close {
+  color:transparent
+}
+.alert-dismissible .close:before {
+  right:1rem;
+  top:.8rem
+}
+.alert-dismissible.alert-success {
+  border-color:#28a745
+}
+.alert-dismissible.alert-success,
+.alert-dismissible.alert-success .alert-link,
+.alert-dismissible.alert-success .close:before {
+  color:#28a745
+}
+.alert-dismissible.alert-info,
+.alert-dismissible.dablink,
+.alert-dismissible.hatnote {
+  border-color:#17a2b8
+}
+.alert-dismissible.alert-info,
+.alert-dismissible.alert-info .alert-link,
+.alert-dismissible.alert-info .close:before,
+.alert-dismissible.dablink,
+.alert-dismissible.dablink .alert-link,
+.alert-dismissible.dablink .close:before,
+.alert-dismissible.hatnote,
+.alert-dismissible.hatnote .alert-link,
+.alert-dismissible.hatnote .close:before {
+  color:#17a2b8
+}
+.alert-dismissible.alert-warning {
+  border-color:#ffc107
+}
+.alert-dismissible.alert-warning,
+.alert-dismissible.alert-warning .alert-link,
+.alert-dismissible.alert-warning .close:before {
+  color:#ffc107
+}
+.alert-dismissible.alert-danger {
+  border-color:#dc3545
+}
+.alert-dismissible.alert-danger,
+.alert-dismissible.alert-danger .alert-link,
+.alert-dismissible.alert-danger .close:before {
+  color:#dc3545
+}
+.card,
+.thumb {
+  border-color:transparent;
+  border-radius:5px/25px 25px 25px 5px;
+  overflow:hidden
+}
+.card-outline-danger,
+.card-outline-info,
+.card-outline-primary,
+.card-outline-success,
+.card-outline-warning {
+  border-width:2px
+}
+.card-header {
+  border-bottom-width:2px
+}
+.card-footer {
+  border-top-width:2px
+}
+.jumbotron {
+  border:2px solid #343a40
+}
+.modal-content {
+  border-radius:15px 5px 5px 25px/5px 25px 25px 5px
+}
+.popover {
+  padding:0;
+  border-radius:45px 85px 15px 25px/15px 10px 35px 555px
+}
+.popover-title {
+  border-bottom:2px solid #343a40
+}
+.popover.bs-tether-element-attached-right::before,
+.popover.popover-left::before {
+  right:-13px
+}
+.popover.bs-tether-element-attached-bottom::before,
+.popover.popover-top::before {
+  bottom:-13px
+}
+.popover.bs-tether-element-attached-top::before,
+.popover.popover-bottom::before {
+  top:-13px
+}
+.popover.bs-tether-element-attached-left::before,
+.popover.popover-right::before {
+  left:-13px
+}
+pre {
+  display:block;
+  margin-top:0;
+  margin-bottom:1rem;
+  font-size:90%;
+  color:#212529;
+  border:2px solid #343a40;
+  border-radius:15px 5px 5px 25px/5px 25px 25px 5px
+}
+.close,
+.close:active,
+.close:focus,
+.close:hover {
+  position:relative;
+  opacity:1
+}
+.close:active:before,
+.close:before,
+.close:focus:before,
+.close:hover:before {
+  position:absolute;
+  content:"X";
+  color:#343a40
+}
 body {
-  -webkit-font-smoothing:antialiased;
   margin:0
-}
-.alert,
-.dablink,
-.hatnote {
-  border:none
-}
-.progress .progress-bar {
-  font-size:8px;
-  line-height:8px
 }
 .mwe-math-element,
 .texhtml,
@@ -5075,9 +5378,6 @@ summary h2 {
 .hlist.navbar.mini,
 .mw-editsection {
   display:none
-}
-.progress {
-  margin-top:277.5px
 }
 .progress-bar {
   width:100%
