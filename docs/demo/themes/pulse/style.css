@@ -5048,10 +5048,6 @@ table .thead-dark th {
 .badge-warning {
   color:#fff
 }
-.progress {
-  height:8px;
-  margin-top:277.5px
-}
 .list-group-item {
   color:rgba(255,255,255,.8)
 }
@@ -5095,7 +5091,6 @@ img.tex {
   }
 }
 #loading {
-  height:600px;
   cursor:progress
 }
 #search {
@@ -5134,6 +5129,7 @@ summary h2 {
   padding-top:0;
   padding-bottom:0
 }
+#loading,
 #yawe {
   display:flex;
   align-items:center;
@@ -5148,8 +5144,9 @@ summary h2 {
 .mw-editsection {
   display:none
 }
-.progress-bar {
-  width:100%
+.progress {
+  height:8px;
+  width:100vw
 }
 .loading {
   overflow:hidden

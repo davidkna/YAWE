@@ -36,7 +36,7 @@
   "dependencies": {
     "dompurify": "1.0.2",
     "yawe-autocomplete": "1.3.6",
-    "yawe-themes": "1.2.3"
+    "yawe-themes": "1.2.4"
   },
   "scripts": {
     "gulp": "gulp "

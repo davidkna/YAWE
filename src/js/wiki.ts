@@ -46,7 +46,7 @@ function parseArticle(response, articleName) {
 
       $details.classList.add('card')
       $summary.classList.add('card-header')
-      $body.classList.add('card-block')
+      $body.classList.add('card-body')
 
       $body.appendChild(content)
 
@@ -81,7 +81,7 @@ function switchToLoadingView(article) {
 
   $base.setAttribute('href', `${options.url}wiki/${article}`)
   $content.style.display = 'none'
-  $loading.style.display = 'block'
+  $loading.style.display = 'flex'
   $body.classList.add('loading')
   $content.textContent = ''
 }

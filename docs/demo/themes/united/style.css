@@ -5015,7 +5015,6 @@ img.tex {
   }
 }
 #loading {
-  height:600px;
   cursor:progress
 }
 #search {
@@ -5054,6 +5053,7 @@ summary h2 {
   padding-top:0;
   padding-bottom:0
 }
+#loading,
 #yawe {
   display:flex;
   align-items:center;
@@ -5069,10 +5069,7 @@ summary h2 {
   display:none
 }
 .progress {
-  margin-top:277.5px
-}
-.progress-bar {
-  width:100%
+  width:100vw
 }
 .loading {
   overflow:hidden
