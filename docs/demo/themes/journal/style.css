@@ -5083,7 +5083,7 @@ summary h2 {
   align-items:center;
   justify-content:center;
   text-align:center;
-  height:31rem
+  height:calc(100vh - 4rem)
 }
 #content {
   overflow:auto
