@@ -1,6 +1,6 @@
 {
   "name": "yawe",
-  "version": "4.2.5",
+  "version": "4.2.6",
   "description": "View and search for wikipedia articles.",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/davidkna/YAWE#readme",
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "devDependencies": {
     "@types/node": "^8.0.13",
