@@ -26,5 +26,6 @@
 	},
 	"manifest_version": 2,
 	"minimum_chrome_version": "62",
-	"minimum_opera_version": "49"
+	"minimum_opera_version": "49",
+	"content_security_policy": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src *; media-src *; connect-src *"
 }
