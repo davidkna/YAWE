@@ -65,12 +65,6 @@ function parseArticle(response, articleName) {
   return fragment
 }
 
-function urlparse(url) {
-  const a = document.createElement('a')
-  a.href = url
-  return a
-}
-
 function switchToLoadingView(article) {
   const {
     $base,
@@ -139,8 +133,8 @@ export function viewArticle(article) {
 }
 
 export function isWikiUrl(testUrl) {
-  const parsedUrl = urlparse(testUrl)
-  const wikiUrl = urlparse(options.url)
+  const parsedUrl = new URL(testUrl)
+  const wikiUrl = new URL(options.url)
 
   if (!/^https?:$/.test(parsedUrl.protocol)) return false
   if (parsedUrl.host) {
@@ -163,8 +157,8 @@ export function articleNameFromUrl(articleUrl) {
   }
 
   function getName(articleUrl) {
-    const parsedUrl = urlparse(articleUrl)
-    const wikiUrl = urlparse(options.url)
+    const parsedUrl = new URL(articleUrl)
+    const wikiUrl = new URL(options.url)
 
     if (parsedUrl.pathname.startsWith('../wiki/')) {
       return parsedUrl.pathname.substring(8)
