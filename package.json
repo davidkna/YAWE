@@ -16,7 +16,7 @@
     "node": ">=8"
   },
   "devDependencies": {
-    "@types/node": "^8.0.13",
+    "@types/node": "^9.3.0",
     "autoprefixer": "^7.1.2",
     "del": "^3.0.0",
     "eslint": "^4.7.2",
