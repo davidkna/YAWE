@@ -8,7 +8,6 @@ const tslint = require('gulp-tslint')
 
 // Webpack
 const webpack = require('webpack')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path')
 
 gulp.task('clean', callback => del('dist/', callback))
@@ -74,7 +73,7 @@ function webpackConfig(enableUglify = false) {
   ]
 
   if (enableUglify) {
-    plugins.push(new UglifyJSPlugin({
+    plugins.push(new webpack.optimize.UglifyJsPlugin({
       parallel: true,
       sourceMap: true,
       uglifyOptions: {

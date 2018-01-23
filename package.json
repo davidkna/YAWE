@@ -30,8 +30,7 @@
     "tslint": "^5.5.0",
     "tslint-config-airbnb": "^5.2.1",
     "typescript": "^2.4.1",
-    "uglifyjs-webpack-plugin": "1.1.6",
-    "webpack": "^3.2.0"
+    "webpack": "4.0.0-alpha.5"
   },
   "dependencies": {
     "dompurify": "1.0.2",
