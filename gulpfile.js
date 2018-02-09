@@ -8,6 +8,7 @@ const tslint = require('gulp-tslint')
 
 // Webpack
 const webpack = require('webpack')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path')
 
 gulp.task('clean', callback => del('dist/', callback))
@@ -64,33 +65,24 @@ gulp.task('img', () =>
     ])
     .pipe(gulp.dest('dist/images')))
 
-function webpackConfig(enableUglify = false) {
-  const plugins = [
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    })
-  ]
-
-  if (enableUglify) {
-    plugins.push(new webpack.optimize.UglifyJsPlugin({
-      parallel: true,
-      sourceMap: true,
-      uglifyOptions: {
-        mangle: {
-          toplevel: true
-        },
-        compress: {
-          toplevel: true,
-          unsafe: true,
-          passes: 3
-        },
-        toplevel: true,
-        ecma: 8
-      }
-    }))
+const uglifyOptions = {
+  parallel: true,
+  sourceMap: true,
+  uglifyOptions: {
+    mangle: {
+      toplevel: true
+    },
+    compress: {
+      toplevel: true,
+      unsafe: true,
+      passes: 3
+    },
+    toplevel: true,
+    ecma: 8
   }
+}
 
+function webpackConfig(enableUglify = false) {
   return {
     entry: {
       app: './src/js/app.ts',
@@ -104,12 +96,17 @@ function webpackConfig(enableUglify = false) {
       extensions: ['.ts', '.tsx', '.js']
     },
     module: {
-      loaders: [
+      rules: [
         // all files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'
         { test: /\.tsx?$/, loader: 'ts-loader' }
       ]
     },
-    plugins
+    optimization: {
+      minimizer: [
+        new UglifyJSPlugin(uglifyOptions)
+      ]
+    },
+    mode: enableUglify ? 'production' : 'development'
   }
 }
 
