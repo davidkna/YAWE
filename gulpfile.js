@@ -102,11 +102,10 @@ function webpackConfig(enableUglify = false) {
       ]
     },
     optimization: {
-      minimizer: [
-        new UglifyJSPlugin(uglifyOptions)
-      ]
+      minimize: enableUglify,
+      minimizer: [new UglifyJSPlugin(uglifyOptions)]
     },
-    mode: enableUglify ? 'production' : 'development'
+    mode: 'production'
   }
 }
 
