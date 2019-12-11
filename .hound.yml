@@ -1,5 +1,0 @@
-javascript:
-  enabled: false
-eslint:
-  config_file: .eslintrc
-  enabled: true

@@ -1,0 +1,49 @@
+[package]
+name = "yawe"
+version = "0.1.0"
+authors = ["David Knaack"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[profile.release]
+lto = true
+
+[dependencies]
+console_error_panic_hook = "0.1.6"
+failure = "0.1"
+futures-preview = { version = "0.3.0-alpha.19", features = ["compat", "io-compat"] }
+serde_derive = "1"
+serde_urlencoded = "0.6.1"
+serde_json = "1"
+serde = "1"
+yew = { path = "../yew" }
+futures = "0.1.20"
+wasm-bindgen = { version = "0.2.48", features = ["serde-serialize"]  }
+js-sys = "0.3.25"
+wasm-bindgen-futures = "0.4.1"
+wee_alloc = "0.4.4"
+
+
+[dependencies.web-sys]
+version = "0.3.25"
+features = [
+    "AbortController",
+    "AbortSignal",
+    "Headers",
+    "ObserverCallback",
+    "ReferrerPolicy",
+    "Request",
+    "RequestCache",
+    "RequestCredentials",
+    "RequestInit",
+    "RequestMode",
+    "RequestRedirect",
+    "Response",
+    "Window",
+]
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+
