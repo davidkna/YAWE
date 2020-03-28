@@ -6,10 +6,6 @@ mod autocomplete_service;
 mod utils;
 
 use wasm_bindgen::prelude::*;
-use wee_alloc;
-
-#[global_allocator]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 // This is the entry point for the web app
 #[wasm_bindgen]
