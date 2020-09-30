@@ -1,6 +1,4 @@
-const DOMPurify = require('dompurify')
-
-// My Imports
+import DOMPurify from 'dompurify'
 import { $, options } from './helper'
 import getJSON from './helper/fetch'
 
@@ -66,12 +64,7 @@ function parseArticle(response, articleName) {
 }
 
 function switchToLoadingView(article) {
-  const {
-    $base,
-    $body,
-    $content,
-    $loading,
-  } = domElems
+  const { $base, $body, $content, $loading } = domElems
 
   $base.setAttribute('href', `${options.url}wiki/${article}`)
   $content.style.display = 'none'
@@ -81,11 +74,7 @@ function switchToLoadingView(article) {
 }
 
 function switchToArticleView(domElement) {
-  const {
-    $body,
-    $content,
-    $loading,
-  } = domElems
+  const { $body, $content, $loading } = domElems
   $body.classList.remove('loading')
   $content.appendChild(domElement)
   $content.style.display = 'block'
@@ -104,15 +93,14 @@ function getArticle(article) {
     redirect: 'yes',
   }
 
-  return getJSON(`${options.url}w/api.php`, wikiOptions)
-    .then((response) => {
-      if (response.error) {
-        const error = new Error(response.error.info)
-        throw error
-      }
+  return getJSON(`${options.url}w/api.php`, wikiOptions).then((response) => {
+    if (response.error) {
+      const error = new Error(response.error.info)
+      throw error
+    }
 
-      return response
-    })
+    return response
+  })
 }
 
 function showError(msg) {
@@ -127,9 +115,9 @@ export function viewArticle(article) {
   switchToLoadingView(article)
 
   getArticle(article)
-    .then(response => parseArticle(response, article))
+    .then((response) => parseArticle(response, article))
     .catch(showError)
-    .then(domElement => switchToArticleView(domElement))
+    .then((domElement) => switchToArticleView(domElement))
 }
 
 export function isWikiUrl(testUrl) {
@@ -156,8 +144,8 @@ export function articleNameFromUrl(articleUrl) {
     return decodeURIComponent(name.replace(/_/g, ' '))
   }
 
-  function getName(articleUrl) {
-    const parsedUrl = new URL(articleUrl)
+  function getName(url) {
+    const parsedUrl = new URL(url)
     const wikiUrl = new URL(options.url)
 
     if (parsedUrl.pathname.startsWith('../wiki/')) {
@@ -183,6 +171,5 @@ export function getAutocompleteSuggestions(query) {
     limit: 10,
   }
 
-  return getJSON(`${options.url}w/api.php`, ajaxOptions)
-    .then(response => response[1])
+  return getJSON(`${options.url}w/api.php`, ajaxOptions).then((response) => response[1])
 }

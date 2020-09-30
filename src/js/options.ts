@@ -36,10 +36,13 @@ $form.addEventListener('submit', (event) => {
     url = 'https://en.wikipedia.org/'
   }
 
-  localStorage.setItem('settings', JSON.stringify({
-    url,
-    theme,
-  }))
+  localStorage.setItem(
+    'settings',
+    JSON.stringify({
+      url,
+      theme,
+    }),
+  )
 
   location.replace('app.html')
 })
@@ -57,7 +60,7 @@ setVal($('#theme'), options.theme)
 $('link').setAttribute('href', `themes/${options.theme}/style.css`)
 
 // fix url to https on blur
-$url.addEventListener('blur', (event) => {
+$url.addEventListener('blur', () => {
   $url.value = http2https($url.value)
 })
 

@@ -1,13 +1,7 @@
 import YaweAutocomplete from 'yawe-autocomplete'
 
 import { $, findParentLink, options, toQueryString, fromQueryString } from './helper'
-import {
-  articleNameFromUrl,
-  domElems,
-  isWikiUrl,
-  viewArticle,
-  getAutocompleteSuggestions,
-} from './wiki'
+import { articleNameFromUrl, domElems, isWikiUrl, viewArticle, getAutocompleteSuggestions } from './wiki'
 
 import './navigation'
 

@@ -26,9 +26,8 @@ function encode(k, v) {
 }
 
 // Transforms Javascript Object to query string
-export function toQueryString(obj) {
-  return Object
-    .keys(obj)
+export function toQueryString(obj: Object) {
+  return Object.keys(obj)
     .map((k) => {
       const { key, value } = encode(k, obj[k])
       return `${key}=${value}`

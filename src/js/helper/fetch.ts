@@ -1,8 +1,8 @@
 import { toQueryString } from './query-string'
 
 // Check HTTP status code
-function checkStatus(response) {
-  const status = response.status
+function checkStatus(response: Response) {
+  const { status } = response
   if (status >= 200 && status < 300) {
     return response
   }
@@ -17,9 +17,12 @@ function parseJSON(response) {
 }
 
 // Returns promise with fetched data from url parsed as JSON
-export default function getJSON(url, queryParams = {}) {
-  queryParams['origin'] = '*' // eslint-disable-line no-param-reassign
-  return fetch(`${url}?${toQueryString(queryParams)}`)
+export default function getJSON(url: String, queryParams = {}) {
+  const params = {
+    origin: '*',
+    ...queryParams,
+  }
+  return fetch(`${url}?${toQueryString(params)}`)
     .then(checkStatus)
     .then(parseJSON)
 }
