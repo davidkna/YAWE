@@ -20,11 +20,9 @@ export function findParentLink(el: Node): HTMLLinkElement | null {
 
 // Transforms http or plain url to https
 export function http2https(url: string): string {
-  if (!url.match(/^http/)) {
-    return `https://${url}`
-  }
-
-  return url.replace(/^http:/, 'https:')
+  const u = new URL(url)
+  u.protocol = 'https'
+  return u.toString()
 }
 
 // Options to use if none set
