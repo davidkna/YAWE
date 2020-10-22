@@ -2,7 +2,7 @@ use crate::autocomplete_service::AutocompleteService;
 use serde_derive::{Deserialize, Serialize};
 use serde_urlencoded;
 use yew::{
-    events::IKeyboardEvent,
+    events::InputData,
     format::Json,
     html,
     services::storage::{Area, StorageService},
@@ -42,7 +42,7 @@ impl Component for App {
             Msg::Input(text) => {
                 self.suggestions = Vec::new();
                 self.autocomplete_service
-                    .get_suggestions(&text, self.link.send_back(Msg::CompleteUpdate));
+                    .get_suggestions(&text, self.link.callback(Msg::CompleteUpdate));
                 self.value = text;
             }
             Msg::CompleteUpdate(list) => {
@@ -53,11 +53,16 @@ impl Component for App {
         true
     }
 
-    fn view(&self) -> Html<Self> {
+    fn change(&mut self, _props: Self::Properties) -> ShouldRender {
+        false
+    }
+
+    fn view(&self) -> Html {
+        let input_callback = self.link.callback(|e: InputData| Msg::Input(e.value));
         html! {<div>
             <input
                 value=&self.value
-                oninput=|e| Msg::Input(e.value)
+                oninput=input_callback
             />
             <ul>
                 {

@@ -1,4 +1,3 @@
-use failure::Error;
 use js_sys::{Array, ArrayBuffer, Reflect, Uint8Array};
 use serde::{de::DeserializeOwned, Serialize};
 use serde_json;
