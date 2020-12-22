@@ -6,7 +6,7 @@ const distPath = path.resolve(__dirname, "dist");
 module.exports = (env, argv) => {
   return {
     devServer: {
-      contentBase: distPath,
+      static: [distPath],
       compress: argv.mode === "production",
       port: 8000,
     },
