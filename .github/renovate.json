@@ -3,5 +3,6 @@
   "extends": [
     "github>davidkna/renovate-config"
   ],
-  "baseBranches": ["main", "v4"]
+  "baseBranches": ["main", "v4"],
+  "requiredStatusChecks": null
 }
