@@ -25,7 +25,7 @@
     "@wasm-tool/wasm-pack-plugin": "1.4.0",
     "copy-webpack-plugin": "7.0.0",
     "cross-env": "7.0.3",
-    "css-loader": "5.2.5",
+    "css-loader": "5.2.6",
     "style-loader": "2.0.0",
     "wasm-pack": "0.9.1",
     "webpack": "5.37.1",
