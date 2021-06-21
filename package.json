@@ -17,8 +17,8 @@
   },
   "devDependencies": {
     "@types/node": "14.17.3",
-    "@typescript-eslint/eslint-plugin": "4.27.0",
-    "@typescript-eslint/parser": "4.27.0",
+    "@typescript-eslint/eslint-plugin": "4.28.0",
+    "@typescript-eslint/parser": "4.28.0",
     "autoprefixer": "10.2.6",
     "del": "6.0.0",
     "eslint": "7.29.0",
