@@ -22,7 +22,7 @@
     "start:dev": "webpack-dev-server --mode development"
   },
   "devDependencies": {
-    "@wasm-tool/wasm-pack-plugin": "1.4.0",
+    "@wasm-tool/wasm-pack-plugin": "1.5.0",
     "copy-webpack-plugin": "9.0.1",
     "cross-env": "7.0.3",
     "css-loader": "6.2.0",
