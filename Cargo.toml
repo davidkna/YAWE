@@ -23,7 +23,7 @@ serde_urlencoded = "0.7.1"
 strum = "0.23"
 strum_macros = "0.23.1"
 wasm-bindgen = "0.2.79"
-wasm-bindgen-futures = "0.4.28"
+wasm-bindgen-futures = "0.4.29"
 wasm-logger = "0.2"
 yew = "0.19"
 
