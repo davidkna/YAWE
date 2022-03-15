@@ -19,7 +19,7 @@
     "@types/node": "16.11.26",
     "@typescript-eslint/eslint-plugin": "5.15.0",
     "@typescript-eslint/parser": "5.15.0",
-    "autoprefixer": "10.4.2",
+    "autoprefixer": "10.4.3",
     "del": "6.0.0",
     "eslint": "8.11.0",
     "eslint-config-airbnb": "19.0.4",
