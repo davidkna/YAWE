@@ -29,7 +29,7 @@
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.29.4",
-    "eslint-plugin-react-hooks": "4.4.0",
+    "eslint-plugin-react-hooks": "4.5.0",
     "gulp": "4.0.2",
     "gulp-concat": "2.6.1",
     "gulp-eslint": "6.0.0",
