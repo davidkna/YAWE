@@ -35,7 +35,7 @@
     "gulp-eslint": "6.0.0",
     "postcss": "8.4.13",
     "prettier": "2.6.2",
-    "ts-loader": "9.2.9",
+    "ts-loader": "9.3.0",
     "typescript": "4.6.4",
     "webpack": "5.72.0"
   },
