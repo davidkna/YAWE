@@ -33,7 +33,7 @@
     "gulp": "4.0.2",
     "gulp-concat": "2.6.1",
     "gulp-eslint": "6.0.0",
-    "postcss": "8.4.26",
+    "postcss": "8.4.27",
     "prettier": "3.0.0",
     "ts-loader": "9.4.4",
     "typescript": "5.1.6",
