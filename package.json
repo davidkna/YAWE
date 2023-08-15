@@ -34,7 +34,7 @@
     "gulp-concat": "2.6.1",
     "gulp-eslint": "6.0.0",
     "postcss": "8.4.28",
-    "prettier": "3.0.1",
+    "prettier": "3.0.2",
     "ts-loader": "9.4.4",
     "typescript": "5.1.6",
     "webpack": "5.88.2"
