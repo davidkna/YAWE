@@ -40,7 +40,7 @@
     "webpack": "5.89.0"
   },
   "dependencies": {
-    "dompurify": "3.0.7",
+    "dompurify": "3.0.8",
     "yawe-autocomplete": "1.3.8",
     "yawe-themes": "1.2.8"
   },
